@@ -4,11 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Squad implements Parcelable {
 
     public String Name;
-    public ArrayList<Soldier> SoldierList;
+    public List<Soldier> SoldierList;
 
     public Squad(String name) {
         Name = name;

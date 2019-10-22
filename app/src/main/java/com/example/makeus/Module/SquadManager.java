@@ -8,12 +8,13 @@ import com.example.makeus.Model.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SquadManager {
     private DBHelper dbHelper;
     public SoldierManager soldierManager;
-    public List<Squad> SquadList = this.getAllSquad();
 
     public SquadManager(DBHelper dbHelper) {
         this.dbHelper = dbHelper;
@@ -21,36 +22,29 @@ public class SquadManager {
     }
 
     public List<Squad> getAllSquad() {
+        List<Squad> squads = new ArrayList<>();
         //모든 스쿼드 반환
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        String sql = "SELECT squad FROM all_tables";
-        Cursor c = db.rawQuery(sql, null);
-        while(c.moveToNext()) {
-            int Discharge_Flag = c.getInt(c.getColumnIndex("discharge_flag"));
-            if( Discharge_Flag == 1) {
-                continue;
-            }
-            String Squad = c.getString(c.getColumnIndex("squad"));
-            if(SquadList.size() == 0) { SquadList.add(new Squad(Squad)); }
-            for(int i = 0; i < SquadList.size(); i++) {
-                if(SquadList.get(i).Name != Squad && i == SquadList.size() - 1) {
-                    SquadList.add(new Squad(Squad));
-                }
-            }
+        String sql = "SELECT squad FROM squads";
+        Cursor squad = db.rawQuery(sql, null);
+        while(squad.moveToNext()) {
+            Squad s = new Squad(squad.getString(squad.getColumnIndex("name")));
+            s.SoldierList = soldierManager.getSpecificSquadSoldiers(s.Name);
+            squads.add(s);
         }
-        return SquadList;
+        return squads;
     }
 
     public Squad readSquad(String name) {
-        //Sqaud 불러오기
-        for(int i = 0; i < SquadList.size(); i++) {
-            if(SquadList.get(i).Name == name) {
-                return SquadList.get(i);
-            }
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor squad = db.rawQuery("SELECT squad FROM squads WHERE name = \'" + name + "\'", null );
+        if(squad.getCount() == 0) {
+            return null;
         }
-        System.out.println("SYSTEM_ERROR : SQMread");
-        return null;
+        else {
+            squad.moveToNext();
+        }
+
     }
 
     public boolean createSquad(Squad squad) {

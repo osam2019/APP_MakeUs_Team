@@ -7,6 +7,7 @@ import com.example.makeus.Model.DBHelper;
 import com.example.makeus.Model.Soldier;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import java.util.List;
@@ -17,6 +18,24 @@ public class SoldierManager {
     private DBHelper dbHelper;
     public SoldierManager(DBHelper dbHelper){
         this.dbHelper = dbHelper;
+    }
+
+    public Soldier getSoldierFromCursor(Cursor cursor) {
+
+        Soldier soldier = new Soldier();
+
+        soldier.Discharge_Flag = cursor.getInt(cursor.getColumnIndex("discharge_flag")) == 0 ? false : true;
+        soldier.Name = cursor.getString(cursor.getColumnIndex("name"));
+        soldier.Squad = cursor.getString(cursor.getColumnIndex("squad"));
+        soldier.Rank = cursor.getString(cursor.getColumnIndex("rank"));
+        soldier.Milli_Number = cursor.getString(cursor.getColumnIndex("milli_number"));
+        soldier.Specialty = cursor.getString(cursor.getColumnIndex("specialty"));
+        soldier.Birthday = cursor.getLong(cursor.getColumnIndex("birthday"));
+        soldier.Enlistment_Day = cursor.getLong(cursor.getColumnIndex("enlistment_day"));
+        soldier.Transfer_Day = cursor.getLong(cursor.getColumnIndex("transfer_day"));
+        soldier.Discharge_Day = cursor.getLong(cursor.getColumnIndex("discharge_day"));
+
+        return soldier;
     }
 
     public List<Soldier> getAllSoldiers() {
@@ -51,15 +70,14 @@ public class SoldierManager {
     }
 
     public List<Soldier> getSpecificSquadSoldiers(String squadName){
-        List<Soldier>specificSquad = null;
-
-        for (int i = 0; i < SoldierList.size(); i ++) {
-            if(SoldierList.get(i).Squad == squadName) {
-                specificSquad.add(SoldierList.get(i));
-            }
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ArrayList<Soldier> soldiers = new ArrayList<>();
+        Cursor solider = db.rawQuery("SELECT * FROM soldiers WHERE squad = \'" + squadName +"\'", null );
+        while(solider.moveToNext()) {
+            soldiers.add(this.getSoldierFromCursor(solider));
         }
 
-        return specificSquad;
+        return soldiers;
     }
 
     public Soldier readSoldier(String milliNumber) {

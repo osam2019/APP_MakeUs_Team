@@ -20,7 +20,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        /*String sql_squad_table_create = "create table 분대_1 (" +
+        //용사 테이블 생성
+        String create_soldiers = "create table soldier (" +
                 "name char(10), " +
                 "squad varchar(20), " +
                 "rank char(10), " +
@@ -33,28 +34,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 "discharge_flag int, " +
                 "primary key(milli_number) " +
                 ") ";
+        db.execSQL(create_soldiers);
 
-        db.execSQL(sql_squad_table_create);*/
-    }
-
-    public void createTable(String squad) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        String sql_squad_table_create = "create table " + squad + " (" +
+        //분대 테이블 생성
+        String create_squads = "create table squads (" +
                 "name char(10), " +
-                "squad varchar(20), " +
-                "rank char(10), " +
-                "milli_number char(12), " +
-                "specialty varchar(20), " +
-                "birthday int, " +
-                "enlistment_day int, " +
-                "transfer_day int, " +
-                "discharge_day int, " +
-                "discharge_flag int, " +
-                "primary key(milli_number) " +
+                "primary key(name) " +
                 ") ";
-
-        db.execSQL(sql_squad_table_create);
+        db.execSQL(create_squads);
     }
 
     @Override
