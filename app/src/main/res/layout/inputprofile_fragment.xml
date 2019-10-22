@@ -116,7 +116,7 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/input_enlistment_Day"
                     android:layout_width="136dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -142,7 +142,7 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/input_transfer_Day"
                     android:layout_width="136dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -168,7 +168,7 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/editText3"
+                    android:id="@+id/input_discharge_Day"
                     android:layout_width="136dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -194,7 +194,7 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/editText4"
+                    android:id="@+id/input_birth"
                     android:layout_width="136dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
