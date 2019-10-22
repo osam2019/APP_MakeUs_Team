@@ -54,14 +54,13 @@ public class inputprofileFragment extends Fragment {
                 try {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-
                     EditText nameView = view.getRootView().findViewById(R.id.input_name);
                     String name = nameView.getText().toString();
 
                     EditText rankView = view.getRootView().findViewById(R.id.input_rank);
                     String rank = rankView.getText().toString();
 
-                    EditText transfer_day_View = getView().findViewById(R.id.input_transfer_Day);
+                    EditText transfer_day_View = view.getRootView().findViewById(R.id.input_transfer_Day);
                     transfer_day_View.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -73,7 +72,7 @@ public class inputprofileFragment extends Fragment {
                     EditText milli_numberView = view.getRootView().findViewById(R.id.input_milli_number);
                     String milli_number = milli_numberView.getText().toString();
 
-                    EditText enlistment_day_View = getView().findViewById(R.id.input_enlistment_Day);
+                    EditText enlistment_day_View = view.getRootView().findViewById(R.id.input_enlistment_Day);
                     enlistment_day_View.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -82,7 +81,7 @@ public class inputprofileFragment extends Fragment {
                     });
                     Date enlistment_day = dateFormat.parse(enlistment_day_View.getText().toString());
 
-                    EditText expeceted_discharge_day_View  = getView().findViewById(R.id.input_discharge_Day);
+                    EditText expeceted_discharge_day_View  = view.getRootView().findViewById(R.id.input_discharge_Day);
                     expeceted_discharge_day_View.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -92,7 +91,7 @@ public class inputprofileFragment extends Fragment {
                     });
                     Date expeceted_discharge_day = dateFormat.parse(expeceted_discharge_day_View.getText().toString());
 
-                    EditText birth_View  = getView().findViewById(R.id.input_birth);
+                    EditText birth_View  = view.getRootView().findViewById(R.id.input_birth);
                     birth_View.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
