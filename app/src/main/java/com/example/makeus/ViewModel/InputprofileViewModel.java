@@ -8,5 +8,4 @@ import com.example.makeus.Model.Soldier;
 public class InputprofileViewModel extends AbstractViewModel {
     // TODO: Implement the ViewModel
 
-
 }

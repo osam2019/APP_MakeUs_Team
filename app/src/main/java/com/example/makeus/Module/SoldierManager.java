@@ -79,16 +79,15 @@ public class SoldierManager {
         }
     }
 
-    public Soldier deleteSoldier(String milliNumber) {
+    public void deleteSoldier(String milliNumber) {
         //Soldier 삭제
         DBHelper helper = new DBHelper(null, null, null, 0);
         SQLiteDatabase db = helper.getWritableDatabase();
 
         String sql = "DELETE FROM * WHERE milli";
-        return null;
     }
 
-    public boolean updateSoldier(String milliNumber, String newName,String rank, String enlistment_Day, String transfer_Day, String discharge_Day, String birth, String specialty, String squad) {
+    public boolean updateSoldier(String milliNumber, String newName,String rank, long enlistment_Day, long transfer_Day, long discharge_Day, long birth, String specialty, String squad) {
         //Soldier 값변경
         return false;
     }

@@ -30,11 +30,7 @@ public class SoldierFragment extends Fragment {
     private SoldierViewModel mViewModel;
     private SoldierAdapter mSoldierAdapter;
 
-    public static SoldierFragment newInstance(Squad squad) {
-        SoldierFragment soldierFragment = new SoldierFragment();
-        Bundle args = new Bundle();
-        args.putParcelable("squad", squad);
-        soldierFragment.setArguments(args);
+    public static SoldierFragment newInstance() {
         return new SoldierFragment();
     }
 
@@ -51,13 +47,13 @@ public class SoldierFragment extends Fragment {
         // TODO: Use the ViewModel
 
         if(mSoldierAdapter == null) {
-            mSoldierAdapter = new SoldierAdapter(this.getContext(), mViewModel.getSoldiers().getValue(),"1소대 1분대");
+            mSoldierAdapter = new SoldierAdapter(this.getContext(), mViewModel.getLiveDataSoldiers().getValue(),"1소대 1분대");
         }
 
         GridView gridView = getView().findViewById(R.id.grid);
         gridView.setAdapter(mSoldierAdapter);
 
-        mViewModel.getSoldiers().observe(this, new Observer<List<Soldier>>(){
+        mViewModel.getLiveDataSoldiers().observe(this, new Observer<List<Soldier>>(){
             @Override
             public void onChanged(@Nullable List<Soldier> soldier) {
                 mSoldierAdapter.notifyDataSetChanged();
@@ -72,7 +68,7 @@ public class SoldierFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(SoldierViewModel.class);
 
         Squad squad = (Squad)getArguments().get("squad");
-        mViewModel.SetSquad(squad);
-        Toast.makeText(getContext(), squad.Name + " 분대 화면", Toast.LENGTH_SHORT).show();
+        mViewModel.setSquad(squad);
+        Toast.makeText(getContext(), squad.Name, Toast.LENGTH_SHORT).show();
     }
 }

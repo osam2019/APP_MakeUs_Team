@@ -8,6 +8,7 @@ import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.Module.SquadManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractViewModel extends ViewModel {
@@ -19,6 +20,10 @@ public abstract class AbstractViewModel extends ViewModel {
     public AbstractViewModel() {
         //NULL 이면 안됨!
         squadManager = new SquadManager(null);
+        this.squads = new MutableLiveData<>();
+        squads.setValue(new ArrayList<Squad>());
+        this.soldiers = new MutableLiveData<>();
+        soldiers.setValue(new ArrayList<Soldier>());
         this.SamleData();
     }
 
@@ -55,14 +60,13 @@ public abstract class AbstractViewModel extends ViewModel {
         return ret;
     }
 
-    public Soldier deleteSoldier(String milliNumber) {
+    public void deleteSoldier(String milliNumber) {
         //Soldier 삭제
-        Soldier ret = squadManager.soldierManager.deleteSoldier(milliNumber);
+        squadManager.soldierManager.deleteSoldier(milliNumber);
         updateDataFromDB();
-        return ret;
     }
 
-    public boolean updateSoldier(String milliNumber, String newName,String rank, String enlistment_Day, String transfer_Day, String discharge_Day, String birth, String specialty, String squad) {
+    public boolean updateSoldier(String milliNumber, String newName,String rank, long enlistment_Day, long transfer_Day, long discharge_Day, long birth, String specialty, String squad) {
         //Soldier 값변경
         boolean ret = squadManager.soldierManager.updateSoldier(milliNumber, newName, rank, enlistment_Day, transfer_Day, discharge_Day, birth, specialty, squad);
         updateDataFromDB();
