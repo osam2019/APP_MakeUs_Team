@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -60,6 +61,7 @@ public class SquadAdapter extends BaseAdapter {
                 SquadButton button = v.findViewById(R.id.squad_button);
                 SoldierFragment fragment = new SoldierFragment();
                 SoldierViewModel viewModel = ViewModelProviders.of(fragment).get(SoldierViewModel.class);
+
                 FragmentManager manager = ((AppCompatActivity) mContext).getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.replace(R.id.nav_host_fragment, fragment);
@@ -69,4 +71,5 @@ public class SquadAdapter extends BaseAdapter {
 
         return convertView;
     }
+
 }
