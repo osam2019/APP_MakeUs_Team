@@ -26,8 +26,11 @@ public class Soldier implements Parcelable {
         this.Transfer_Day = 2019022000;
         this.Discharge_Day = 2020070100;
         this.Discharge_Flag = false;
+        Specialty = "화학병";
     }
-
+    public  Soldier(String name) {
+        Name = name;
+    }
     public Soldier(String Name, String Squad, String Rank, String Milli_Number) {
         this.Name = Name;
         this.Squad = Squad;
