@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/view_squad_rank"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/purestBlue"
+            android:text="rank"
+            android:textSize="36sp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/view_squad_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/purestBlue"
+            android:text="name"
+            android:textSize="36sp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/view_squad_milnum"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/purestBlue"
+        android:text="tag"
+        android:textSize="36sp"
+        android:layout_weight="1"/>
+
+
+</LinearLayout>
