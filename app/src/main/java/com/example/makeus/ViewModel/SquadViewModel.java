@@ -42,7 +42,7 @@ public class SquadViewModel extends AbstractViewModel {
         mSquads.setValue(squads);
     }
 
-    public MutableLiveData<List<Squad>> getSquads() {
+    public MutableLiveData<List<Squad>> getLiveDataSquads() {
         return mSquads;
     }
 }

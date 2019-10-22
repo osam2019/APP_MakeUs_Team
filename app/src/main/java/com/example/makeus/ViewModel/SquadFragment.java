@@ -43,14 +43,14 @@ public class SquadFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(SquadViewModel.class);
 
         if(mSquadAdapter == null) {
-            mSquadAdapter = new SquadAdapter(this.getContext(), mViewModel.getSquads().getValue());
+            mSquadAdapter = new SquadAdapter(this.getContext(), mViewModel.getLiveDataSquads().getValue());
         }
 
         // TODO: Use the ViewModel
         GridView gridView = getView().findViewById(R.id.grid);
         gridView.setAdapter(mSquadAdapter);
 
-        mViewModel.getSquads().observe(this, new Observer<List<Squad>>() {
+        mViewModel.getLiveDataSquads().observe(this, new Observer<List<Squad>>() {
             @Override
             public void onChanged(@Nullable List<Squad> squads) {
                 mSquadAdapter.notifyDataSetChanged();

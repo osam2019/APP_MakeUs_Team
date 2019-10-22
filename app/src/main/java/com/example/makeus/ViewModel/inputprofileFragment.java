@@ -38,13 +38,12 @@ public class inputprofileFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View v1 = inflater.inflate(R.layout.inputprofile_fragment, container, false);
-
         Button summit = v1.findViewById(R.id.modify);
         summit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                EditText nameView = view.findViewById(R.id.input_name);
+                EditText nameView = view.getRootView().findViewById(R.id.input_name);
                 String name = nameView.getText().toString();
 
                 EditText rankView = view.findViewById(R.id.input_rank);
