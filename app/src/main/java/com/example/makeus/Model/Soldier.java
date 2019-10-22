@@ -13,7 +13,7 @@ public class Soldier implements Parcelable {
     private long Transfer_Day; // 전입일
     private long Discharge_Day; // 전역예정일
     private boolean Discharge_Flag; // 전역여부
-    private Specialty Specialty; // 주특기
+    private String Specialty; // 주특기
 
     public Soldier() {
         this.Name = "Test";
@@ -29,7 +29,7 @@ public class Soldier implements Parcelable {
         this.Milli_Number = Milli_Number;
     }
 
-    public void Input_Infomation(String name, String squad, String milli_Number, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag, String rank, Specialty specialty){
+    public void Input_Infomation(String name, String squad, String milli_Number, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag, String rank, String specialty){
         this.Name = name;
         this.Squad = squad;
         this.Milli_Number = milli_Number;
@@ -68,7 +68,7 @@ public class Soldier implements Parcelable {
             long Transfer_Day = source.readLong();
             long Discharge_Day = source.readLong();
             boolean Discharge_Flag = source.readByte() != 0;
-            Specialty Specialty = source.readParcelable(com.example.makeus.Model.Specialty.class.getClassLoader());
+            String Specialty = source.readString();
             Soldier t1 = new Soldier();
             t1.Input_Infomation(Name, Squad, Milli_Number, Birthday, Enlistment_Day, Transfer_Day, Discharge_Day, Discharge_Flag, Rank, Specialty);
 
@@ -92,7 +92,7 @@ public class Soldier implements Parcelable {
         dest.writeLong(Transfer_Day);
         dest.writeLong(Discharge_Day);
         dest.writeByte((byte) (Discharge_Flag ? 1 : 0));
-        dest.writeParcelable(Specialty, flags);
+        dest.writeString(Specialty);
     }
 
     @Override

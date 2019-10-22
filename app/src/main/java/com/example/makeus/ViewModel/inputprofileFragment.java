@@ -39,7 +39,6 @@ public class inputprofileFragment extends Fragment {
                 TextView nameView = view.findViewById(R.id.name);
                 String name = nameView.getText().toString();
 
-
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("soldier", soldier);
                 Navigation.findNavController(view).navigate(R.id.nav_soilder, bundle);

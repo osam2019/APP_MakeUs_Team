@@ -10,11 +10,20 @@ import java.util.List;
 
 public abstract class AbstractViewModel extends ViewModel {
 
-    public List<Squad> squad;
+    private List<Squad> squads;
     public SquadManager squadManager;
 
     public AbstractViewModel() {
         //NULL 이면 안됨!
         squadManager = new SquadManager(null);
+    }
+
+    public List<Squad> getSquads() {
+        updateDataFromDB();
+        return squads;
+    }
+
+    private void updateDataFromDB() {
+        squads = squadManager.getAllSquad();
     }
 }
