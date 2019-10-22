@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SquadViewModel extends ViewModel {
+public class SquadViewModel extends AbstractViewModel {
     // TODO: Implement the ViewModel
     private MutableLiveData<List<Squad>> mSquads;
 
