@@ -30,8 +30,8 @@ public class SoldierViewModel extends AbstractViewModel {
 
     @Override
     protected void updateDataFromDB() {
-        super.updateDataFromDB();
-        mSoldiers.setValue(getSpecificSquadSoldiers(mSquad.Name));
+        //super.updateDataFromDB();
+        //mSoldiers.setValue(getSpecificSquadSoldiers(mSquad.Name));
     }
 
     @Override
