@@ -34,7 +34,6 @@ public class SquadFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_squad, container, false);
-
     }
 
     @Override

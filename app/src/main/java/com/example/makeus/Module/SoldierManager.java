@@ -88,8 +88,12 @@ public class SoldierManager {
         return null;
     }
 
-    public boolean updateSoldier(String milliNumber, String newName) {
+    public boolean updateSoldier(String milliNumber, String newName,String rank, String enlistment_Day, String transfer_Day, String discharge_Day, String birth, String specialty, String squad) {
         //Soldier 값변경
+        return false;
+    }
+
+    public boolean isExistSoldier(String milliNumber) {
         return false;
     }
 }

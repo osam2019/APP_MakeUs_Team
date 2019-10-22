@@ -5,19 +5,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.makeus.Model.Soldier;
 
-public class InputprofileViewModel extends ViewModel {
+public class InputprofileViewModel extends AbstractViewModel {
     // TODO: Implement the ViewModel
 
-    private MutableLiveData<Soldier> mSoldier;
-
-    public InputprofileViewModel() {
-        Soldier soldier = new Soldier();
-        mSoldier = new MutableLiveData<>();
-        mSoldier.setValue(soldier);
-    }
-
-    public MutableLiveData<Soldier> getSoldier(){
-        return mSoldier;
-    }
 
 }

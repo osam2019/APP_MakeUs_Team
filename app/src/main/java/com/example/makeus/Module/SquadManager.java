@@ -41,4 +41,8 @@ public class SquadManager {
         //Squad 값변경
         return false;
     }
+
+    public boolean isExistSquad(String name) {
+        return false;
+    }
 }
