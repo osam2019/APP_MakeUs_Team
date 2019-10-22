@@ -9,14 +9,9 @@ import java.util.ArrayList;
 
 public class SoldierViewModel extends ViewModel {
     // TODO: Implement the ViewModel
+    public Squad squad;
 
-    private SoldierViewModel mViewModel;
-    private Squad mSquad;
-
-    public SoldierViewModel() {
-
-
-    }
+    public SoldierViewModel() { }
 
 
 }

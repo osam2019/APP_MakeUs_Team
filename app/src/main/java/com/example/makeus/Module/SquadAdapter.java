@@ -1,6 +1,7 @@
 package com.example.makeus.Module;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
+import com.example.makeus.MainActivity;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.R;
 import com.example.makeus.ViewModel.SoldierFragment;
@@ -55,20 +58,19 @@ public class SquadAdapter extends BaseAdapter {
         final SquadButton squadButton = convertView.findViewById(R.id.squad_button);
         squadButton.squad = mSquads.get(position);
         squadButton.setText(String.valueOf(mSquads.get(position).Name));
+        squadButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.nav_soilder));
+        /*
         squadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SquadButton button = v.findViewById(R.id.squad_button);
                 SoldierFragment fragment = new SoldierFragment();
-                SoldierViewModel viewModel = ViewModelProviders.of(fragment).get(SoldierViewModel.class);
 
-                FragmentManager manager = ((AppCompatActivity) mContext).getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.nav_host_fragment, fragment);
-                transaction.commit();
+
+                Toast.makeText((AppCompatActivity) mContext, button.squad.Name + " 이벤트발생", Toast.LENGTH_LONG).show();
             }
         });
-
+        */
         return convertView;
     }
 

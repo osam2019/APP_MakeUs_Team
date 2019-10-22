@@ -1,5 +1,8 @@
 package com.example.makeus.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Soldier {
     public String Name; // 성명
     public String Squad; // 분대
@@ -35,4 +38,45 @@ public class Soldier {
     public Soldier Output_Infomation(){
         return this;
     }
+
+    /*
+    public static final Creator<Squad> CREATOR = new Creator<Squad>() {
+        // 객체 복원
+        @Override
+        public Squad createFromParcel(Parcel source) {
+            Squad t1 = new Squad(source.readString());
+            t1.SoldierList = source.readArrayList(Soldier.class.getClassLoader());
+
+            return t1;
+        }
+
+        @Override
+        public Squad[] newArray(int size) {
+            return new Squad[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Name);
+
+        public Rank Rank; // 계급
+        private Specialty Specialty; // 주특기
+
+        dest.writeString(Squad);
+        dest.writeString(Milli_Number);
+        dest.writeLong(Birthday);
+        dest.writeLong(Enlistment_Day);
+        dest.writeLong(Transfer_Day);
+        dest.writeLong(Discharge_Day);
+        dest.writeByte((byte) (Discharge_Flag ? 1 : 0));
+
+
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    */
 }

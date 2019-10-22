@@ -15,5 +15,10 @@
         android:name="com.example.makeus.ViewModel.inputprofileFragment"
         android:label="@string/test"
         tools:layout="@layout/inputprofile_fragment" />
+    <fragment
+        android:id="@+id/nav_soilder"
+        android:name="com.example.makeus.ViewModel.SoldierFragment"
+        android:label="@string/test"
+        tools:layout="@layout/soldier_fragment" />
 
 </navigation>
