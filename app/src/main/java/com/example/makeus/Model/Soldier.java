@@ -62,6 +62,34 @@ public class Soldier implements Parcelable {
         return this.Milli_Number;
     }
 
+    public long getBirthday() {
+        return this.Birthday;
+    }
+
+    public long getEnlistment_Day() {
+        return this.Enlistment_Day;
+    }
+
+    public long getTransfer_Day() {
+        return this.Transfer_Day;
+    }
+
+    public long getDischarge_Day() {
+        return this.Discharge_Day;
+    }
+
+    public boolean isDischarge_Flag() {
+        return this.Discharge_Flag;
+    }
+
+    public String getSpecialty() {
+        return this.Specialty;
+    }
+
+    public String getSquad() {
+        return this.Squad;
+    }
+
 
     public static final Creator<Soldier> CREATOR = new Creator<Soldier>() {
         // 객체 복원

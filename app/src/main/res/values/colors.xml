@@ -6,4 +6,8 @@
 
     <!-- purest blue for 2020 color -->
     <color name="purestBlue">#8CBECD</color>
+
+    <!-- Squad Button Color -->
+    <color name="addSquad">#E4FFC4</color>
+    <color name="squadButton">#8BC34A</color>
 </resources>

@@ -172,4 +172,64 @@ public class inputprofileFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
+
+        if( getArguments() != null ) {
+            Soldier soldier = (Soldier) getArguments().get("soldier");
+            setForProfileModification(soldier);
+        }
+    }
+
+    private void setForProfileModification(Soldier soldier) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        if(soldier.Name != null) {
+            EditText inputName = getView().findViewById(R.id.input_name);
+            inputName.setText(soldier.Name);
+        }
+
+        if(soldier.getRank() != null) {
+            EditText inputRank = getView().findViewById(R.id.input_rank);
+            inputRank.setText(soldier.getRank());
+        }
+
+        if(soldier.getMilli_Number() != null) {
+            EditText inputMilNum = getView().findViewById(R.id.input_milli_number);
+            inputMilNum.setText(soldier.getMilli_Number());
+        }
+
+        if(soldier.getEnlistment_Day() != 0) {
+            EditText inputEnlistmentDay = getView().findViewById(R.id.input_enlistment_Day);
+            inputEnlistmentDay.setText( dateFormat.format(new Date(soldier.getEnlistment_Day())) );
+        }
+
+        if(soldier.getTransfer_Day() != 0) {
+            EditText inputTransferDay = getView().findViewById(R.id.input_transfer_Day);
+            inputTransferDay.setText( dateFormat.format(new Date(soldier.getTransfer_Day())) );
+        }
+
+        if(soldier.getDischarge_Day() != 0) {
+            EditText inputDischargeDay = getView().findViewById(R.id.input_discharge_Day);
+            inputDischargeDay.setText( dateFormat.format(new Date(soldier.getDischarge_Day())) );
+        }
+
+        if(soldier.getBirthday() != 0) {
+            EditText inputBirthday = getView().findViewById(R.id.input_birth);
+            inputBirthday.setText( dateFormat.format(new Date(soldier.getBirthday())));
+        }
+
+        if(soldier.getSpecialty() != null) {
+            EditText inputSpecialty = getView().findViewById(R.id.input_specialty);
+            inputSpecialty.setText(soldier.getSpecialty());
+        }
+
+        if(soldier.getSquad() != null) {
+            EditText inputSquad = getView().findViewById(R.id.input_squad);
+            inputSquad.setText(soldier.getSquad());
+        }
+    }
+
 }

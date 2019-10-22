@@ -1,32 +1,22 @@
 package com.example.makeus.Module;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
+
 import androidx.navigation.Navigation;
 
-import com.example.makeus.MainActivity;
-import com.example.makeus.Model.DBHelper;
-import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.R;
-import com.example.makeus.ViewModel.SoldierFragment;
-import com.example.makeus.ViewModel.SoldierViewModel;
+
 
 import java.util.List;
 
@@ -42,7 +32,7 @@ public class SquadAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mSquads.size();
+        return mSquads.size() + 1;
     }
 
     @Override
@@ -58,14 +48,29 @@ public class SquadAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        if(position == 0) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.add_squad, null);
+            final SquadButton squadButton = view.findViewById(R.id.squad_button);
+            squadButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText((AppCompatActivity) mContext, "새로운 분대 추가 버튼", Toast.LENGTH_LONG).show();
+                }
+            });
+            return view;
+        } else {
+            final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+            convertView = layoutInflater.inflate(R.layout.squad, null);
+        }
+
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
             convertView = layoutInflater.inflate(R.layout.squad, null);
         }
 
         final SquadButton squadButton = convertView.findViewById(R.id.squad_button);
-        squadButton.squad = mSquads.get(position);
-        squadButton.setText(String.valueOf(mSquads.get(position).Name));
+        squadButton.squad = mSquads.get( position - 1 );
+        squadButton.setText(String.valueOf(mSquads.get( position - 1 ).Name));
         squadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,15 +1,18 @@
 package com.example.makeus.Module;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import androidx.navigation.Navigation;
+
 import com.example.makeus.Model.Soldier;
-import com.example.makeus.Model.Squad;
 import com.example.makeus.R;
 
 import java.util.List;
@@ -48,30 +51,31 @@ public class SoldierAdapter extends BaseAdapter {
 
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-            convertView = layoutInflater.inflate(R.layout.row_view_squad, null);
+            convertView = layoutInflater.inflate(R.layout.row_view_soldier, null);
         }
 
-        Soldier soldier = soldiers.get(position);
+        final Soldier soldier = soldiers.get(position);
 
-        TextView soldierRank = convertView.findViewById(R.id.view_squad_rank);
+        TextView soldierRank = convertView.findViewById(R.id.view_soilder_rank);
         soldierRank.setText(soldier.getRank());
-        soldierRank.setOnClickListener(new soldierListener());
 
-        TextView soldierName = convertView.findViewById(R.id.view_squad_name);
+        TextView soldierName = convertView.findViewById(R.id.view_soldier_name);
         soldierName.setText(soldier.Name);
-        //soldierRank.setOnClickListener(new soldierListener());
 
-        TextView soldierMilNum = convertView.findViewById(R.id.view_squad_milnum);
+        TextView soldierMilNum = convertView.findViewById(R.id.view_soldier_milnum);
         soldierMilNum.setText(soldier.getMilli_Number());
-        soldierMilNum.setOnClickListener(new soldierListener());
+
+        LinearLayout viewSoldierLayout = convertView.findViewById(R.id.row_view_soldier_layout);
+        viewSoldierLayout.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("soldier", soldier);
+
+                Navigation.findNavController(v).navigate(R.id.nav_inputprofile, bundle);
+            }
+        });
 
         return convertView;
     }
-
-        class soldierListener implements View.OnClickListener{
-            @Override   // 클릭시 용사 개개인의 정보 보기로 이동. ViewSolider
-            public void onClick(View v){
-
-            }
-        }
 }
