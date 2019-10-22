@@ -62,8 +62,6 @@ public class SquadManager {
         db.close();
     }
 
-    //
-
     public void updateSquad(String oldName, String newName) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String sql = "UPDATE squads SET name = ? WHERE name = " + oldName;

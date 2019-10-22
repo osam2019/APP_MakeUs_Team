@@ -131,13 +131,12 @@ public class SoldierManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor data = db.rawQuery("SELECT name FROM soldiers WHERE milli_number = \'" + milliNumber +"\'", null );
-        db.close();
 
-        int noOfData = data.getCount();
-
-        if(noOfData > 0) {
+        if(data.getCount() > 0) {
+            db.close();
             return true;
         } else {
+            db.close();
             return false;
         }
     }
