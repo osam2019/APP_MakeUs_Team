@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.makeus.R;
 
@@ -25,6 +27,16 @@ public class inputprofileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        Button summit = getView().findViewById(R.id.modify);
+        summit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                TextView nameView = view.findViewById(R.id.name);
+                String name = nameView.getText().toString();
+            }
+        });
+
         return inflater.inflate(R.layout.inputprofile_fragment, container, false);
     }
 

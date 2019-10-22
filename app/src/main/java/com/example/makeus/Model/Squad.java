@@ -3,7 +3,6 @@ package com.example.makeus.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Squad implements Parcelable {
