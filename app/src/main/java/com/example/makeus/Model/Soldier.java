@@ -6,14 +6,14 @@ import android.os.Parcelable;
 public class Soldier implements Parcelable {
     public String Name; // 성명
     public String Squad; // 분대
-    private String Rank; // 계급
-    private String Milli_Number; // 군번
-    private long Birthday; // 생년월일
-    private long Enlistment_Day; // 입대일
-    private long Transfer_Day; // 전입일
-    private long Discharge_Day; // 전역예정일
-    private boolean Discharge_Flag; // 전역여부
-    private String Specialty; // 주특기
+    public String Rank; // 계급
+    public String Milli_Number; // 군번
+    public String Specialty; // 주특기
+    public long Birthday; // 생년월일
+    public long Enlistment_Day; // 입대일
+    public long Transfer_Day; // 전입일
+    public long Discharge_Day; // 전역예정일
+    public boolean Discharge_Flag; // 전역여부
 
     public Soldier() {
         this.Name = "Test Name";
@@ -35,7 +35,7 @@ public class Soldier implements Parcelable {
         this.Milli_Number = Milli_Number;
     }
 
-    public void Input_Infomation(String name, String squad, String milli_Number, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag, String rank, String specialty){
+    public void Input_Infomation(String name, String squad,  String rank, String milli_Number, String specialty, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag){
         this.Name = name;
         this.Squad = squad;
         this.Milli_Number = milli_Number;
@@ -69,14 +69,14 @@ public class Soldier implements Parcelable {
             String Squad = source.readString();
             String Rank = source.readString();
             String Milli_Number = source.readString();
+            String Specialty = source.readString();
             long Birthday = source.readLong();
             long Enlistment_Day = source.readLong();
             long Transfer_Day = source.readLong();
             long Discharge_Day = source.readLong();
             boolean Discharge_Flag = source.readByte() != 0;
-            String Specialty = source.readString();
             Soldier t1 = new Soldier();
-            t1.Input_Infomation(Name, Squad, Milli_Number, Birthday, Enlistment_Day, Transfer_Day, Discharge_Day, Discharge_Flag, Rank, Specialty);
+            t1.Input_Infomation(Name, Squad, Rank, Milli_Number, Specialty, Birthday, Enlistment_Day, Transfer_Day, Discharge_Day, Discharge_Flag);
 
             return t1;
         }
@@ -93,12 +93,12 @@ public class Soldier implements Parcelable {
         dest.writeString(Squad);
         dest.writeString(Rank);
         dest.writeString(Milli_Number);
+        dest.writeString(Specialty);
         dest.writeLong(Birthday);
         dest.writeLong(Enlistment_Day);
         dest.writeLong(Transfer_Day);
         dest.writeLong(Discharge_Day);
         dest.writeByte((byte) (Discharge_Flag ? 1 : 0));
-        dest.writeString(Specialty);
     }
 
     @Override

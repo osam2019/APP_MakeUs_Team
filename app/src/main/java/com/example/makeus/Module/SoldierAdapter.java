@@ -70,7 +70,7 @@ public class SoldierAdapter extends BaseAdapter {
 
         class soldierListener implements View.OnClickListener{
             @Override   // 클릭시 용사 개개인의 정보 보기로 이동. ViewSolider
-            public void onClick(View view){
+            public void onClick(View v){
 
             }
         }

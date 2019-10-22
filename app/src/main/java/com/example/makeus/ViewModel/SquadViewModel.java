@@ -3,6 +3,7 @@ package com.example.makeus.ViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.makeus.Model.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 
@@ -45,4 +46,5 @@ public class SquadViewModel extends AbstractViewModel {
     public MutableLiveData<List<Squad>> getLiveDataSquads() {
         return mSquads;
     }
+
 }
