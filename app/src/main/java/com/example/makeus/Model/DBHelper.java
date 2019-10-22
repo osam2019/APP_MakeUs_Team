@@ -14,19 +14,26 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "create table soldierList (" +
-                "name char(10)" +
-                "squad varchar(20)" +
-                "rank char(10)" +
-                "millitary_number char(12)" +
-                "birthday int" +
-                "enlistment_day int" +
-                "transfer_day int" +
-                "discharge_day int" +
-
+                "name char(10), " +
+                "squad varchar(20), " +
+                "rank char(10), " +
+                "milli_number char(12), " +
+                "birthday int, " +
+                "enlistment_day int, " +
+                "transfer_day int, " +
+                "discharge_day int, " +
+                "discharge_flag int, " +
+                "specialty varchar(20), " +
+                "primary key(milli_number) " +
                 ")";
+        db.execSQL(sql);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if(oldVersion != newVersion) {
+            switch (oldVersion) {
+                /* 버전 갱신시 작성 */
+            }
+        }
     }
 }
