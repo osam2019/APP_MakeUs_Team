@@ -6,14 +6,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DBHelper extends SQLiteOpenHelper {
-    public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    String SquadName;
+
+    public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, String squadName) {
         super(context, "SoldierDB", null, 1);
+        this.SquadName = squadName;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table soldierList (" +
+        String sql_squad_table_create = "create table " + SquadName + "squadTable (" +
                 "name char(10), " +
                 "squad varchar(20), " +
                 "rank char(10), " +
@@ -25,8 +30,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "discharge_flag int, " +
                 "specialty varchar(20), " +
                 "primary key(milli_number) " +
-                ")";
-        db.execSQL(sql);
+                ") ";
+
+        db.execSQL(sql_squad_table_create);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

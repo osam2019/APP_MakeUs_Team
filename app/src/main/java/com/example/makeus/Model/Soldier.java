@@ -3,7 +3,7 @@ package com.example.makeus.Model;
 public class Soldier {
     public String Name; // 성명
     public String Squad; // 분대
-    public Rank Rank; // 계급
+    private String Rank; // 계급
     private String Milli_Number; // 군번
     private long Birthday; // 생년월일
     private long Enlistment_Day; // 입대일
@@ -12,14 +12,14 @@ public class Soldier {
     private boolean Discharge_Flag; // 전역여부
     private Specialty Specialty; // 주특기
 
-    public Soldier(String Name, String Squad, Rank Rank, String Milli_Number){
+    public Soldier(String Name, String Squad, String Rank, String Milli_Number){
         this.Name = Name;
         this.Squad = Squad;
         this.Rank = Rank;
         this.Milli_Number = Milli_Number;
     }
 
-    public void Input_Infomation(String name, String squad, String milli_Number, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag, Rank rank, Specialty specialty){
+    public void Input_Infomation(String name, String squad, String milli_Number, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag, String rank, Specialty specialty){
         this.Name = name;
         this.Squad = squad;
         this.Milli_Number = milli_Number;

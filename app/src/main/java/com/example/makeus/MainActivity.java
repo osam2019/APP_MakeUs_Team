@@ -1,6 +1,5 @@
 package com.example.makeus;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.navigation.NavController;
