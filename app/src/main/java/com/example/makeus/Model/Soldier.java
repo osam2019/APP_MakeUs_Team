@@ -3,7 +3,7 @@ package com.example.makeus.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Soldier {
+public class Soldier implements Parcelable {
     public String Name; // 성명
     public String Squad; // 분대
     private String Rank; // 계급
@@ -15,7 +15,14 @@ public class Soldier {
     private boolean Discharge_Flag; // 전역여부
     private Specialty Specialty; // 주특기
 
-    public Soldier(String Name, String Squad, String Rank, String Milli_Number){
+    public Soldier() {
+        this.Name = "Test";
+        this.Squad = "Test";
+        this.Rank = "Test";
+        this.Milli_Number = "00-00000000";
+    }
+
+    public Soldier(String Name, String Squad, String Rank, String Milli_Number) {
         this.Name = Name;
         this.Squad = Squad;
         this.Rank = Rank;
@@ -47,44 +54,50 @@ public class Soldier {
         return this.Milli_Number;
     }
 
-    /*
-    public static final Creator<Squad> CREATOR = new Creator<Squad>() {
+
+    public static final Creator<Soldier> CREATOR = new Creator<Soldier>() {
         // 객체 복원
         @Override
-        public Squad createFromParcel(Parcel source) {
-            Squad t1 = new Squad(source.readString());
-            t1.SoldierList = source.readArrayList(Soldier.class.getClassLoader());
+        public Soldier createFromParcel(Parcel source) {
+            String Name = source.readString();
+            String Squad = source.readString();
+            String Rank = source.readString();
+            String Milli_Number = source.readString();
+            long Birthday = source.readLong();
+            long Enlistment_Day = source.readLong();
+            long Transfer_Day = source.readLong();
+            long Discharge_Day = source.readLong();
+            boolean Discharge_Flag = source.readByte() != 0;
+            Specialty Specialty = source.readParcelable(com.example.makeus.Model.Specialty.class.getClassLoader());
+            Soldier t1 = new Soldier();
+            t1.Input_Infomation(Name, Squad, Milli_Number, Birthday, Enlistment_Day, Transfer_Day, Discharge_Day, Discharge_Flag, Rank, Specialty);
 
             return t1;
         }
 
         @Override
-        public Squad[] newArray(int size) {
-            return new Squad[size];
+        public Soldier[] newArray(int size) {
+            return new Soldier[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(Name);
-
-        public Rank Rank; // 계급
-        private Specialty Specialty; // 주특기
-
         dest.writeString(Squad);
+        dest.writeString(Rank);
         dest.writeString(Milli_Number);
         dest.writeLong(Birthday);
         dest.writeLong(Enlistment_Day);
         dest.writeLong(Transfer_Day);
         dest.writeLong(Discharge_Day);
         dest.writeByte((byte) (Discharge_Flag ? 1 : 0));
-
-
+        dest.writeParcelable(Specialty, flags);
     }
 
     @Override
     public int describeContents() {
         return 0;
     }
-    */
+
 }

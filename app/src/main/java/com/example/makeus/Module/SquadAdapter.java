@@ -2,6 +2,7 @@ package com.example.makeus.Module;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,8 +63,12 @@ public class SquadAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 SquadButton button = v.findViewById(R.id.squad_button);
-                Navigation.findNavController(v).navigate(R.id.nav_soilder);
-                Toast.makeText((AppCompatActivity) mContext, button.squad.Name + " 이벤트발생", Toast.LENGTH_LONG).show();
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("squad", button.squad);
+                Navigation.findNavController(v).navigate(R.id.nav_soilder, bundle);
+
+                //Toast.makeText((AppCompatActivity) mContext, button.squad.Name + " 이벤트발생", Toast.LENGTH_LONG).show();
             }
         });
 

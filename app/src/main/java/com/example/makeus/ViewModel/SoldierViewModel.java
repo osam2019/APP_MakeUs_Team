@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class SoldierViewModel extends ViewModel {
     // TODO: Implement the ViewModel
+    private Squad mSquad;
     private MutableLiveData<ArrayList<Soldier>> mSoldiers;
 
     final String squadName = "1소대 1분대";
@@ -29,5 +30,7 @@ public class SoldierViewModel extends ViewModel {
         return mSoldiers;
     }
 
-
+    public void SetSquad(Squad squad) {
+        mSoldiers.setValue(squad.SoldierList);
+    }
 }

@@ -3,6 +3,7 @@ package com.example.makeus.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Squad implements Parcelable {
@@ -12,6 +13,12 @@ public class Squad implements Parcelable {
 
     public Squad(String name){
         Name = name;
+        SoldierList = new ArrayList<>();
+    }
+
+    public Squad(String name, ArrayList<Soldier> soldierList){
+        Name = name;
+        SoldierList = soldierList;
     }
 
     public void Organize_Squad(Soldier soldier) {

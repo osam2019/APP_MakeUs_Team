@@ -59,7 +59,7 @@ public class SoldierAdapter extends BaseAdapter {
 
         TextView soldierName = convertView.findViewById(R.id.view_squad_name);
         soldierName.setText(soldier.Name);
-        soldierRank.setOnClickListener(new soldierListener());
+        //soldierRank.setOnClickListener(new soldierListener());
 
         TextView soldierMilNum = convertView.findViewById(R.id.view_squad_milnum);
         soldierMilNum.setText(soldier.getMilli_Number());

@@ -65,4 +65,14 @@ public class SoldierFragment extends Fragment {
         });
 
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(SoldierViewModel.class);
+
+        Squad squad = (Squad)getArguments().get("squad");
+        mViewModel.SetSquad(squad);
+        Toast.makeText(getContext(), squad.Name + " 분대 화면", Toast.LENGTH_SHORT).show();
+    }
 }

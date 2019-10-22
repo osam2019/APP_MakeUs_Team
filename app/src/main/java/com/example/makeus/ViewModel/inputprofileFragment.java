@@ -32,6 +32,8 @@ public class inputprofileFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
+
+
         // TODO: Use the ViewModel
     }
 
