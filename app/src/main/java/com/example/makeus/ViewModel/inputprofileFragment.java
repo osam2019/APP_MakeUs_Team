@@ -23,6 +23,8 @@ import com.example.makeus.R;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.jar.Attributes;
 
 public class inputprofileFragment extends Fragment {
@@ -39,6 +41,7 @@ public class inputprofileFragment extends Fragment {
 
         View v1 = inflater.inflate(R.layout.inputprofile_fragment, container, false);
         Button summit = v1.findViewById(R.id.modify);
+
         summit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,28 +49,29 @@ public class inputprofileFragment extends Fragment {
                 EditText nameView = view.getRootView().findViewById(R.id.input_name);
                 String name = nameView.getText().toString();
 
-                EditText rankView = view.findViewById(R.id.input_rank);
+                EditText rankView = view.getRootView().findViewById(R.id.input_rank);
                 String rank = rankView.getText().toString();
 
-                EditText milli_numberView = view.findViewById(R.id.input_milli_number);
+                EditText milli_numberView = view.getRootView().findViewById(R.id.input_milli_number);
                 String milli_number = milli_numberView.getText().toString();
 
-                EditText enlistment_DayView = view.findViewById(R.id.input_enlistment_Day);
-                String enlistment_Day = enlistment_DayView.getText().toString();
+                EditText enlistment_DayView = view.getRootView().findViewById(R.id.input_enlistment_Day);
+                //long enlistment_Day = enlistment_DayView.getText();
 
-                EditText transfer_DayView = view.findViewById(R.id.input_transfer_Day);
-                String transfer_Day = transfer_DayView.getText().toString();
 
-                EditText discharge_DayView = view.findViewById(R.id.input_discharge_Day);
-                String discharge_Day = discharge_DayView.getText().toString();
+                EditText transfer_DayView = view.getRootView().findViewById(R.id.input_transfer_Day);
+                //transfer_Day = transfer_DayView.getText();
 
-                EditText birthView = view.findViewById(R.id.input_specialty);
-                String birth = birthView.getText().toString();
+                EditText discharge_DayView = view.getRootView().findViewById(R.id.input_discharge_Day);
+                //discharge_Day = discharge_DayView.getText();
 
-                EditText specialtyView = view.findViewById(R.id.name);
+                EditText birthView = view.getRootView().findViewById(R.id.input_specialty);
+                // birth = birthView.getText();
+
+                EditText specialtyView = view.getRootView().findViewById(R.id.input_specialty);
                 String specialty = specialtyView.getText().toString();
 
-                EditText squadView = view.findViewById(R.id.input_squad);
+                EditText squadView = view.getRootView().findViewById(R.id.input_squad);
                 String squad = squadView.getText().toString();
             }
         });
