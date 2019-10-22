@@ -53,9 +53,13 @@ public class SquadAdapter extends BaseAdapter {
             public void onClick(View v) {
                 SquadButton button = v.findViewById(R.id.squad_button);
                 Toast.makeText(mContext, button.squad.Name, Toast.LENGTH_SHORT).show();
+
+
+
             }
         });
 
         return convertView;
     }
+
 }
