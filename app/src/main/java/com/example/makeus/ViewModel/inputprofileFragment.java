@@ -2,32 +2,31 @@ package com.example.makeus.ViewModel;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.example.makeus.Model.Soldier;
 import com.example.makeus.R;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.jar.Attributes;
+import java.util.Calendar;
 
 public class inputprofileFragment extends Fragment {
+
+    final int OPTION_ENLISTMENT_DAY = 0;
+    final int OPTION_TRANSFER_DAY = 1;
+    final int OPTION_EXPECTED_DISCHARGE_DAY = 2;
+    final int OPTION_BIRTH = 3;
 
     private InputprofileViewModel mViewModel;
 
@@ -38,46 +37,7 @@ public class inputprofileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        View v1 = inflater.inflate(R.layout.inputprofile_fragment, container, false);
-        Button summit = v1.findViewById(R.id.modify);
-
-        summit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                EditText nameView = view.getRootView().findViewById(R.id.input_name);
-                String name = nameView.getText().toString();
-
-                EditText rankView = view.getRootView().findViewById(R.id.input_rank);
-                String rank = rankView.getText().toString();
-
-                EditText milli_numberView = view.getRootView().findViewById(R.id.input_milli_number);
-                String milli_number = milli_numberView.getText().toString();
-
-                EditText enlistment_DayView = view.getRootView().findViewById(R.id.input_enlistment_Day);
-                //long enlistment_Day = enlistment_DayView.getText();
-
-
-                EditText transfer_DayView = view.getRootView().findViewById(R.id.input_transfer_Day);
-                //transfer_Day = transfer_DayView.getText();
-
-                EditText discharge_DayView = view.getRootView().findViewById(R.id.input_discharge_Day);
-                //discharge_Day = discharge_DayView.getText();
-
-                EditText birthView = view.getRootView().findViewById(R.id.input_specialty);
-                // birth = birthView.getText();
-
-                EditText specialtyView = view.getRootView().findViewById(R.id.input_specialty);
-                String specialty = specialtyView.getText().toString();
-
-                EditText squadView = view.getRootView().findViewById(R.id.input_squad);
-                String squad = squadView.getText().toString();
-            }
-        });
-
-
-        return v1;
+        return inflater.inflate(R.layout.inputprofile_fragment, container, false);
     }
 
     @Override
@@ -85,8 +45,93 @@ public class inputprofileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
 
+        setDatePickerInput();
+
+        Button summit = getView().findViewById(R.id.modify);
+        summit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                TextView nameView = view.findViewById(R.id.name);
+//                if(nameView.getText().toString() != null) {
+//                    String name = nameView.getText().toString();
+//                }
+            }
+        });
 
         // TODO: Use the ViewModel
+
+    }
+
+    // 날짜 Input 부분을 DatePicker로 받기
+    private void setDatePickerInput() {
+        EditText enlistment_day = getView().findViewById(R.id.input_enlistment_Day);
+        enlistment_day.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_ENLISTMENT_DAY);
+            }
+        });
+
+        EditText transfer_day = getView().findViewById(R.id.input_transfer_Day);
+        transfer_day.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_TRANSFER_DAY);
+            }
+        });
+
+        EditText expeceted_discharge_day  = getView().findViewById(R.id.input_discharge_Day);
+        expeceted_discharge_day.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_EXPECTED_DISCHARGE_DAY);
+            }
+        });
+
+        EditText birth  = getView().findViewById(R.id.input_birth);
+        birth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_BIRTH);
+            }
+        });
+    }
+
+    private void callDatePicker(final int option) {
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                receiveDate(option, year, monthOfYear, dayOfMonth);
+            }
+        }, mYear, mMonth, mDay);
+
+        datePickerDialog.show();
+    }
+
+    private void receiveDate(int option, int year, int monthOfYear, int dayOfMonth) {
+        switch(option) {
+            case OPTION_ENLISTMENT_DAY:
+                EditText enlistment_day = getView().findViewById(R.id.input_enlistment_Day);
+                enlistment_day.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                break;
+            case OPTION_TRANSFER_DAY:
+                EditText transfer_day = getView().findViewById(R.id.input_transfer_Day);
+                transfer_day.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                break;
+            case OPTION_EXPECTED_DISCHARGE_DAY:
+                EditText expeceted_discharge_day = getView().findViewById(R.id.input_discharge_Day);
+                expeceted_discharge_day.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                break;
+            case OPTION_BIRTH:
+                EditText birth = getView().findViewById(R.id.input_birth);
+                birth.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                break;
+        }
     }
 
 }

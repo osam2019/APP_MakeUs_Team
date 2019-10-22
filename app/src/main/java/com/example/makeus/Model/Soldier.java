@@ -16,10 +16,16 @@ public class Soldier implements Parcelable {
     private String Specialty; // 주특기
 
     public Soldier() {
-        this.Name = "Test";
-        this.Squad = "Test";
-        this.Rank = "Test";
-        this.Milli_Number = "00-00000000";
+        this.Name = "Test Name";
+        this.Squad = "Squad Test";
+        this.Rank = "Test Rank";
+        this.Milli_Number = "00-12345678";
+
+        this.Birthday = 1999080800;
+        this.Enlistment_Day = 2019010100;
+        this.Transfer_Day = 2019022000;
+        this.Discharge_Day = 2020070100;
+        this.Discharge_Flag = false;
     }
 
     public Soldier(String Name, String Squad, String Rank, String Milli_Number) {
