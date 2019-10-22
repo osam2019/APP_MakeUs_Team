@@ -36,15 +36,14 @@ public class SquadManager {
     }
 
     public Squad readSquad(String name) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor squad = db.rawQuery("SELECT squad FROM squads WHERE name = \'" + name + "\'", null );
-        if(squad.getCount() == 0) {
+        if(isExistSquad(name)) {
             return null;
         }
         else {
-            squad.moveToNext();
+            Squad s = new Squad(name);
+            s.SoldierList = soldierManager.getSpecificSquadSoldiers(s.Name);
+            return s;
         }
-
     }
 
     public boolean createSquad(Squad squad) {
@@ -71,13 +70,13 @@ public class SquadManager {
     }
 
     public boolean isExistSquad(String name) {
-        // 존재하면 true, 없으면 false
-        if(SquadList.size() == 0) { return false; }
-        for(int i = 0; i<SquadList.size(); i++) {
-            if(SquadList.get(i).Name == name) {
-                return true;
-            }
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor squad = db.rawQuery("SELECT squad FROM squads WHERE name = \'" + name + "\'", null );
+        if(squad.getCount() == 0) {
+            return false;
         }
-        return false;
+        else {
+            return true;
+        }
     }
 }
