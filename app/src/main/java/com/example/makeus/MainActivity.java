@@ -38,9 +38,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        // DBHelper 초기화
-        DBHelper helper = new DBHelper(this,"SoldierDB.db",null, 1);
-
     }
 
     @Override

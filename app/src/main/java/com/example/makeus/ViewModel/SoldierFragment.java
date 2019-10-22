@@ -44,8 +44,6 @@ public class SoldierFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SoldierViewModel.class);
-        mViewModel.setDbHelper(getContext());
-        // TODO: Use the ViewModel
 
         if(mSoldierAdapter == null) {
             mSoldierAdapter = new SoldierAdapter(this.getContext(), mViewModel.getLiveDataSoldiers().getValue(),"1소대 1분대");

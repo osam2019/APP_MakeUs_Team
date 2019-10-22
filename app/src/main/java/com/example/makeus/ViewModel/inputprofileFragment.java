@@ -54,7 +54,6 @@ public class inputprofileFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
-        mViewModel.setDbHelper(getContext());
 
         EditText expeceted_discharge_day_View  = getView().findViewById(R.id.input_discharge_Day);
         expeceted_discharge_day_View.setOnClickListener(new View.OnClickListener() {

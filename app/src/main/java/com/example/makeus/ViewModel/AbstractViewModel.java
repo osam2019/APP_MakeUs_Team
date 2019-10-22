@@ -22,16 +22,14 @@ public abstract class AbstractViewModel extends ViewModel {
     private DBHelper dbHelper;
 
     public AbstractViewModel() {
+        this.dbHelper = new DBHelper();
+        squadManager = new SquadManager(dbHelper);
+
         this.squads = new MutableLiveData<>();
         squads.setValue(new ArrayList<Squad>());
         this.soldiers = new MutableLiveData<>();
         soldiers.setValue(new ArrayList<Soldier>());
         this.SampleData();
-    }
-
-    public void setDbHelper(Context context) {
-        dbHelper = new DBHelper(context,"SoldierDB.db", null, 1);
-        squadManager = new SquadManager(dbHelper);
     }
 
     public MutableLiveData<List<Squad>> getLiveDataSquads() {

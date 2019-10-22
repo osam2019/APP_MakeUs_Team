@@ -12,11 +12,7 @@ import java.util.Locale;
 import java.util.List;
 
 public class SoldierManager {
-    List<Soldier> SoldierList = null;
-
-    public SoldierManager() {
-        getAllSoldiers();
-    }
+    List<Soldier> SoldierList = this.getAllSoldiers();
 
     private DBHelper dbHelper;
     public SoldierManager(DBHelper dbHelper){
@@ -167,6 +163,7 @@ public class SoldierManager {
 
     public boolean isExistSoldier(String milliNumber) {
         // 존재하면 true, 없으면 false
+        if(SoldierList.size() == 0) { return false; }
         for(int i = 0; i < SoldierList.size(); i++) {
             if(SoldierList.get(i).Milli_Number == milliNumber) {
                 return true;

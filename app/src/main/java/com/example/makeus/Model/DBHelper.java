@@ -13,13 +13,14 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    final static String name = "makeus";
+    public DBHelper() {
+        super(null, name, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql_squad_table_create = "create table 분대_1 (" +
+        /*String sql_squad_table_create = "create table 분대_1 (" +
                 "name char(10), " +
                 "squad varchar(20), " +
                 "rank char(10), " +
@@ -33,11 +34,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 "primary key(milli_number) " +
                 ") ";
 
-        db.execSQL(sql_squad_table_create);
+        db.execSQL(sql_squad_table_create);*/
     }
 
-    public void createTable(DBHelper helper, String squad) {
-        SQLiteDatabase db = helper.getWritableDatabase();
+    public void createTable(String squad) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
         String sql_squad_table_create = "create table " + squad + " (" +
                 "name char(10), " +

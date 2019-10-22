@@ -13,7 +13,7 @@ import java.util.List;
 public class SquadManager {
     private DBHelper dbHelper;
     public SoldierManager soldierManager;
-    public List<Squad> SquadList = null;
+    public List<Squad> SquadList = this.getAllSquad();
 
     public SquadManager(DBHelper dbHelper) {
         this.dbHelper = dbHelper;
@@ -59,7 +59,7 @@ public class SquadManager {
 
         if(SquadList.get(SquadList.size()-1) == squad) {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            dbHelper.createTable(dbHelper, squad.Name);
+            dbHelper.createTable(squad.Name);
             db.close();
             return true;
         }
@@ -78,6 +78,7 @@ public class SquadManager {
 
     public boolean isExistSquad(String name) {
         // 존재하면 true, 없으면 false
+        if(SquadList.size() == 0) { return false; }
         for(int i = 0; i<SquadList.size(); i++) {
             if(SquadList.get(i).Name == name) {
                 return true;
