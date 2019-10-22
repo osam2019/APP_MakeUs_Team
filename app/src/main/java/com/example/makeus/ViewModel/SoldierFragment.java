@@ -30,7 +30,11 @@ public class SoldierFragment extends Fragment {
     private SoldierViewModel mViewModel;
     private SoldierAdapter mSoldierAdapter;
 
-    public static SoldierFragment newInstance() {
+    public static SoldierFragment newInstance(Squad squad) {
+        SoldierFragment soldierFragment = new SoldierFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("squad", squad);
+        soldierFragment.setArguments(args);
         return new SoldierFragment();
     }
 

@@ -58,19 +58,15 @@ public class SquadAdapter extends BaseAdapter {
         final SquadButton squadButton = convertView.findViewById(R.id.squad_button);
         squadButton.squad = mSquads.get(position);
         squadButton.setText(String.valueOf(mSquads.get(position).Name));
-        squadButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.nav_soilder));
-        /*
         squadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SquadButton button = v.findViewById(R.id.squad_button);
-                SoldierFragment fragment = new SoldierFragment();
-
-
+                Navigation.findNavController(v).navigate(R.id.nav_soilder);
                 Toast.makeText((AppCompatActivity) mContext, button.squad.Name + " 이벤트발생", Toast.LENGTH_LONG).show();
             }
         });
-        */
+
         return convertView;
     }
 

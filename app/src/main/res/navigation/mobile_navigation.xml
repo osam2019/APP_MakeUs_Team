@@ -9,7 +9,8 @@
         android:id="@+id/nav_squad"
         android:name="com.example.makeus.ViewModel.SquadFragment"
         android:label="@string/test"
-        tools:layout="@layout/fragment_squad" />
+        tools:layout="@layout/fragment_squad" >
+    </fragment>
     <fragment
         android:id="@+id/nav_inputprofile"
         android:name="com.example.makeus.ViewModel.inputprofileFragment"
