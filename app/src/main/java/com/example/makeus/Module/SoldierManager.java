@@ -23,20 +23,8 @@ public class SoldierManager {
         this.dbHelper = dbHelper;
     }
 
-    public List<String> getTableList() {
-        List<String> TableList = null;
-        for (int i = 0; i < SoldierList.size(); i++) {
-            if(i == 0) { TableList.add(SoldierList.get(i).Squad); }
-            for (int k = 0; k < TableList.size(); k++) {
-                if(SoldierList.get(i).Squad != TableList.get(k)) { TableList.add(SoldierList.get(i).Squad); }
-            }
-        }
-        return TableList;
-    }
-
     public List<Soldier> getAllSoldiers() {
-        DBHelper helper = new DBHelper(null, null, null, 0);
-        SQLiteDatabase db = helper.getReadableDatabase();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String sql = "SELECT * FROM all_tables";
         Cursor c = db.rawQuery(sql, null);
@@ -54,11 +42,7 @@ public class SoldierManager {
             long Enlistment_Day = c.getLong(c.getColumnIndex("enlistment_day"));
             long Transfer_Day = c.getLong(c.getColumnIndex("transfer_day"));
             long Discharge_Day = c.getLong(c.getColumnIndex("discharge_day"));
-
-            boolean Discharge = true;
-            if (Discharge_Flag == 0) {
-                Discharge = false;
-            }
+            boolean Discharge = false;
 
             Soldier soldier = new Soldier();
             soldier.Input_Infomation(Name, Squad, Rank, Milli_Number, Specialty, Birthday, Enlistment_Day, Transfer_Day,
@@ -94,8 +78,7 @@ public class SoldierManager {
 
     public boolean createSoldier(Soldier squad) {
         //Soldier 추가
-        DBHelper helper = new DBHelper(null, null, null, 0);
-        SQLiteDatabase db = helper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         String sql = "insert into " + squad.Squad + "(name, squad, rank, milli_number, specialty, birthday, " +
                 "enlistment_day, transfer_day, discharge_day, discharge_flag) values (?,?,?,?,?,?,?,?,?,?)";
 
@@ -124,8 +107,7 @@ public class SoldierManager {
 
     public void deleteSoldier(String milliNumber) {
         //Soldier 삭제
-        DBHelper helper = new DBHelper(null, null, null, 0);
-        SQLiteDatabase db = helper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         for(int i = 0; i < SoldierList.size(); i++) {
             if(SoldierList.get(i).Milli_Number == milliNumber) {
@@ -140,8 +122,7 @@ public class SoldierManager {
 
     public boolean updateSoldier(String milliNumber, String newName, String rank, long enlistment_Day, long transfer_Day, long discharge_Day, long birth, String specialty, String squad) {
         //Soldier 일반 상태값 변경
-        DBHelper helper = new DBHelper(null, null, null, 0);
-        SQLiteDatabase db = helper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         String sql = "UPDATE * SET name = ?, squad = ?, rank = ?, milli_number = ?, specialty = ?, birthday = ?," +
                 "enlistment_day = ?, transfer_day = ?, discharge_day = ? WHERE milli_number = " + milliNumber;
@@ -161,15 +142,17 @@ public class SoldierManager {
 
     public boolean updateSoldier(String milliNumber, boolean disFlag) {
         //Soldier 전역 플래그값 변경
-        DBHelper helper = new DBHelper(null, null, null, 0);
-        SQLiteDatabase db = helper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         String sql = "UPDATE * SET discharge_flag = ? WHERE milli_number = " + milliNumber;
 
-        String [] arg = {"0"};
+        // 전역자는 1, 복무중인 사람은 0
+        String [] arg = null;
         if (disFlag == true) {
+            arg[0] = "0";
+        }else {
             arg[0] = "1";
-        } // 전역자는 1, 복무중인 사람은 0
+        }
 
         getAllSoldiers();
         db.execSQL(sql, arg);
@@ -183,6 +166,7 @@ public class SoldierManager {
     }
 
     public boolean isExistSoldier(String milliNumber) {
+        // 존재하면 true, 없으면 false
         for(int i = 0; i < SoldierList.size(); i++) {
             if(SoldierList.get(i).Milli_Number == milliNumber) {
                 return true;

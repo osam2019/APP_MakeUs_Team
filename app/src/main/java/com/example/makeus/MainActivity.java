@@ -1,5 +1,6 @@
 package com.example.makeus;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.navigation.NavController;
@@ -7,7 +8,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.makeus.Module.Notifier;
+import com.example.makeus.Model.DBHelper;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -36,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // DBHelper 초기화
+        DBHelper helper = new DBHelper(this,"SoldierDB.db",null, 1);
+
     }
 
     @Override

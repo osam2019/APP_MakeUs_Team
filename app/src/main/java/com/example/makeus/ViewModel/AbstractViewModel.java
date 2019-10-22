@@ -1,5 +1,7 @@
 package com.example.makeus.ViewModel;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -17,15 +19,19 @@ public abstract class AbstractViewModel extends ViewModel {
     private MutableLiveData<List<Squad>> squads;
     private MutableLiveData<List<Soldier>> soldiers;
     private SquadManager squadManager;
+    private DBHelper dbHelper;
 
     public AbstractViewModel() {
-        //NULL 이면 안됨!
-        squadManager = new SquadManager(null);
         this.squads = new MutableLiveData<>();
         squads.setValue(new ArrayList<Squad>());
         this.soldiers = new MutableLiveData<>();
         soldiers.setValue(new ArrayList<Soldier>());
         this.SampleData();
+    }
+
+    public void setDbHelper(Context context) {
+        dbHelper = new DBHelper(context,"SoldierDB.db", null, 1);
+        squadManager = new SquadManager(dbHelper);
     }
 
     public MutableLiveData<List<Squad>> getLiveDataSquads() {

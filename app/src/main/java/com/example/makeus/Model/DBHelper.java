@@ -6,41 +6,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.makeus.Module.SoldierManager;
+import com.example.makeus.Module.SquadManager;
 
 import java.util.List;
 
 
 public class DBHelper extends SQLiteOpenHelper {
-    String SquadName;
-    List<String>SquadList = null;
-    SoldierManager sm = new SoldierManager();
-
-    public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, String squadName) {
-        // 추가시
-        super(context, "SoldierDB", null, 1);
-        if(SquadList != null) {
-            for (int i = 0; i<SquadList.size(); i++) {
-                if (SquadList.get(i) != squadName) {
-                    SquadList.add(squadName);
-                }
-            }
-        } else {
-            this.SquadName = squadName;
-            SquadList.add(squadName);
-        }
-        createTable(squadName);
-        SquadList = sm.getTableList();
-    }
 
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        // 평상시
-        super(context, "SoldierDB", null, 1);
+        super(context, name, factory, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql_squad_table_create = "create table " + sm.getTableList().get(0) + " (" +
+        String sql_squad_table_create = "create table 분대_1 (" +
                 "name char(10), " +
                 "squad varchar(20), " +
                 "rank char(10), " +
@@ -57,11 +36,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(sql_squad_table_create);
     }
 
-    public void createTable(String squad) {
-        DBHelper helper = new DBHelper(null, null, null, 0);
+    public void createTable(DBHelper helper, String squad) {
         SQLiteDatabase db = helper.getWritableDatabase();
 
-        String sql_squad_table_create = "create table " + SquadName + " (" +
+        String sql_squad_table_create = "create table " + squad + " (" +
                 "name char(10), " +
                 "squad varchar(20), " +
                 "rank char(10), " +

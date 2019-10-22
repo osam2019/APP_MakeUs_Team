@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.NoCopySpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class inputprofileFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
+        mViewModel.setDbHelper(getContext());
 
         EditText expeceted_discharge_day_View  = getView().findViewById(R.id.input_discharge_Day);
         expeceted_discharge_day_View.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +113,7 @@ public class inputprofileFragment extends Fragment {
                     EditText birth_day_View  = view.getRootView().findViewById(R.id.input_birth);
                     Date birth = dateFormat.parse(birth_day_View.getText().toString());
 
-                    EditText specialtyView = view.getRootView().findViewById(R.id.name);
+                    EditText specialtyView = view.getRootView().findViewById(R.id.input_specialty);
                     String specialty = specialtyView.getText().toString();
 
                     EditText squadView = view.getRootView().findViewById(R.id.input_squad);
