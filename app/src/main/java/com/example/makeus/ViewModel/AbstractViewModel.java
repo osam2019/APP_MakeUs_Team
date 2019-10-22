@@ -58,11 +58,10 @@ public abstract class AbstractViewModel extends ViewModel {
         return squadManager.soldierManager.readSoldier(milliNumber);
     }
 
-    public boolean createSoldier(Soldier squad) {
+    public void createSoldier(Soldier squad) {
         //Soldier 추가
-        boolean ret = squadManager.soldierManager.createSoldier(squad);
+        squadManager.soldierManager.createSoldier(squad);
         updateDataFromDB();
-        return ret;
     }
 
     public void deleteSoldier(String milliNumber) {
@@ -71,11 +70,10 @@ public abstract class AbstractViewModel extends ViewModel {
         updateDataFromDB();
     }
 
-    public boolean updateSoldier(String milliNumber, String newName, String rank, long enlistment_Day, long transfer_Day, long discharge_Day, long birth, String specialty, String squad) {
+    public void updateSoldier(String milliNumber, String newName, String rank, long enlistment_Day, long transfer_Day, long discharge_Day, long birth, String specialty, String squad) {
         //Soldier 값변경
-        boolean ret = squadManager.soldierManager.updateSoldier(milliNumber, newName, rank, enlistment_Day, transfer_Day, discharge_Day, birth, specialty, squad);
+        squadManager.soldierManager.updateSoldier(milliNumber, newName, rank, enlistment_Day, transfer_Day, discharge_Day, birth, specialty, squad);
         updateDataFromDB();
-        return ret;
     }
 
     public boolean isExistSoldier(String isExistSoldier) {
@@ -93,25 +91,22 @@ public abstract class AbstractViewModel extends ViewModel {
         return squadManager.readSquad(name);
     }
 
-    public boolean createSquad(Squad squad) {
+    public void createSquad(String name) {
         //Squad 추가
-        boolean ret = squadManager.createSquad(squad);
+        squadManager.createSquad(name);
         updateDataFromDB();
-        return ret;
     }
 
-    public Squad deleteSquad(String name) {
+    public void deleteSquad(String name) {
         //Squad 삭제
-        Squad ret = squadManager.deleteSquad(name);
+        squadManager.deleteSquad(name);
         updateDataFromDB();
-        return ret;
     }
 
-    public boolean updateSquad(String oldName, String newName) {
+    public void updateSquad(String oldName, String newName) {
         //Squad 값변경
-        boolean ret = squadManager.updateSquad(oldName, newName);
+        squadManager.updateSquad(oldName, newName);
         updateDataFromDB();
-        return ret;
     }
 
     public boolean isExistSquad(String name) {
