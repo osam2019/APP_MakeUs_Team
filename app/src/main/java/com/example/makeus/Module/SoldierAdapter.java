@@ -48,7 +48,7 @@ public class SoldierAdapter extends BaseAdapter {
 
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-            convertView = layoutInflater.inflate(R.layout.squad, null);
+            convertView = layoutInflater.inflate(R.layout.row_view_squad, null);
         }
 
         Soldier soldier = soldiers.get(position);

@@ -51,7 +51,7 @@ public class SoldierFragment extends Fragment {
         // TODO: Use the ViewModel
 
         if(mSoldierAdapter == null) {
-            mSoldierAdapter = new SoldierAdapter(this.getContext(), mViewModel.getSoldiers().getValue(),"");
+            mSoldierAdapter = new SoldierAdapter(this.getContext(), mViewModel.getSoldiers().getValue(),"1소대 1분대");
         }
 
         GridView gridView = getView().findViewById(R.id.grid);
