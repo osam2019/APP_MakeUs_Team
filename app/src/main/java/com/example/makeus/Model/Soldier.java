@@ -39,6 +39,14 @@ public class Soldier {
         return this;
     }
 
+    public String getRank(){
+        return this.Rank;
+    }
+
+    public String getMilli_Number(){
+        return this.Milli_Number;
+    }
+
     /*
     public static final Creator<Squad> CREATOR = new Creator<Squad>() {
         // 객체 복원

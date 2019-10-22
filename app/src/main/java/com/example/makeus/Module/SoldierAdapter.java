@@ -17,18 +17,19 @@ import java.util.List;
 public class SoldierAdapter extends BaseAdapter {
 
     private final Context mContext;
-    private List<Soldier> mSoldier;
+    private Squad mSquad;
     private String squadName;
 
-    public SoldierAdapter(Context context, List<Soldier> soldier, String squadName) {
+    public SoldierAdapter(Context context, Squad squad, String squadName) {
         this.mContext = context;
-        this.mSoldier = soldier;
+        this.mSquad = squad;
         this.squadName = squadName;
     }
 
     @Override
     public int getCount() {
-        return mSoldier.size();
+        // 분대의 용사 리스트 사이즈 반환
+        return mSquad.SoldierList.size();
     }
 
     @Override
@@ -49,19 +50,18 @@ public class SoldierAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.squad, null);
         }
 
-        //TextView toolBarTitle = convertView.findViewById(R.id.toolbar);
-        //toolBarTitle.setText(squadName);
+        Soldier soldier = mSquad.SoldierList.get(position);
 
         TextView soldierRank = convertView.findViewById(R.id.view_squad_rank);
-        // soldierRank.setText();
+        soldierRank.setText(soldier.getRank());
         soldierRank.setOnClickListener(new soldierListener());
 
         TextView soldierName = convertView.findViewById(R.id.view_squad_name);
-        // soldierName.setText();
+        soldierName.setText(soldier.Name);
         soldierRank.setOnClickListener(new soldierListener());
 
         TextView soldierMilNum = convertView.findViewById(R.id.view_squad_milnum);
-        // soliderMilNum.setText();
+        soldierMilNum.setText(soldier.getMilli_Number());
         soldierMilNum.setOnClickListener(new soldierListener());
 
         return convertView;
