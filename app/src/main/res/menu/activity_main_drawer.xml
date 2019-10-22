@@ -4,35 +4,25 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/test" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/test" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/test" />
-        <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/test" />
+        <item android:title="관리">
+            <menu>
+                <item
+                    android:id="@+id/nav_squad"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="용사관리" />
+                <item
+                    android:id="@+id/nav_health"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="체력관리" />
+            </menu>
+        </item>
+        <item android:title="기능">
+            <menu>
+                <item
+                    android:id="@+id/nav_inputprofile"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="용사추가" />
+            </menu>
+        </item>
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="@string/test" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="@string/test" />
-        </menu>
-    </item>
-
 </menu>
