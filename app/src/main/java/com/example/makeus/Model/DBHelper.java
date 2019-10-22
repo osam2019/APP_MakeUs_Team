@@ -6,27 +6,31 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.makeus.Module.SoldierManager;
+
+import java.util.List;
+
+
 public class DBHelper extends SQLiteOpenHelper {
     String SquadName;
-    public String [] SquadList = null;
+    List<String>SquadList = null;
+    SoldierManager sm = new SoldierManager();
 
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, String squadName) {
         // 추가시
         super(context, "SoldierDB", null, 1);
         if(SquadList != null) {
-            for (int i = 0; i<SquadList.length; i++) {
-                if (SquadList[i] == squadName) {
-                    continue;
-                }
-                if (i == SquadList.length - 1) {
-                    SquadList[SquadList.length] = squadName;
-                    createTable(squadName);
+            for (int i = 0; i<SquadList.size(); i++) {
+                if (SquadList.get(i) != squadName) {
+                    SquadList.add(squadName);
                 }
             }
         } else {
             this.SquadName = squadName;
-            SquadList[0] = squadName;
+            SquadList.add(squadName);
         }
+        createTable(squadName);
+        SquadList = sm.getTableList();
     }
 
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -36,7 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql_squad_table_create = "create table " + SquadName + " (" +
+        String sql_squad_table_create = "create table " + sm.getTableList().get(0) + " (" +
                 "name char(10), " +
                 "squad varchar(20), " +
                 "rank char(10), " +

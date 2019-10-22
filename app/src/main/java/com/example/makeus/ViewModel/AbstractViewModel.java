@@ -67,7 +67,7 @@ public abstract class AbstractViewModel extends ViewModel {
         updateDataFromDB();
     }
 
-    public boolean updateSoldier(String milliNumber, String newName,String rank, long enlistment_Day, long transfer_Day, long discharge_Day, long birth, String specialty, String squad) {
+    public boolean updateSoldier(String milliNumber, String newName, String rank, long enlistment_Day, long transfer_Day, long discharge_Day, long birth, String specialty, String squad) {
         //Soldier 값변경
         boolean ret = squadManager.soldierManager.updateSoldier(milliNumber, newName, rank, enlistment_Day, transfer_Day, discharge_Day, birth, specialty, squad);
         updateDataFromDB();

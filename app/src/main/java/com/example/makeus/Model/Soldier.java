@@ -20,7 +20,6 @@ public class Soldier implements Parcelable {
         this.Squad = "Squad Test";
         this.Rank = "Test Rank";
         this.Milli_Number = "00-12345678";
-
         this.Birthday = 1999080800;
         this.Enlistment_Day = 2019010100;
         this.Transfer_Day = 2019022000;
