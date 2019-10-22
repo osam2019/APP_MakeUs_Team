@@ -1,5 +1,6 @@
 package com.example.makeus.ViewModel;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
+import com.example.makeus.Module.SoldierAdapter;
 import com.example.makeus.R;
 
 import java.util.List;
@@ -26,6 +28,7 @@ import java.util.List;
 public class SoldierFragment extends Fragment {
 
     private SoldierViewModel mViewModel;
+    private SoldierAdapter mSoldierAdapter;
 
     public static SoldierFragment newInstance() {
         return new SoldierFragment();
@@ -42,6 +45,20 @@ public class SoldierFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SoldierViewModel.class);
         // TODO: Use the ViewModel
-        //mViewModel.squad = savedInstanceState.getParcelable("squad");
+
+        if(mSoldierAdapter == null) {
+            mSoldierAdapter = new SoldierAdapter(this.getContext(), mViewModel.getSoldiers().getValue(),"");
+        }
+
+        GridView gridView = getView().findViewById(R.id.grid);
+        gridView.setAdapter(mSoldierAdapter);
+
+        mViewModel.getSoldiers().observe(this, new Observer<List<Soldier>>(){
+            @Override
+            public void onChanged(@Nullable List<Soldier> soldier) {
+                mSoldierAdapter.notifyDataSetChanged();
+            }
+        });
+
     }
 }

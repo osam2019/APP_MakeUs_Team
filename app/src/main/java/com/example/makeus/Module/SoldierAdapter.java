@@ -17,19 +17,20 @@ import java.util.List;
 public class SoldierAdapter extends BaseAdapter {
 
     private final Context mContext;
-    private Squad mSquad;
+    //private Squad mSquad;
+    private List<Soldier> soldiers;
     private String squadName;
 
-    public SoldierAdapter(Context context, Squad squad, String squadName) {
+    public SoldierAdapter(Context context, List<Soldier> soldiers, String squadName) {
         this.mContext = context;
-        this.mSquad = squad;
+        this.soldiers = soldiers;
         this.squadName = squadName;
     }
 
     @Override
     public int getCount() {
         // 분대의 용사 리스트 사이즈 반환
-        return mSquad.SoldierList.size();
+        return soldiers.size();
     }
 
     @Override
@@ -50,7 +51,7 @@ public class SoldierAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.squad, null);
         }
 
-        Soldier soldier = mSquad.SoldierList.get(position);
+        Soldier soldier = soldiers.get(position);
 
         TextView soldierRank = convertView.findViewById(R.id.view_squad_rank);
         soldierRank.setText(soldier.getRank());
