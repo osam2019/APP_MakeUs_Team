@@ -41,4 +41,8 @@ public class SoldierFragment extends Fragment {
         // --
     }
 
+    public SoliderViewModel getViewModel() {
+        return mViewModel;
+    }
+
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Squad {
     public String Name;
-    private ArrayList<Soldier> SoldierList;
+    public ArrayList<Soldier> SoldierList;
 
     public Squad(String name){
         Name = name;
@@ -15,4 +15,5 @@ public class Squad {
             SoldierList.add(soldier);
         }
     }
+
 }
