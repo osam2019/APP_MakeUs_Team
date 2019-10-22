@@ -43,8 +43,5 @@ public class SoldierFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(SoldierViewModel.class);
         // TODO: Use the ViewModel
         //mViewModel.squad = savedInstanceState.getParcelable("squad");
-
-    public SoldierViewModel getViewModel() {
-        return mViewModel;
     }
 }
