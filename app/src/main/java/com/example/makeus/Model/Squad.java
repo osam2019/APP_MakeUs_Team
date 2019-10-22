@@ -10,12 +10,12 @@ public class Squad implements Parcelable {
     public String Name;
     public ArrayList<Soldier> SoldierList;
 
-    public Squad(String name){
+    public Squad(String name) {
         Name = name;
         SoldierList = new ArrayList<>();
     }
 
-    public Squad(String name, ArrayList<Soldier> soldierList){
+    public Squad(String name, ArrayList<Soldier> soldierList) {
         Name = name;
         SoldierList = soldierList;
     }

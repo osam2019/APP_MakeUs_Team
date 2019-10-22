@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.makeus.Model.Soldier;
 import com.example.makeus.R;
 
 public class inputprofileFragment extends Fragment {
@@ -32,8 +34,15 @@ public class inputprofileFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                Soldier soldier = new Soldier();
+
                 TextView nameView = view.findViewById(R.id.name);
                 String name = nameView.getText().toString();
+
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("soldier", soldier);
+                Navigation.findNavController(view).navigate(R.id.nav_soilder, bundle);
             }
         });
 

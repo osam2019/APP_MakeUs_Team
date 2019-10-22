@@ -8,9 +8,8 @@ import com.example.makeus.Model.Squad;
 
 import java.util.ArrayList;
 
-public class SoldierViewModel extends ViewModel {
+public class SoldierViewModel extends AbstractViewModel {
     // TODO: Implement the ViewModel
-    private Squad mSquad;
     private MutableLiveData<ArrayList<Soldier>> mSoldiers;
 
     final String squadName = "1소대 1분대";
