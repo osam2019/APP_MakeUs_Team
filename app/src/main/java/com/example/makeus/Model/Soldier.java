@@ -1,16 +1,16 @@
 package com.example.makeus.Model;
 
 public class Soldier {
-    public String Name;
-    public String Squad;
-    public Rank Rank;
-    private String Millitary_Number;
-    private long Birthday;
-    private long Enlistment_Day;
-    private long Transfer_Day;
-    private long Discharge_Day;
-    private boolean Discharge_Flag;
-    private Specialty Specialty;
+    public String Name; // 성명
+    public String Squad; // 분대
+    public Rank Rank; // 계급
+    private String Millitary_Number; // 군번
+    private long Birthday; // 생년월일
+    private long Enlistment_Day; // 입대일
+    private long Transfer_Day; // 전입일
+    private long Discharge_Day; // 전역예정일
+    private boolean Discharge_Flag; // 전역여부
+    private Specialty Specialty; // 주특기
 
     public void Input_Infomation(String name, String squad, String millitary_Number, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag, Rank rank, Specialty specialty){
         this.Name = name;
@@ -23,5 +23,9 @@ public class Soldier {
         this.Discharge_Flag = discharge_Flag;
         this.Rank = rank;
         this.Specialty = specialty;
+    }
+
+    public Soldier Output_Infomation(){
+        return this;
     }
 }
