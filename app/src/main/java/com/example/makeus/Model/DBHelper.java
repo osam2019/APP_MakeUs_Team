@@ -21,6 +21,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "birthday int" +
                 "enlistment_day int" +
                 "transfer_day int" +
+                "discharge_day int" +
+
                 ")";
     }
     @Override
