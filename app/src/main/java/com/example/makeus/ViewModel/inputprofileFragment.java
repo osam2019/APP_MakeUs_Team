@@ -46,8 +46,44 @@ public class inputprofileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View v1 = inflater.inflate(R.layout.inputprofile_fragment, container, false);
-        Button summit = v1.findViewById(R.id.modify);
+        return inflater.inflate(R.layout.inputprofile_fragment, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
+
+        EditText expeceted_discharge_day_View  = getView().findViewById(R.id.input_discharge_Day);
+        expeceted_discharge_day_View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_EXPECTED_DISCHARGE_DAY);
+            }
+        });
+        EditText transfer_day_View = getView().findViewById(R.id.input_transfer_Day);
+        transfer_day_View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_TRANSFER_DAY);
+            }
+        });
+        EditText birth_day_view  = getView().findViewById(R.id.input_birth);
+        birth_day_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_BIRTH);
+            }
+        });
+        EditText enlistment_day_View = getView().findViewById(R.id.input_enlistment_Day);
+        enlistment_day_View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_ENLISTMENT_DAY);
+            }
+        });
+
+        Button summit = getView().findViewById(R.id.modify);
         summit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,44 +97,19 @@ public class inputprofileFragment extends Fragment {
                     String rank = rankView.getText().toString();
 
                     EditText transfer_day_View = view.getRootView().findViewById(R.id.input_transfer_Day);
-                    transfer_day_View.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            callDatePicker(OPTION_TRANSFER_DAY);
-                        }
-                    });
                     Date transfer_day = dateFormat.parse(transfer_day_View.getText().toString());
 
                     EditText milli_numberView = view.getRootView().findViewById(R.id.input_milli_number);
                     String milli_number = milli_numberView.getText().toString();
 
                     EditText enlistment_day_View = view.getRootView().findViewById(R.id.input_enlistment_Day);
-                    enlistment_day_View.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            callDatePicker(OPTION_ENLISTMENT_DAY);
-                        }
-                    });
                     Date enlistment_day = dateFormat.parse(enlistment_day_View.getText().toString());
 
                     EditText expeceted_discharge_day_View  = view.getRootView().findViewById(R.id.input_discharge_Day);
-                    expeceted_discharge_day_View.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            callDatePicker(OPTION_EXPECTED_DISCHARGE_DAY);
-
-                        }
-                    });
                     Date expeceted_discharge_day = dateFormat.parse(expeceted_discharge_day_View.getText().toString());
 
-                    EditText birth_View  = view.getRootView().findViewById(R.id.input_birth);
-                    birth_View.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            callDatePicker(OPTION_BIRTH);
-                        }
-                    });
-                    Date birth = dateFormat.parse(birth_View.getText().toString());
+                    EditText birth_day_View  = view.getRootView().findViewById(R.id.input_birth);
+                    Date birth = dateFormat.parse(birth_day_View.getText().toString());
 
                     EditText specialtyView = view.getRootView().findViewById(R.id.name);
                     String specialty = specialtyView.getText().toString();
@@ -120,23 +131,6 @@ public class inputprofileFragment extends Fragment {
                 }
             }
         });
-
-        return v1;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
-
-        setDatePickerInput();
-
-        // TODO: Use the ViewModel
-
-    }
-
-    // 날짜 Input 부분을 DatePicker로 받기
-    private void setDatePickerInput() {
 
     }
 
