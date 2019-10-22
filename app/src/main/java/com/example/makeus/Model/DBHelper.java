@@ -41,6 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "name char(10), " +
                 "primary key(name) " +
                 ") ";
+
         db.execSQL(create_squads);
     }
 

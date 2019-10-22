@@ -76,7 +76,7 @@ public class SoldierManager {
         while(solider.moveToNext()) {
             soldiers.add(this.getSoldierFromCursor(solider));
         }
-
+        db.close();
         return soldiers;
     }
 

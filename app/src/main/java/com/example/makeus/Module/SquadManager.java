@@ -32,6 +32,7 @@ public class SquadManager {
             s.SoldierList = soldierManager.getSpecificSquadSoldiers(s.Name);
             squads.add(s);
         }
+        db.close();
         return squads;
     }
 
@@ -46,36 +47,40 @@ public class SquadManager {
         }
     }
 
-    public boolean createSquad(Squad squad) {
-        //Squad 추가
-        SquadList.add(squad);
-
-        if(SquadList.get(SquadList.size()-1) == squad) {
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            dbHelper.createTable(squad.Name);
-            db.close();
-            return true;
-        }
-        return false;
+    public void createSquad(String name) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String sql = "insert into " + name + "(name) values (?)";
+        String [] arg = {name};
+        db.execSQL(sql, arg);
+        db.close();
     }
 
-    public Squad deleteSquad(String name) {
-        //Squad 삭제
-        return null;
+    public void deleteSquad(String name) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String sql = "DELETE FROM squads WHERE name = " + name;
+        db.execSQL(sql,null);
+        db.close();
     }
 
-    public boolean updateSquad(String oldName, String newName) {
-        //Squad 업데이트
-        return false;
+    //
+
+    public void updateSquad(String oldName, String newName) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String sql = "UPDATE squads SET name = ? WHERE name = " + oldName;
+        String [] arg = { newName };
+        db.execSQL(sql, arg);
+        db.close();
     }
 
     public boolean isExistSquad(String name) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor squad = db.rawQuery("SELECT squad FROM squads WHERE name = \'" + name + "\'", null );
         if(squad.getCount() == 0) {
+            db.close();
             return false;
         }
         else {
+            db.close();
             return true;
         }
     }
