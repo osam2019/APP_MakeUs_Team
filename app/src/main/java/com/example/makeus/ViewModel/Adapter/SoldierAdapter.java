@@ -22,12 +22,10 @@ public class SoldierAdapter extends BaseAdapter {
     private final Context mContext;
     //private squad mSquad;
     private List<Soldier> soldiers;
-    private String squadName;
 
-    public SoldierAdapter(Context context, List<Soldier> soldiers, String squadName) {
+    public SoldierAdapter(Context context, List<Soldier> soldiers) {
         this.mContext = context;
         this.soldiers = soldiers;
-        this.squadName = squadName;
     }
 
     @Override

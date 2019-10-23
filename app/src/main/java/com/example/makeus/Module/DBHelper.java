@@ -25,11 +25,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "makeus.db";
     public static final String TABLE_SOLDIERS = "soldiers";
     public static final String TABLE_SQUADS = "squads";
-    private AbstractViewModel viewModel;
 
-    public DBHelper(Context context, AbstractViewModel viewModel) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.viewModel = viewModel;
     }
 
     @Override
@@ -106,7 +104,6 @@ public class DBHelper extends SQLiteOpenHelper {
         String [] arg = {name};
         db.execSQL(sql, arg);
         db.close();
-        viewModel.updateDataFromDB(this);
     }
 
     public void createSquad(Squad squad) {
@@ -129,7 +126,6 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql = "DELETE FROM "+TABLE_SQUADS+" WHERE name = " + name;
         db.execSQL(sql,null);
         db.close();
-        viewModel.updateDataFromDB(this);
     }
 
     public void updateSquad(String oldName, String newName) {
@@ -138,7 +134,6 @@ public class DBHelper extends SQLiteOpenHelper {
         String [] arg = { newName };
         db.execSQL(sql, arg);
         db.close();
-        viewModel.updateDataFromDB(this);
     }
 
     public boolean isExistSquad(String name) {
@@ -231,7 +226,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 };
         db.execSQL(sql, arg);
         db.close();
-        viewModel.updateDataFromDB(this);
     }
 
     public void deleteSoldier(String milliNumber) {
@@ -239,14 +233,13 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql = "DELETE FROM "+TABLE_SOLDIERS+" WHERE milli_number = " + milliNumber;
         db.execSQL(sql,null);
         db.close();
-        viewModel.updateDataFromDB(this);
     }
 
     public void updateSoldier(String milliNumber, String newName, String rank, long enlistment_Day, long transfer_Day, long discharge_Day, long birth, String specialty, String squad, PhysicalScore physicalScore) {
         SQLiteDatabase db = getWritableDatabase();
 
         String sql = "UPDATE " + TABLE_SOLDIERS + " SET name = ?, squad = ?, rank = ?, specialty = ?, birthday = ?," +
-                "enlistment_day = ?, transfer_day = ?, discharge_day = ?, push_up = ?, sit_up = ?, running = ? WHERE milli_number = " + milliNumber;
+                "enlistment_day = ?, transfer_day = ?, discharge_day = ?, push_up = ?, sit_up = ?, running = ? WHERE milli_number = ?";
 
         String [] arg = {newName, squad, rank, specialty,
                 String.valueOf(birth),
@@ -256,11 +249,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 String.valueOf(physicalScore.getPushUp()),
                 String.valueOf(physicalScore.getSitUp()),
                 String.valueOf(physicalScore.getRunning()),
+                String.valueOf(milliNumber)
         };
 
         db.execSQL(sql, arg);
         db.close();
-        viewModel.updateDataFromDB(this);
     }
 
     public void updateSoldier(Soldier soldier) {
@@ -283,7 +276,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL(sql, arg);
         db.close();
-        viewModel.updateDataFromDB(this);
     }
 
     public boolean isExistSoldier(String milliNumber) {

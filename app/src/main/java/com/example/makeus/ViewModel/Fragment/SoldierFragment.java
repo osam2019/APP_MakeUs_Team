@@ -43,10 +43,10 @@ public class SoldierFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SoldierViewModel.class);
-        mViewModel.updateDataFromDB(new DBHelper(getContext(), mViewModel));
+        mViewModel.updateDataFromDB(new DBHelper(getContext()));
 
         if(mSoldierAdapter == null) {
-            mSoldierAdapter = new SoldierAdapter(this.getContext(), mViewModel.getLiveDataSoldiers().getValue(),"1소대 1분대");
+            mSoldierAdapter = new SoldierAdapter(this.getContext(), mViewModel.getLiveDataSoldiers().getValue());
         }
 
         GridView gridView = getView().findViewById(R.id.grid);
@@ -58,7 +58,6 @@ public class SoldierFragment extends Fragment {
                 mSoldierAdapter.notifyDataSetChanged();
             }
         });
-
     }
 
     @Override
@@ -67,7 +66,7 @@ public class SoldierFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(SoldierViewModel.class);
 
         Squad squad = (Squad)getArguments().get("squad");
-        mViewModel.setSquad(new DBHelper(getContext(), this.mViewModel), squad);
+        mViewModel.setSquad(new DBHelper(getContext()), squad);
         Toast.makeText(getContext(), squad.Name, Toast.LENGTH_SHORT).show();
     }
 }

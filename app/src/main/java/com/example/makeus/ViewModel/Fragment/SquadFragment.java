@@ -42,7 +42,7 @@ public class SquadFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SquadViewModel.class);
-        mViewModel.updateDataFromDB(new DBHelper(getContext(), mViewModel));
+        mViewModel.updateDataFromDB(new DBHelper(getContext()));
 
         if(mSquadAdapter == null) {
             mSquadAdapter = new SquadAdapter(this.getContext(), mViewModel.getLiveDataSquads().getValue());

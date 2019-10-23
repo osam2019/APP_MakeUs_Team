@@ -125,7 +125,7 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
-        mViewModel.updateDataFromDB(new DBHelper(getContext(), mViewModel));
+        mViewModel.updateDataFromDB(new DBHelper(getContext()));
 
         List<String> squadNames = getSquadNames(mViewModel.getLiveDataSquads().getValue());
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item, squadNames);
@@ -167,7 +167,7 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                         soldier.birthday = dateFormat.parse(s).getTime();
                     }
 
-                    DBHelper dbHelper = new DBHelper(getContext(), mViewModel);
+                    DBHelper dbHelper = new DBHelper(getContext());
                     if(!dbHelper.isExistSquad(soldier.Squad)) {
                         dbHelper.createSquad(soldier.Squad);
                     }

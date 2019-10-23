@@ -25,16 +25,16 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="b2377c7a-32f4-4ec5-9141-9ffa1d0e7cbf">
-        <schema name="main" object-types="index, view, column, table" />
+        <schema name="main" object-types="dataset trigger, column, view, table, index, constraint" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="b2377c7a-32f4-4ec5-9141-9ffa1d0e7cbf">
-      <console name="Connection" type="STANDARD" schema="main" session="Main" />
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from soldier;]]></console>
     </connection>
-    <connection id="02d1be19-fb92-455e-949a-01cbbf967cff">
-      <console name="Connection 1" type="STANDARD" schema="" session="Main" />
+    <connection id="72e497b5-8508-4198-81dc-db1d09fbe40f">
+      <console name="Connection 1" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -42,7 +42,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="b2377c7a-32f4-4ec5-9141-9ffa1d0e7cbf" />
-    <connection id="02d1be19-fb92-455e-949a-01cbbf967cff" />
+    <connection id="72e497b5-8508-4198-81dc-db1d09fbe40f" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="b2377c7a-32f4-4ec5-9141-9ffa1d0e7cbf" dataset="main.soldier" active-filter-id="1e864de7-4d97-4b9d-babe-289e19341365">
@@ -158,13 +158,13 @@
           <object-name-filters />
         </object-filters>
       </connection>
-      <connection id="02d1be19-fb92-455e-949a-01cbbf967cff" active="true">
+      <connection id="72e497b5-8508-4198-81dc-db1d09fbe40f" active="true">
         <database>
           <name value="Connection 1" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
-          <database-version value="9999.0" />
+          <database-version value="3.21" />
           <driver-source value="BUILTIN" />
           <driver-library value="" />
           <driver value="" />
@@ -173,7 +173,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="sqlite.db" schema="main" />
+            <file path="C:\makeus.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
