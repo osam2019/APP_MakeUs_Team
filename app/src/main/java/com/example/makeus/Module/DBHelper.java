@@ -230,6 +230,10 @@ public class DBHelper extends SQLiteOpenHelper {
         viewModel.updateDataFromDB(this);
     }
 
+    public void updateSoldier(Soldier soldier) {
+        updateSoldier(soldier.milliNumber, soldier.Name, soldier.Rank, soldier.Enlistment_Day, soldier.Transfer_Day, soldier.Discharge_Day, soldier.Birthday, soldier.Specialty, soldier.Squad);
+    }
+
     public void updateSoldier(String milliNumber, boolean disFlag) {
         //Soldier 전역 플래그값 변경
         SQLiteDatabase db = getWritableDatabase();

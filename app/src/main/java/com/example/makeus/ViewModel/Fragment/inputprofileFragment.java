@@ -30,16 +30,29 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static androidx.databinding.DataBindingUtil.setContentView;
 
 
 public class inputprofileFragment extends Fragment { //fragment class 선언
 
+    final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
     final int OPTION_ENLISTMENT_DAY = 0;  //입대일 선언
     final int OPTION_TRANSFER_DAY = 1;  //전입일 선언
     final int OPTION_EXPECTED_DISCHARGE_DAY = 2;    //
     final int OPTION_BIRTH = 3;
+
+    EditText inputName;
+    Spinner inputRank;
+    EditText inputMilNum;
+    Spinner inputSquad;
+    EditText inputEnlistmentDay;
+    EditText inputTransferDay;
+    EditText inputDischargeDay;
+    EditText inputBirthday;
+    EditText inputSpecialty;
 
     private InputprofileViewModel mViewModel;
 
@@ -50,51 +63,62 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.inputprofile_fragment, container, false);
+        View fragment = inflater.inflate(R.layout.inputprofile_fragment, container, false);
+
+        inputName = fragment.findViewById(R.id.input_name);
+        inputTransferDay = fragment.findViewById(R.id.input_transfer_Day);
+        inputMilNum = fragment.findViewById(R.id.input_milli_number);
+        inputSquad = fragment.findViewById(R.id.input_squad);
+
+        inputDischargeDay  = fragment.findViewById(R.id.input_discharge_Day);
+        inputDischargeDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_EXPECTED_DISCHARGE_DAY);
+            }
+        });
+        inputTransferDay = fragment.findViewById(R.id.input_transfer_Day);
+        inputTransferDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_TRANSFER_DAY);
+            }
+        });
+        inputBirthday  = fragment.findViewById(R.id.input_birth);
+        inputBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_BIRTH);
+            }
+        });
+        inputEnlistmentDay = fragment.findViewById(R.id.input_enlistment_Day);
+        inputEnlistmentDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDatePicker(OPTION_ENLISTMENT_DAY);
+            }
+        });
+        inputSpecialty = fragment.findViewById(R.id.input_specialty);
+        inputSquad = fragment.findViewById(R.id.input_squad);
+        inputRank = fragment.findViewById(R.id.input_rank);
+        return fragment;
+    }
+
+    private List<String> getSquadNames(List<Squad> squads) {
+        List<String> squadNames = new ArrayList<>();
+        for(int i=0;i<squads.size();i++){
+            squadNames.add(squads.get(i).Name);
+        }
+        return squadNames;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
-
-        Spinner input_squadView = getView().findViewById(R.id.input_squad);
-        ArrayList<Squad> squads = (ArrayList)mViewModel.getLiveDataSquads().getValue();
-        ArrayList<String> squadsName = new ArrayList<>();
-        for(int i=0;i<squads.size();i++){
-            squadsName.add(squads.get(i).Name);
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item, squadsName);
-        input_squadView.setAdapter(arrayAdapter);
-
-        EditText expeceted_discharge_day_View  = getView().findViewById(R.id.input_discharge_Day);
-        expeceted_discharge_day_View.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callDatePicker(OPTION_EXPECTED_DISCHARGE_DAY);
-            }
-        });
-        EditText transfer_day_View = getView().findViewById(R.id.input_transfer_Day);
-        transfer_day_View.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callDatePicker(OPTION_TRANSFER_DAY);
-            }
-        });
-        EditText birth_day_view  = getView().findViewById(R.id.input_birth);
-        birth_day_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callDatePicker(OPTION_BIRTH);
-            }
-        });
-        EditText enlistment_day_View = getView().findViewById(R.id.input_enlistment_Day);
-        enlistment_day_View.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callDatePicker(OPTION_ENLISTMENT_DAY);
-            }
-        });
+        List<String> squadNames = getSquadNames(mViewModel.getLiveDataSquads().getValue());
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item, squadNames);
+        inputSquad.setAdapter(arrayAdapter);
 
         Button summit = getView().findViewById(R.id.modify);
         summit.setOnClickListener(new View.OnClickListener() {
@@ -102,56 +126,30 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
             public void onClick(View view) {
                 try {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-                    EditText nameView = view.getRootView().findViewById(R.id.input_name);
-                    String name = nameView.getText().toString();
-
-                    Spinner spinnerView = view.getRootView().findViewById(R.id.input_rank);
-                    String rank = spinnerView.getSelectedItem().toString();
-
-                    EditText transfer_day_View = view.getRootView().findViewById(R.id.input_transfer_Day);
-                    Date transfer_day = dateFormat.parse(transfer_day_View.getText().toString());
-
-                    EditText milli_numberView = view.getRootView().findViewById(R.id.input_milli_number);
-                    String milli_number = milli_numberView.getText().toString();
-
-                    EditText enlistment_day_View = view.getRootView().findViewById(R.id.input_enlistment_Day);
-                    Date enlistment_day = dateFormat.parse(enlistment_day_View.getText().toString());
-
-                    EditText expeceted_discharge_day_View  = view.getRootView().findViewById(R.id.input_discharge_Day);
-                    Date expeceted_discharge_day = dateFormat.parse(expeceted_discharge_day_View.getText().toString());
-
-                    EditText birth_day_View  = view.getRootView().findViewById(R.id.input_birth);
-                    Date birth = dateFormat.parse(birth_day_View.getText().toString());
-
-                    EditText specialtyView = view.getRootView().findViewById(R.id.input_specialty);
-                    String specialty = specialtyView.getText().toString();
-
-                    Spinner squadView = view.getRootView().findViewById(R.id.input_squad);
-                    String squad = squadView.getSelectedItem().toString();
+                    Soldier soldier = new Soldier();
+                    soldier.Squad  = inputName.getText().toString();
+                    soldier.Rank = inputRank.getSelectedItem().toString();
+                    soldier.Transfer_Day = dateFormat.parse(inputTransferDay.getText().toString()).getTime();
+                    soldier.milliNumber = inputMilNum.getText().toString();
+                    soldier.Enlistment_Day = dateFormat.parse(inputEnlistmentDay.getText().toString()).getTime();
+                    soldier.Discharge_Day = dateFormat.parse(inputDischargeDay.getText().toString()).getTime();
+                    soldier.Birthday = dateFormat.parse(inputBirthday.getText().toString()).getTime();
+                    soldier.Specialty = inputSpecialty.getText().toString();
+                    soldier.Squad = inputSquad.getSelectedItem().toString();
+                    soldier.Discharge_Flag = false;
 
                     DBHelper dbHelper = new DBHelper(getContext(), mViewModel);
-                    if(!dbHelper.isExistSquad(squad)) {
-                        dbHelper.createSquad(squad);
+                    if(!dbHelper.isExistSquad(soldier.Squad)) {
+                        dbHelper.createSquad(soldier.Squad);
                     }
-                    if(dbHelper.isExistSoldier(milli_number)) {
-                        dbHelper.updateSoldier(milli_number, name, rank, enlistment_day.getTime(), transfer_day.getTime(), expeceted_discharge_day.getTime(), birth.getTime(), specialty, squad);
+
+                    if(dbHelper.isExistSoldier(soldier.milliNumber)) {
+                        dbHelper.updateSoldier(soldier);
                     }
                     else {
-                        Soldier soldier = new Soldier();
-                        soldier.Name = name;
-                        soldier.Squad = squad;
-                        soldier.milliNumber =milli_number;
-                        soldier.Rank = rank;
-                        soldier.Specialty = specialty;
-                        soldier.Birthday = birth.getTime();
-                        soldier.Discharge_Day = expeceted_discharge_day.getTime();
-                        soldier.Transfer_Day = transfer_day.getTime();
-                        soldier.Enlistment_Day = enlistment_day.getTime();
-                        soldier.Discharge_Flag = false;
                         dbHelper.createSoldier(soldier);
                     }
-                    Toast.makeText(getContext(), name +" 용사가 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), soldier.Name +" 용사가 추가되었습니다.", Toast.LENGTH_SHORT).show();
                 }
                 catch(ParseException e) {
                     Toast.makeText(getContext(), "용사가 추가되지 못했습니다.", Toast.LENGTH_LONG);
@@ -209,52 +207,27 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     }
 
     private void setForProfileModification(Soldier soldier) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        inputName.setText(soldier.Name);
+        inputMilNum.setText(soldier.getMilliNumber());
+        inputEnlistmentDay.setText( dateFormat.format(new Date(soldier.getEnlistment_Day())) );
+        inputTransferDay.setText( dateFormat.format(new Date(soldier.getTransfer_Day())) );
+        inputDischargeDay.setText( dateFormat.format(new Date(soldier.getDischarge_Day())) );
+        inputBirthday.setText( dateFormat.format(new Date(soldier.getBirthday())));
+        inputSpecialty.setText(soldier.getSpecialty());
 
-        if(soldier.Name != null) {
-            EditText inputName = getView().findViewById(R.id.input_name);
-            inputName.setText(soldier.Name);
+        inputSquad.setSelection(getIndex(inputSquad, soldier.getSquad()));
+        inputRank.setSelection(getIndex(inputRank, soldier.getRank()));
+
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount(); i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
         }
 
-        if(soldier.getRank() != null) {
-            EditText inputRank = getView().findViewById(R.id.input_rank);
-            inputRank.setText(soldier.getRank());
-        }
-
-        if(soldier.getMilliNumber() != null) {
-            EditText inputMilNum = getView().findViewById(R.id.input_milli_number);
-            inputMilNum.setText(soldier.getMilliNumber());
-        }
-
-        if(soldier.getEnlistment_Day() != 0) {
-            EditText inputEnlistmentDay = getView().findViewById(R.id.input_enlistment_Day);
-            inputEnlistmentDay.setText( dateFormat.format(new Date(soldier.getEnlistment_Day())) );
-        }
-
-        if(soldier.getTransfer_Day() != 0) {
-            EditText inputTransferDay = getView().findViewById(R.id.input_transfer_Day);
-            inputTransferDay.setText( dateFormat.format(new Date(soldier.getTransfer_Day())) );
-        }
-
-        if(soldier.getDischarge_Day() != 0) {
-            EditText inputDischargeDay = getView().findViewById(R.id.input_discharge_Day);
-            inputDischargeDay.setText( dateFormat.format(new Date(soldier.getDischarge_Day())) );
-        }
-
-        if(soldier.getBirthday() != 0) {
-            EditText inputBirthday = getView().findViewById(R.id.input_birth);
-            inputBirthday.setText( dateFormat.format(new Date(soldier.getBirthday())));
-        }
-
-        if(soldier.getSpecialty() != null) {
-            EditText inputSpecialty = getView().findViewById(R.id.input_specialty);
-            inputSpecialty.setText(soldier.getSpecialty());
-        }
-
-        if(soldier.getSquad() != null) {
-            EditText inputSquad = getView().findViewById(R.id.input_squad);
-            inputSquad.setText(soldier.getSquad());
-        }
+        return 0;
     }
 
 }
