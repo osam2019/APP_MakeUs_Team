@@ -13,23 +13,23 @@ import androidx.navigation.Navigation;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.Module.SquadButton;
 import com.example.makeus.R;
+import com.example.makeus.ViewModel.AbstractViewModel;
 import com.example.makeus.ViewModel.Fragment.SquadCreateFragment;
-import com.example.makeus.ViewModel.SquadViewModel;
 
 import java.util.List;
 
 public class SquadAdapter extends BaseAdapter {
 
+    private AbstractViewModel mViewModel;
     private static final int DIALOG_REQUEST_CODE = 2150;
     private final Context mContext;
-    private SquadViewModel mViewModel;
     private FragmentManager fm;
     public List<Squad> mSquads;
 
-    public SquadAdapter(Context context, List<Squad> squads, SquadViewModel viewmodel) {
+    public SquadAdapter(Context context, List<Squad> squads, AbstractViewModel viewModel) {
         this.mContext = context;
         this.mSquads = squads;
-        this.mViewModel = viewmodel;
+        this.mViewModel = viewModel;
     }
 
     public void setFm(FragmentManager fm) { this.fm = fm; }
