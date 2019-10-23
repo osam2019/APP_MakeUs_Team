@@ -230,8 +230,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void deleteSoldier(String milliNumber) {
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "DELETE FROM "+TABLE_SOLDIERS+" WHERE milli_number = " + milliNumber;
-        db.execSQL(sql,null);
+        String sql = "DELETE FROM "+TABLE_SOLDIERS+" WHERE milli_number = ?";
+        String[] args = {milliNumber};
+        db.execSQL(sql, args);
         db.close();
     }
 

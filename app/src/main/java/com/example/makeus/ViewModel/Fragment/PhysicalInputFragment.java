@@ -3,7 +3,6 @@ package com.example.makeus.ViewModel.Fragment;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -11,7 +10,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +20,13 @@ import com.example.makeus.MainActivity;
 import com.example.makeus.R;
 import com.example.makeus.ViewModel.PhysicinputViewModel;
 
-public class PhysicinputFragment extends DialogFragment {
+public class PhysicalInputFragment extends DialogFragment {
     TextView confirm;
 
     private PhysicinputViewModel mViewModel;
 
-    public static PhysicinputFragment newInstance() {
-        return new PhysicinputFragment();
+    public static PhysicalInputFragment newInstance() {
+        return new PhysicalInputFragment();
     }
 
     @NonNull
@@ -40,8 +38,6 @@ public class PhysicinputFragment extends DialogFragment {
 
         AlertDialog physicAlert = builder.create();
 
-        confirm =(TextView)findViewByid(R.layout.physicinput_fragment);
-
         return super.onCreateDialog(savedInstanceState);
     }
 
@@ -50,10 +46,6 @@ public class PhysicinputFragment extends DialogFragment {
         public void onClick(DialogInterface dialogInterface, int i) {
             MainActivity activity = (MainActivity)getActivity();
 
-            switch (which){
-                case DialogInterface.BUTTON_POSITIVE:
-                    activity.confirm
-            }
         }
     }
 
@@ -65,7 +57,7 @@ public class PhysicinputFragment extends DialogFragment {
 
 
 
-        return inflater.inflate(R.layout.physicinput_fragment, container, false);
+        return inflater.inflate(R.layout.physical_input_fragment, container, false);
     }
 
     @Override

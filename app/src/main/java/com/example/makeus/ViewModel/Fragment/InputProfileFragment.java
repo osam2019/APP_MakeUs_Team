@@ -2,7 +2,6 @@ package com.example.makeus.ViewModel.Fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -28,7 +27,7 @@ import com.example.makeus.Module.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.R;
-import com.example.makeus.ViewModel.InputprofileViewModel;
+import com.example.makeus.ViewModel.InputProfileViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +39,7 @@ import java.util.List;
 import static androidx.databinding.DataBindingUtil.setContentView;
 
 
-public class inputprofileFragment extends Fragment { //fragment class 선언
+public class InputProfileFragment extends Fragment { //fragment class 선언
 
     final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -59,10 +58,10 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     EditText inputBirthday;
     EditText inputSpecialty;
 
-    private InputprofileViewModel mViewModel;
+    private InputProfileViewModel mViewModel;
 
-    public static inputprofileFragment newInstance() {
-        return new inputprofileFragment();
+    public static InputProfileFragment newInstance() {
+        return new InputProfileFragment();
     }
 
     @Override
@@ -124,7 +123,7 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(InputProfileViewModel.class);
         mViewModel.updateDataFromDB(new DBHelper(getContext()));
 
         List<String> squadNames = getSquadNames(mViewModel.getLiveDataSquads().getValue());
@@ -187,6 +186,25 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                 getFragmentManager().popBackStack();
             }
         });
+
+        Button discharge = getView().findViewById(R.id.discharge);
+        discharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String milliNumber = inputMilNum.getText().toString();
+                if (milliNumber == null || milliNumber.isEmpty()) {
+                    Toast.makeText(getContext(), "군번이 있어야 전역할 수 있습니다!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                DBHelper dbHelper = new DBHelper(getContext());
+                if (dbHelper.isExistSoldier(milliNumber)) {
+                    dbHelper.deleteSoldier(milliNumber);
+                }
+                Toast.makeText(getContext(), "완료", Toast.LENGTH_SHORT).show();
+                getFragmentManager().popBackStack();
+            }
+        });
     }
 
     private void callDatePicker(final int option) {
@@ -225,7 +243,7 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(InputProfileViewModel.class);
 
         if( getArguments() != null ) {
             Soldier soldier = (Soldier) getArguments().get("soldier");

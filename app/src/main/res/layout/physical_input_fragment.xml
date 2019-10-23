@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewModel.Fragment.PhysicinputFragment">
+    tools:context=".ViewModel.Fragment.PhysicalInputFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

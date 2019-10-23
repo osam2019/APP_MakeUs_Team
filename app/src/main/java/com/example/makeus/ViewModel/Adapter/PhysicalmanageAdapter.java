@@ -47,7 +47,6 @@ public class PhysicalmanageAdapter extends BaseAdapter {
 
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-            convertView = layoutInflater.inflate(R.layout.physicalManageFragment, null);
         }
 
         Soldier soldier = soldiers.get(position);
@@ -69,14 +68,6 @@ public class PhysicalmanageAdapter extends BaseAdapter {
         TextView physicalRunning = convertView.findViewById(R.id.in_physic_running);
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm:ss");
         physicalRunning.setText( dateFormat.format(new Date(physicalScore.getRunning())) );
-        
-        LinearLayout viewPhysicalScoreLayout = convertView.findViewById(R.id.physical_test_layout);
-        viewPhysicalScoreLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Open Dialog for Pnysical score", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         return convertView;
     }
