@@ -14,10 +14,10 @@
 
         <ImageView
             android:id="@+id/physical_soldier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="#FFC107" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,18 +26,18 @@
 
             <TextView
                 android:id="@+id/physical_rank"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Rank"
+                android:text="이병"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/physical_name"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Soldier Name"
+                android:text="홍길동"
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>

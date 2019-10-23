@@ -23,16 +23,15 @@ public class SquadAdapter extends BaseAdapter {
     private AbstractViewModel mViewModel;
     private static final int DIALOG_REQUEST_CODE = 2150;
     private final Context mContext;
-    private FragmentManager fm;
+    private FragmentManager fragmentManager;
     public List<Squad> mSquads;
 
-    public SquadAdapter(Context context, List<Squad> squads, AbstractViewModel viewModel) {
+    public SquadAdapter(Context context, List<Squad> squads, AbstractViewModel viewModel, FragmentManager fragmentManager) {
         this.mContext = context;
         this.mSquads = squads;
         this.mViewModel = viewModel;
+        this.fragmentManager = fragmentManager;
     }
-
-    public void setFm(FragmentManager fm) { this.fm = fm; }
 
     @Override
     public int getCount() {
@@ -59,7 +58,7 @@ public class SquadAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     SquadCreateFragment scf = new SquadCreateFragment(mViewModel);
-                    scf.show(fm, "squad_create");
+                    scf.show(fragmentManager, "createSquad");
                 }
             });
             return view;

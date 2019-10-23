@@ -9,9 +9,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModel;
+
 import com.example.makeus.Model.PhysicalScore;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.R;
+import com.example.makeus.ViewModel.AbstractViewModel;
+import com.example.makeus.ViewModel.Fragment.PhysicalInputFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,11 +25,15 @@ import java.util.List;
 public class PhysicalTestAdapter extends BaseAdapter {
 
     private final Context mContext;
-    private List<Soldier> soldiers;
+    public List<Soldier> soldiers;
+    private AbstractViewModel viewModel;
+    private FragmentManager fragmentManager;
 
-    public PhysicalTestAdapter(Context context, List<Soldier> soldiers) {
+    public PhysicalTestAdapter(Context context, List<Soldier> soldiers, AbstractViewModel viewModel, FragmentManager fragmentManager) {
         this.mContext = context;
         this.soldiers = soldiers;
+        this.viewModel = viewModel;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -50,7 +59,7 @@ public class PhysicalTestAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.item_physical_test, null);
         }
 
-        Soldier soldier = soldiers.get(position);
+        final Soldier soldier = soldiers.get(position);
 
         TextView physicalRank = convertView.findViewById(R.id.physical_rank);
         physicalRank.setText(soldier.getRank());
@@ -74,7 +83,8 @@ public class PhysicalTestAdapter extends BaseAdapter {
         viewPhysicalScoreLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Open Dialog for Pnysical score", Toast.LENGTH_SHORT).show();
+                PhysicalInputFragment pif = new PhysicalInputFragment(mContext, viewModel, soldier);
+                pif.show(fragmentManager, "InputPhysicalData");
             }
         });
 

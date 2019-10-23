@@ -162,9 +162,9 @@ public class DBHelper extends SQLiteOpenHelper {
         soldier.enlistmentDay = cursor.getLong(cursor.getColumnIndex("enlistment_day"));
         soldier.transferDay = cursor.getLong(cursor.getColumnIndex("transfer_day"));
         soldier.dischargeDay = cursor.getLong(cursor.getColumnIndex("discharge_day"));
-        soldier.dischargeDay = cursor.getLong(cursor.getColumnIndex("push_up"));
-        soldier.dischargeDay = cursor.getLong(cursor.getColumnIndex("sit_up"));
-        soldier.dischargeDay = cursor.getLong(cursor.getColumnIndex("running"));
+        soldier.physicalScore.setPushUp(cursor.getInt(cursor.getColumnIndex("push_up")));
+        soldier.physicalScore.setSitUp(cursor.getInt(cursor.getColumnIndex("sit_up")));
+        soldier.physicalScore.setRunning(cursor.getLong(cursor.getColumnIndex("running")));
 
         return soldier;
     }
@@ -172,7 +172,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public List<Soldier> getAllSoldiers() {
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<Soldier> soldiers = new ArrayList<>();
-        Cursor solider = db.rawQuery("SELECT * FROM "+ TABLE_SOLDIERS, null );
+        Cursor solider = db.rawQuery("SELECT * FROM " + TABLE_SOLDIERS, null);
         while(solider.moveToNext()) {
             soldiers.add(this.getSoldierFromCursor(solider));
         }
@@ -259,24 +259,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void updateSoldier(Soldier soldier) {
         updateSoldier(soldier.milliNumber, soldier.name, soldier.rank, soldier.enlistmentDay, soldier.transferDay, soldier.dischargeDay, soldier.birthday, soldier.specialty, soldier.Squad, soldier.physicalScore);
-    }
-
-    public void updateSoldier(String milliNumber, boolean disFlag) {
-        //Soldier 전역 플래그값 변경
-        SQLiteDatabase db = getWritableDatabase();
-
-        String sql = "UPDATE " + TABLE_SOLDIERS + " SET discharge_flag = ? WHERE milli_number = " + milliNumber;
-
-        // 전역자는 1, 복무중인 사람은 0
-        String [] arg = new String[1];
-        if (disFlag == true) {
-            arg[0] = "0";
-        }else {
-            arg[0] = "1";
-        }
-
-        db.execSQL(sql, arg);
-        db.close();
     }
 
     public boolean isExistSoldier(String milliNumber) {

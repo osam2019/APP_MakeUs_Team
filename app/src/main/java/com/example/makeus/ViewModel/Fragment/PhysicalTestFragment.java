@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.makeus.Model.Soldier;
+import com.example.makeus.Module.DBHelper;
 import com.example.makeus.ViewModel.Adapter.PhysicalTestAdapter;
 import com.example.makeus.R;
 import com.example.makeus.ViewModel.PhysicalTestViewModel;
@@ -40,9 +41,10 @@ public class PhysicalTestFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(PhysicalTestViewModel.class);
+        mViewModel.updateDataFromDB(new DBHelper(getContext()));
         // TODO: Use the ViewModel
         if(mPhysicalTestAdapter == null) {
-            mPhysicalTestAdapter = new PhysicalTestAdapter(this.getContext(), mViewModel.getLiveDataSoldierWithPhysicalScore().getValue());
+            mPhysicalTestAdapter = new PhysicalTestAdapter(this.getContext(), mViewModel.getLiveDataSoldiers().getValue(), mViewModel, getFragmentManager());
         }
 
         ListView listView = getView().findViewById(R.id.physicalTestListView);
@@ -51,6 +53,7 @@ public class PhysicalTestFragment extends Fragment {
         mViewModel.getLiveDataSoldiers().observe(this, new Observer<List<Soldier>>(){
             @Override
             public void onChanged(@Nullable List<Soldier> soldiers) {
+                mPhysicalTestAdapter.soldiers = soldiers;
                 mPhysicalTestAdapter.notifyDataSetChanged();
             }
         });

@@ -1,10 +1,10 @@
 package com.example.makeus.ViewModel.Fragment;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -14,57 +14,67 @@ import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.makeus.MainActivity;
+import com.example.makeus.Model.PhysicalScore;
+import com.example.makeus.Model.Soldier;
+import com.example.makeus.Module.DBHelper;
 import com.example.makeus.R;
-import com.example.makeus.ViewModel.PhysicinputViewModel;
+import com.example.makeus.ViewModel.AbstractViewModel;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PhysicalInputFragment extends DialogFragment {
-    TextView confirm;
+    AbstractViewModel mViewModel;
+    Context context;
+    Soldier soldier;
 
-    private PhysicinputViewModel mViewModel;
-
-    public static PhysicalInputFragment newInstance() {
-        return new PhysicalInputFragment();
+    public PhysicalInputFragment(Context context, AbstractViewModel viewModel, Soldier soldier) {
+        this.context = context;
+        this.mViewModel = viewModel;
+        this.soldier = soldier;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        MainActivity avtivity = (MainActivity) getActivity();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View fragment = inflater.inflate(R.layout.physical_input_fragment,null, false);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(avtivity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(fragment);
 
-        AlertDialog physicAlert = builder.create();
+        final EditText situpET = fragment.findViewById(R.id.situp);
+        final EditText pushupET = fragment.findViewById(R.id.pushup);
+        final EditText runningET = fragment.findViewById(R.id.running);
 
-        return super.onCreateDialog(savedInstanceState);
-    }
+        builder.setPositiveButton("제출", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                DBHelper dbHelper = new DBHelper(context);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("mm:ss");
+                long running;
+                try {
+                    running = dateFormat.parse(runningET.getText().toString()).getTime();
+                } catch (ParseException e) {
+                    Toast.makeText(context, "시간이 잘못 입력되었어요.", Toast.LENGTH_LONG);
+                    return;
+                }
+                soldier.physicalScore.setSitUp(Integer.valueOf(situpET.getText().toString()));
+                soldier.physicalScore.setPushUp(Integer.valueOf(pushupET.getText().toString()));
+                soldier.physicalScore.setRunning(running);
+                dbHelper.updateSoldier(soldier);
+                mViewModel.updateDataFromDB(dbHelper);
+            }
+        });
+        builder.setNegativeButton("취소", null);
 
-    class DialogListener implements DialogInterface.OnClickListener{
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            MainActivity activity = (MainActivity)getActivity();
-
-        }
-    }
-
-
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-
-
-
-        return inflater.inflate(R.layout.physical_input_fragment, container, false);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(PhysicinputViewModel.class);
-        // TODO: Use the ViewModel
+        return builder.create();
     }
 
 }

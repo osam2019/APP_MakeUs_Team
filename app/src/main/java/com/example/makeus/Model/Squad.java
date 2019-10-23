@@ -22,12 +22,6 @@ public class Squad implements Parcelable {
         SoldierList = soldierList;
     }
 
-//    public void Organize_Squad(Soldier soldier) {
-//        if ( name.equals(soldier.squad)) {
-//            SoldierList.add(soldier);
-//        }
-//    }
-
     public static final Creator<Squad> CREATOR = new Creator<Squad>() {
         // 객체 복원
         @Override

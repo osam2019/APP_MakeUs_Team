@@ -233,7 +233,7 @@ public class DateCalculator {
             Calendar transferCal = Calendar.getInstance();
             transferCal.setTime(new Date(transfer_day));
 
-            int yearDiff = curCal.get(Calendar.YEAR) -
+            //nt yearDiff = curCal.get(Calendar.YEAR) -
 
         }
     }
