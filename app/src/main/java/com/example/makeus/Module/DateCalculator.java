@@ -223,22 +223,87 @@ public class DateCalculator {
         }
     }
 
-    public void getPersonalityTestDay(long transfer_day, String rank){
-        Calendar curCal = Calendar.getInstance();
-        int month = curCal.get(Calendar.MONTH) + 1;
-        int year = curCal.get(Calendar.YEAR);
-
+    // 인성검사
+    public boolean isPersonalityAssessmentDay(long transfer_day, String rank){
+        // 전입신병의 조건으로만
         if(rank.equals("이병") || rank.equals("일병")) {
-            // Compare transfer_day with current date
-            Calendar transferCal = Calendar.getInstance();
-            transferCal.setTime(new Date(transfer_day));
-
-            //nt yearDiff = curCal.get(Calendar.YEAR) -
-
+            return toPrivateOrPrivateFirstClassCase(transfer_day);
         }
+        return false;
     }
 
-    public void getHealthScreeningDay(Soldier soldier) {
-
+    // 신체검사
+    public boolean isHealthScreeningDay(Soldier soldier) {
+        // 전입 신병일 경우 (전입 신병 신체 검사)
+        if(soldier.rank.equals("이병") || soldier.rank.equals("일병")) {
+            return toPrivateOrPrivateFirstClassCase(soldier.transferDay);
+        } else if(soldier.rank.equals("상병")) {  // 상병 신체 검사
+            return toCorporalCase(soldier.enlistmentDay);
+        }
+        return false;
     }
+
+    // 전입신병 (일, 이병으로만) 케이스: 전입오고 1달 이내로 시행.
+    private boolean toPrivateOrPrivateFirstClassCase(long transfer_date) {
+        // Compare transfer date with current date
+        Calendar curCal = Calendar.getInstance();
+        Calendar transferCal = Calendar.getInstance();
+        transferCal.setTime(new Date(transfer_date));
+
+        int monthDiff = ((curCal.get(Calendar.MONTH) - transferCal.get(Calendar.MONTH)) % 12);
+        int dayDiff = curCal.get(Calendar.DAY_OF_MONTH) - transferCal.get(Calendar.DAY_OF_MONTH);
+
+        // 1. 전입일과 현재 개월이 아직 같은 달일경우
+        // 2. 전입월이 지난달이고 현재 달에서 전입월의 일수만큼 넘지않거나 같은경우
+        // 3. 전입월이 12월이고 다음달이 1월인 경우.
+        if( monthDiff == 0 || ( (monthDiff == 1) && (dayDiff <= 0))
+       || ( (monthDiff == -1) && (dayDiff <= 0) ) || ( (monthDiff == 11) && (dayDiff <= 0) )) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean toCorporalCase(long enlistment_date) {
+        // Compare enlistment date with current date
+        Calendar curCal = Calendar.getInstance();
+        Calendar enlistmentCal = Calendar.getInstance();
+        enlistmentCal.setTime(new Date(enlistment_date));
+
+        // This policy affect to current soldier's rank since Sep 2019
+        // if Enlistment day is 1st day
+        if (enlistmentCal.get(Calendar.DAY_OF_MONTH) == 1) {
+            // 예를 들어서 올해 8월 군번이면서 8월 1일 입대자는 10월에 일병 자동진급, 내년 4월에 상병진급 예정
+            // 즉, 이병 8,9월, 일병 10, 11, 12, 1, 2, 3월 총 8개월간 복무
+            // cf. 7월 1일 입대자는 9월에 자동 진급!
+            int enlistmentMonth = enlistmentCal.get(Calendar.MONTH) + 1;
+            int monthForCorporal = (enlistmentMonth + 8) % 12;
+            int curMonth = curCal.get(Calendar.MONTH) + 1;
+            int monthDiff = curMonth - monthForCorporal;
+
+            // 진급일과 현재 개월이 아직 같은 달일 경우. 진급일은 매달 1일마다 이뤄지므로
+            // 다음달 이전으로 넘어가선 안된다.
+            if (monthDiff == 0) {
+                return true;
+            }
+
+        } else {            // else: Enlistment day is not 1st day. the rest of 1st day.
+            // 예를 들어서 올해 8월 군번이면서 8월 1일 이후의 입대자들은 11월 일병 자동진급, 내년 5월에 상병 진급 예쩡
+            // 즉, 이병 8, 9, 10월, 일병 11, 12, 1, 2, 3, 4월 총 9개월간 복무
+            // cf.7월은 10월 자동지급, 6월은 9월 자동진급 (5, 6월 동시진급)
+            int enlistmentMonth = enlistmentCal.get(Calendar.MONTH) + 1;
+            int monthForCorporal = (enlistmentMonth + 9) % 12;
+            int curMonth = curCal.get(Calendar.MONTH) + 1;
+            int monthDiff = curMonth - monthForCorporal;
+
+            // 진급일과 현재 개월이 아직 같은 달일 경우. 진급일은 매달 1일마다 이뤄지므로
+            // 다음달 이전으로 넘어가선 안된다.
+            if (monthDiff == 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
