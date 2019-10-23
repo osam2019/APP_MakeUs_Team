@@ -127,7 +127,7 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                 try {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     Soldier soldier = new Soldier();
-                    soldier.Squad  = inputName.getText().toString();
+                    soldier.Name  = inputName.getText().toString();
                     soldier.Rank = inputRank.getSelectedItem().toString();
                     soldier.Transfer_Day = dateFormat.parse(inputTransferDay.getText().toString()).getTime();
                     soldier.milliNumber = inputMilNum.getText().toString();
