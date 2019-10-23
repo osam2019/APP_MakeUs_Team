@@ -1,60 +1,65 @@
 package com.example.makeus.Module;
 
-import android.util.Log;
-
 import com.example.makeus.Model.Soldier;
 
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class DateCalculator {
 
-        final String DISCHARGE = "DISCHARGE";
+    final String DISCHARGE = "DISCHARGE";
+    final int defaultNSDay = 630;
+    final String initialDateStrForDeduct = "2017-01-03";
+    final String lastDateStrFordeduct = "2020-06-16";
 
-    public void getDischargeDay(long enlistment_day) throws ParseException {
-        // 1. 단축이전 군복무 일수구하기
+    public long getDischargeDay(long enlistment_day) {
+        // 1. 군복무 단축 이전 총 군복무 필요 일수 총합
         // 입대한날짜 + (21개월 * 30일 = 630)
         // 입대한달을 따로(less than or equal to 30일)
-        // + 임대한달 이후 31일 달의 갯수 => 총 20달 체크  31일인 달: 1, 3, 5, 7, 8, 10, 12
-        // + (30일 - 입대한달의 복무수)
-        // + 그해가 윤달인가? 윤달이면 -1 아니면 -2
-        // 2. 입대한달이 2017-01-03 > x  인경우 복무단축일자 적용 x?         -   적용 x
-        // 3. 입대한달이 2017-01-03 <= x <= 2020-06-15 인가?                 - 1일 ~ 90일
-        // 4. 입대한달이 2020-06-16 부터인가?                                -   3개월
-        //
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyy-MMM-dd", Locale.KOREA);
-        Date elistmentDate = new Date(enlistment_day);
-
+        // 입대한 달을 포함한 31일 달의 갯수 => 총 21달 체크  31일인 달: 1, 3, 5, 7, 8, 10, 12
+        Date enlistmentDate = new Date(enlistment_day);
         Calendar cal = Calendar.getInstance();
-        cal.setTime(elistmentDate);
+        cal.setTime(enlistmentDate);
+
         int year = cal.get(Calendar.YEAR);
-        int month = (cal.get(Calendar.MONTH) + 1);
+        int month = (cal.get(Calendar.MONTH) + 1) % 12;
         int day = cal.get(Calendar.DAY_OF_MONTH);
-
-        int restFromEnlistmentDay = 0;
-
-        // 입대한 달에 복무가능한 날 갯수 계산
-        if(isMonthwith31days(month)) {
-            restFromEnlistmentDay = (31 - day) + 1;
-        } else if( month == 2 ) {
-            if(isLeapMonth(year)) {
-                restFromEnlistmentDay = (29 - day) + 1;
-            } else {
-                restFromEnlistmentDay = (29 - day) + 1;
-            }
-        } else {
-            restFromEnlistmentDay = (30 - day) + 1;
-        }
 
         // 입대한달 이후 20개월동안 31일 달과 28일 혹은 29일의 총합 연산
         int additionalDay = 0;
+        // 입대일자가 2020-06-16 이후인경우는 3개월 단축.
+        int additionalDayForLast3Month = 0;
 
-        for(int i=0; i<20; i++) {
+        // 입대한 달 포함 21개월동안 31일인 달의 갯수만큼 증가
+        // 2월은 윤달인 경우 1만큼 감소, 윤달이 아닌경우 2만큼 감소
+        for(int i = 0; i < 21; i++) {
+            if(isMonthWith31days(month)) {
+                additionalDay++;
+
+                if(i >= 18) {
+                    additionalDayForLast3Month++;
+                }
+
+            } else if( month == 2 ) {
+                if(isLeapYear(year)) {
+                    additionalDay -= 1;
+
+                    if(i >= 18) {
+                        additionalDayForLast3Month -= 1;
+                    }
+
+                } else {
+                    additionalDay -= 2;
+
+                    if(i >= 18) {
+                        additionalDayForLast3Month -= 2;
+                    }
+
+                }
+            }
+
             // 달 업데이트 이후, 달이 다음해로 지내는지 체크
             month = ((month + 1) % 12);
 
@@ -62,165 +67,83 @@ public class DateCalculator {
             if(month == 1) {
                 year++;
             }
-
-            if(isMonthwith31days(month)) {
-                additionalDay++;
-            } else if( month == 2 ) {
-                if(isLeapMonth(year)) {
-                    additionalDay -= 1;
-                } else {
-                    additionalDay -= 2;
-                }
-            }
         }
 
-        //
+        // 총 군복무 일수 결과
+        int totalNSDay = defaultNSDay + additionalDay;
 
+        // 2. 군복무 단축일수
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-        // ----------------------------------------------------------------------------------------
-        /*
-        SimpleDateFormat formatter_one = new SimpleDateFormat ( "yyyyMMddhh",Locale.KOREA );
-        SimpleDateFormat formatter_two = new SimpleDateFormat ( "yyyy-MM-dd" );
-        SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+        Date initialDate = new Date();
+        Date lastDate = new Date();
+        try{
+            initialDate = format.parse(initialDateStrForDeduct);
+            lastDate = format.parse(lastDateStrFordeduct);
+        } catch(ParseException e) {
+            e.printStackTrace();
+        }
 
-        ParsePosition pos = new ParsePosition (0);
-        Date frmTime = formatter_one.parse (Long.toString(enlistment_day), pos );
-        String outString = formatter_two.format (frmTime);
-        Date d = formatter_two.parse("2017-01-03");
-        Date b = formatter_two.parse(outString);
-        System.out.println("1: " +outString);
+        if(enlistmentDate.compareTo(initialDate) < 0) {
+            // 입대한달이 2017-01-03 > x  인경우 복무단축용이 안되경우인가?
 
-        long dDay = b.getTime() - d.getTime();
-        long diffdays = dDay / (24 * 60 * 60 *1000);
+            // 입대일에 totalNSDay 추가한뒤 반환
+            return addTotalNSDayToInitialDate(initialDate, totalNSDay);
 
-        int i = 0;
+        } else if( (enlistmentDate.compareTo(initialDate) >= 0) && enlistmentDate.compareTo(lastDate) > 0 ){
+            // 입대한달이 2017-01-03 <= x < 2020-06-16 인가? (1일 ~ 90일 적용)
+            int noOfDeductedDay = getNoOfDeductedDay(enlistmentDate, initialDate);
+            totalNSDay -= noOfDeductedDay;
 
-        if((int)(diffdays%14) != 0) {
-            i = (int)(diffdays / 14) + 1;       // suscipicious point
+            // 입대일에 totalNSDay 추가한뒤 반환
+            return addTotalNSDayToInitialDate(initialDate, totalNSDay);
+
         } else {
-            i = (int)(diffdays / 14);
+            // 입대한달이 2020-06-16 부터인가? (3개월 적용)
+            int noOfDeductedDay = getNoOfDeductedDay(enlistmentDate, initialDate) + additionalDayForLast3Month;
+            totalNSDay -= noOfDeductedDay;
+
+            // 입대일에 totalNSDay 추가한뒤 반환
+            return addTotalNSDayToInitialDate(initialDate, totalNSDay);
         }
-
-        int discharge = 640 - i;    // difficult to define the whole period is 640 days
-
-        System.out.println("2: " +discharge);
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(b);
-        Date currentTime = cal.getTime();
-        String year = yearFormat.format(currentTime);
-        int yyyy = Integer.parseInt(year);
-        int year_flag = 0;
-        int tmpMonth = cal.get(Calendar.MONTH) + 1;
-        System.out.println("2-1: " + yyyy);
-        System.out.println("2-1: " + tmpMonth);
-        System.out.println("2-1: " + cal.get(Calendar.DAY_OF_MONTH));
-
-        cal.setTime(b);
-        cal.add(Calendar.DAY_OF_MONTH, discharge);
-        int nDay = cal.get(Calendar.DAY_OF_MONTH);
-        int bonus = 0;
-
-        if (((double) discharge / 30) - (discharge / 30) == 0.0) {
-            bonus = 0;
-        }
-        else if (((double) discharge / 30) > 18.6) {
-            bonus = 1;
-        }
-        else {
-            bonus = 2;
-        }
-
-        for (int k = 1; k < discharge / 30 + bonus; k++) {
-            if(tmpMonth == 2){
-                if (year_flag == 0) {
-                    if (((yyyy % 4) == 0 && (yyyy % 100) != 0) || (yyyy % 100 == 0) && (yyyy % 400 == 0)) {
-                        nDay ++;
-                        System.out.println("5: " + nDay);
-                        System.out.println("6: " + "윤년 +1");
-                        year_flag = 1;
-                    }
-                }else if(year_flag == -1) {
-                    year_flag = -2;
-                    nDay --;
-                }
-
-                nDay -= 2;
-                System.out.println("7: " + nDay);
-                System.out.println("8: " + "-2");
-            }
-            tmpMonth += 1;
-
-            if(tmpMonth == 7) {
-                nDay ++;
-                System.out.println("9: " + nDay);
-                System.out.println("10: " + "+1");
-            }
-
-            if(tmpMonth > 12){
-                if(year_flag == 1) { year_flag = -1; }
-                tmpMonth = 1;
-                yyyy += 1;
-                System.out.println("3: " + "월: " + tmpMonth);
-                System.out.println("4: " +"년도: " + yyyy);
-                System.out.println("4-1: " +"일: " + nDay);
-            }
-        }
-
-        if(nDay < 0) {
-            if ((tmpMonth % 2 == 0) && tmpMonth != 2) {
-                nDay += 30;
-            }else if ((tmpMonth % 2 == 0) && tmpMonth == 2) {
-                if(year_flag == 1) { nDay += 29; }
-                else{ nDay += 28; }
-            }else if(tmpMonth % 2 == 1) {
-                nDay += 31;
-            }
-        }else if(nDay == 0) {
-            if ((tmpMonth % 2 == 0) && tmpMonth != 2) {
-                nDay = 30;
-            }else if ((tmpMonth % 2 == 0) && tmpMonth == 2) {
-                if(year_flag == 1) { nDay = 29; }
-                else{ nDay = 28; }
-            }else if(tmpMonth % 2 == 1) {
-                nDay = 31;
-            }
-        }
-
-        System.out.println("11: " + nDay);
-        System.out.println("12: " + tmpMonth);
-        System.out.println("13: " + yyyy);
-
-        StringBuffer sbDate = new StringBuffer();
-        sbDate.append (yyyy);
-        if (tmpMonth < 10) sbDate.append("0");
-        System.out.println(sbDate);
-        sbDate.append(tmpMonth);
-        if (nDay < 10) sbDate.append("0");
-        System.out.println(sbDate);
-        sbDate.append(nDay);
-
-        System.out.println(sbDate);
-        */
 
     }
 
-    private boolean isMonthwith31days(int month) {
+    // 일수가 31일인 달인경우 참으로 반환
+    // month == 0: DEC, month == 1: JAN, month == 3: MAR
+    // month == 5: MAY, month == 7: JUL, month == 8: AUG
+    // month == 10: OCT
+    private boolean isMonthWith31days(int month) {
         // 1, 3, 5, 7, 8, 10, 12
         if(month == 0 || month == 1 || month == 3 || month == 5
-        || month == 7 || month == 8 || month == 10 || month == 12) {
+                      || month == 7 || month == 8 || month == 10) {
             return true;
         } else {
             return false;
         }
     }
 
-    private boolean isLeapMonth(int year) {
+    // 윤달인경우 참으로 반환
+    private boolean isLeapYear(int year) {
         if(year % 4 == 0) {
             return true;
         } else {
             return false;
         }
+    }
+
+    // 복무단축일 반환하는 메소드
+    private int getNoOfDeductedDay(Date enlistmentDate, Date initialDate) {
+        long diff = enlistmentDate.getTime() - initialDate.getTime();
+        int diffDays = (int) (diff / 24 * 60 * 60 * 1000);
+        return ((diffDays/14) + 1);
+    }
+
+    private long addTotalNSDayToInitialDate(Date initialDate, int totalNSDay) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(initialDate);
+        cal.add(Calendar.DATE, totalNSDay);
+        return cal.getTime().getTime();
     }
 
     // 인성검사
