@@ -92,7 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void createSquad(String name) {
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "INSERT INTO " + name + " (name) VALUES ?";
+        String sql = "INSERT INTO " + TABLE_SQUADS + " VALUES (?)";
         String [] arg = {name};
         db.execSQL(sql, arg);
         db.close();

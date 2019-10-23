@@ -74,7 +74,6 @@
                     android:layout_weight="1"
                     android:entries="@array/rank" />
 
-
             </LinearLayout>
 
             <LinearLayout

@@ -126,8 +126,8 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                     EditText specialtyView = view.getRootView().findViewById(R.id.input_specialty);
                     String specialty = specialtyView.getText().toString();
 
-                    EditText squadView = view.getRootView().findViewById(R.id.input_squad);
-                    String squad = squadView.getText().toString();
+                    Spinner squadView = view.getRootView().findViewById(R.id.input_squad);
+                    String squad = squadView.getSelectedItem().toString();
 
                     DBHelper dbHelper = new DBHelper(getContext(), mViewModel);
                     if(!dbHelper.isExistSquad(squad)) {
@@ -150,6 +150,7 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                         soldier.Discharge_Flag = false;
                         dbHelper.createSoldier(soldier);
                     }
+                    Toast.makeText(getContext(), name +" 용사가 추가되었습니다.", Toast.LENGTH_SHORT).show();
                 }
                 catch(ParseException e) {
                     Toast.makeText(getContext(), "용사가 추가되지 못했습니다.", Toast.LENGTH_LONG);

@@ -14,7 +14,7 @@ public class SoldierViewModel extends AbstractViewModel {
     private MutableLiveData<List<Soldier>> mSoldiers;
 
     public SoldierViewModel() {
-
+        mSoldiers = new MutableLiveData<>();
     }
 
     @Override
