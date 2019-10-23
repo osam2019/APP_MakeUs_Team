@@ -8,11 +8,11 @@ import com.example.makeus.Model.Soldier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhysicalTestViewModel extends AbstractViewModel {
+public class PhysicalmanageViewModel extends AbstractViewModel {
     // TODO: Implement the ViewModel
     private MutableLiveData<List<Soldier>> mSoldierWithPhysicalScore;
 
-    public PhysicalTestViewModel() {
+    public PhysicalmanageViewModel() {
 
         PhysicalScore score1 = new PhysicalScore(78, 81, 19700);
         Soldier soldier1 = new Soldier("Jack O Lantern", "일병", "19-13467946", score1);

@@ -17,12 +17,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class PhysicalTestAdapter extends BaseAdapter {
+public class PhysicalmanageAdapter extends BaseAdapter {
 
     private final Context mContext;
     private List<Soldier> soldiers;
 
-    public PhysicalTestAdapter(Context context, List<Soldier> soldiers) {
+    public PhysicalmanageAdapter(Context context, List<Soldier> soldiers) {
         this.mContext = context;
         this.soldiers = soldiers;
     }
@@ -47,26 +47,26 @@ public class PhysicalTestAdapter extends BaseAdapter {
 
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-            convertView = layoutInflater.inflate(R.layout.item_physical_test, null);
+            convertView = layoutInflater.inflate(R.layout.physicalManageFragment, null);
         }
 
         Soldier soldier = soldiers.get(position);
 
-        TextView physicalRank = convertView.findViewById(R.id.physical_rank);
+        TextView physicalRank = convertView.findViewById(R.id.in_physic_rank);
         physicalRank.setText(soldier.getRank());
 
-        TextView physicalName = convertView.findViewById(R.id.physical_name);
+        TextView physicalName = convertView.findViewById(R.id.in_physic_name);
         physicalName.setText(soldier.name);
 
         PhysicalScore physicalScore = soldier.getPhysicalScore();
 
-        TextView physicalPushUp = convertView.findViewById(R.id.physical_pushUp);
+        TextView physicalPushUp = convertView.findViewById(R.id.in_physic_pushUp);
         physicalPushUp.setText(Integer.toString(physicalScore.getPushUp()));
 
-        TextView physicalSitUp = convertView.findViewById(R.id.physical_sitUp);
+        TextView physicalSitUp = convertView.findViewById(R.id.in_physic_sitUp);
         physicalSitUp.setText(Integer.toString(physicalScore.getSitUp()));
 
-        TextView physicalRunning = convertView.findViewById(R.id.physical_running);
+        TextView physicalRunning = convertView.findViewById(R.id.in_physic_running);
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm:ss");
         physicalRunning.setText( dateFormat.format(new Date(physicalScore.getRunning())) );
         

@@ -23,7 +23,7 @@
         tools:layout="@layout/soldier_fragment" />
     <fragment
         android:id="@+id/nav_physical"
-        android:name="com.example.makeus.ViewModel.Fragment.PhysicalTestFragment"
+        android:name="com.example.makeus.ViewModel.Fragment.PhysicalmanageFragment"
         android:label="test"
         tools:layout="@layout/physical_test_fragment"
         />
