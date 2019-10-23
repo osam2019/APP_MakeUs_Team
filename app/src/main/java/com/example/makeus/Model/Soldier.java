@@ -15,6 +15,8 @@ public class Soldier implements Parcelable {
     public long Discharge_Day; // 전역예정일
     public boolean Discharge_Flag; // 전역여부
 
+    public PhysicalScore physicalScore;
+
     public Soldier() {
         this.Name = "Test Name";
         this.Squad = "Squad Test";
@@ -27,7 +29,7 @@ public class Soldier implements Parcelable {
         this.Discharge_Flag = false;
         Specialty = "화학병";
     }
-    public  Soldier(String name) {
+    public Soldier(String name) {
         Name = name;
     }
     public Soldier(String Name, String Squad, String Rank, String milliNumber) {
@@ -35,6 +37,13 @@ public class Soldier implements Parcelable {
         this.Squad = Squad;
         this.Rank = Rank;
         this.milliNumber = milliNumber;
+    }
+
+    public Soldier(String Name, String Rank, String milliNumber, PhysicalScore physicalScore) {
+        this.Name = Name;
+        this.Rank = Rank;
+        this.milliNumber = milliNumber;
+        this.physicalScore = physicalScore;
     }
 
     public void Input_Infomation(String name, String squad,  String rank, String milli_Number, String specialty, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag){
@@ -90,6 +99,25 @@ public class Soldier implements Parcelable {
         return this.Squad;
     }
 
+    public PhysicalScore getPhysicalScore() {
+        return this.physicalScore;
+    }
+
+    public void setPhysicalScore(PhysicalScore physicalScore) {
+        this.physicalScore = physicalScore;
+    }
+
+    public void setPushUp(int pushUp) {
+        this.physicalScore.setPushUp(pushUp);
+    }
+
+    public void setSitUp(int sitUp) {
+        this.physicalScore.setSitUp(sitUp);
+    }
+
+    public void setRunning(long running) {
+        this.physicalScore.setRunning(running);
+    }
 
     public static final Creator<Soldier> CREATOR = new Creator<Soldier>() {
         // 객체 복원

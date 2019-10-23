@@ -21,5 +21,11 @@
         android:name="com.example.makeus.ViewModel.Fragment.SoldierFragment"
         android:label="@string/test"
         tools:layout="@layout/soldier_fragment" />
+    <fragment
+        android:id="@+id/nav_physical"
+        android:name="com.example.makeus.ViewModel.Fragment.PhysicalTestFragment"
+        android:label="test"
+        tools:layout="@layout/physical_test_fragment"
+        />
 
 </navigation>
