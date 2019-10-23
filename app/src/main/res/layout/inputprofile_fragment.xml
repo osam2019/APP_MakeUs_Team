@@ -20,16 +20,17 @@
                 android:id="@+id/imageView"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/ic_launcher_background" />
 
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -52,9 +53,10 @@
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -65,21 +67,23 @@
                     android:text="계급"
                     android:textSize="20dp" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/input_rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:hint="내용입력" />
+                    android:layout_width="136dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:entries="@array/rank" />
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -87,12 +91,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="20dp"
-                    android:text="군번" />
+                    android:text="군번"
+                    android:textSize="20dp" />
 
                 <EditText
                     android:id="@+id/input_milli_number"
-                    android:layout_width="wrap_content"
+                    android:layout_width="76dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:ems="10"
@@ -103,9 +107,10 @@
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -130,9 +135,10 @@
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -157,9 +163,10 @@
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -184,9 +191,10 @@
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -211,9 +219,10 @@
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -236,9 +245,10 @@
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -246,43 +256,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="20dp"
-                    android:text="분대" />
+                    android:text="분대"
+                    android:textSize="20dp" />
 
-                <EditText
+
+                <Spinner
                     android:id="@+id/input_squad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:hint="내용입력" />
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="2" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/modify"
                     android:layout_width="101dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:text="입력완료" />
 
                 <Button
                     android:id="@+id/discharge_Flag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:text="전역처리" />
             </LinearLayout>
 
 
         </LinearLayout>
-
 
 
     </ScrollView>

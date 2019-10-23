@@ -15,9 +15,12 @@ import android.text.NoCopySpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,18 +28,25 @@ import android.widget.Toast;
 
 import com.example.makeus.Model.DBHelper;
 import com.example.makeus.Model.Soldier;
+import com.example.makeus.Model.Squad;
 import com.example.makeus.R;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
-public class inputprofileFragment extends Fragment {
+import static androidx.databinding.DataBindingUtil.setContentView;
 
-    final int OPTION_ENLISTMENT_DAY = 0;
-    final int OPTION_TRANSFER_DAY = 1;
-    final int OPTION_EXPECTED_DISCHARGE_DAY = 2;
+
+public class inputprofileFragment extends Fragment { //fragment class 선언
+
+    final int OPTION_ENLISTMENT_DAY = 0;  //입대일 선언
+    final int OPTION_TRANSFER_DAY = 1;  //전입일 선언
+    final int OPTION_EXPECTED_DISCHARGE_DAY = 2;    //
     final int OPTION_BIRTH = 3;
 
     private InputprofileViewModel mViewModel;
@@ -44,6 +54,20 @@ public class inputprofileFragment extends Fragment {
     public static inputprofileFragment newInstance() {
         return new inputprofileFragment();
     }
+    //분대 데이터를 가져올 arraylist
+    /*ArrayList squadarray = new ArrayList();
+    List<Squad> squads = mViewModel.getLiveDataSquads().getValue();
+
+    public ArrayList getSquadarray(List<Squad> msquads) {
+        for(int i=0;i<squads.size();i++){
+            squadarray.add(squads.get(i));
+        }
+        return squadarray;
+    }
+
+    public void setSquadarray(ArrayList squadarray) {
+        this.squadarray = squadarray;
+    }*/
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -56,6 +80,15 @@ public class inputprofileFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
+
+        Spinner input_squadView = getView().findViewById(R.id.input_squad);
+        ArrayList<Squad> squads = (ArrayList)mViewModel.getLiveDataSquads().getValue();
+        ArrayList<String> squadsName = new ArrayList<>();
+        for(int i=0;i<squads.size();i++){
+            squadsName.add(squads.get(i).Name);
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item, squadsName);
+        input_squadView.setAdapter(arrayAdapter);
 
         EditText expeceted_discharge_day_View  = getView().findViewById(R.id.input_discharge_Day);
         expeceted_discharge_day_View.setOnClickListener(new View.OnClickListener() {
@@ -96,8 +129,8 @@ public class inputprofileFragment extends Fragment {
                     EditText nameView = view.getRootView().findViewById(R.id.input_name);
                     String name = nameView.getText().toString();
 
-                    EditText rankView = view.getRootView().findViewById(R.id.input_rank);
-                    String rank = rankView.getText().toString();
+                    Spinner spinnerView = view.getRootView().findViewById(R.id.input_rank);
+                    String rank = spinnerView.getSelectedItem().toString();
 
                     EditText transfer_day_View = view.getRootView().findViewById(R.id.input_transfer_Day);
                     Date transfer_day = dateFormat.parse(transfer_day_View.getText().toString());
@@ -241,3 +274,4 @@ public class inputprofileFragment extends Fragment {
     }
 
 }
+
