@@ -3,15 +3,19 @@ package com.example.makeus.ViewModel.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -23,7 +27,7 @@ import com.example.makeus.Module.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.R;
-import com.example.makeus.ViewModel.InputprofileViewModel;
+import com.example.makeus.ViewModel.InputProfileViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,9 +39,9 @@ import java.util.List;
 import static androidx.databinding.DataBindingUtil.setContentView;
 
 
-public class inputprofileFragment extends Fragment { //fragment class 선언
+public class InputProfileFragment extends Fragment { //fragment class 선언
 
-    final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     final int OPTION_ENLISTMENT_DAY = 0;  //입대일 선언
     final int OPTION_TRANSFER_DAY = 1;  //전입일 선언
@@ -54,10 +58,10 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     EditText inputBirthday;
     EditText inputSpecialty;
 
-    private InputprofileViewModel mViewModel;
+    private InputProfileViewModel mViewModel;
 
-    public static inputprofileFragment newInstance() {
-        return new inputprofileFragment();
+    public static InputProfileFragment newInstance() {
+        return new InputProfileFragment();
     }
 
     @Override
@@ -66,8 +70,10 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
         View fragment = inflater.inflate(R.layout.inputprofile_fragment, container, false);
 
         inputName = fragment.findViewById(R.id.input_name);
+        inputName.setOnFocusChangeListener(new MyFocusChangeListener());
         inputTransferDay = fragment.findViewById(R.id.input_transfer_Day);
         inputMilNum = fragment.findViewById(R.id.input_milli_number);
+        inputMilNum.setOnFocusChangeListener(new MyFocusChangeListener());
         inputSquad = fragment.findViewById(R.id.input_squad);
 
         inputDischargeDay  = fragment.findViewById(R.id.input_discharge_Day);
@@ -99,8 +105,10 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
             }
         });
         inputSpecialty = fragment.findViewById(R.id.input_specialty);
+        inputSpecialty.setOnFocusChangeListener(new MyFocusChangeListener());
         inputSquad = fragment.findViewById(R.id.input_squad);
         inputRank = fragment.findViewById(R.id.input_rank);
+
         return fragment;
     }
 
@@ -115,8 +123,8 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
-        mViewModel.updateDataFromDB(new DBHelper(getContext(), mViewModel));
+        mViewModel = ViewModelProviders.of(this).get(InputProfileViewModel.class);
+        mViewModel.updateDataFromDB(new DBHelper(getContext()));
 
         List<String> squadNames = getSquadNames(mViewModel.getLiveDataSquads().getValue());
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item, squadNames);
@@ -127,20 +135,38 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
             @Override
             public void onClick(View view) {
                 try {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     Soldier soldier = new Soldier();
-                    soldier.Name  = inputName.getText().toString();
-                    soldier.Rank = inputRank.getSelectedItem().toString();
-                    soldier.Transfer_Day = dateFormat.parse(inputTransferDay.getText().toString()).getTime();
-                    soldier.milliNumber = inputMilNum.getText().toString();
-                    soldier.Enlistment_Day = dateFormat.parse(inputEnlistmentDay.getText().toString()).getTime();
-                    soldier.Discharge_Day = dateFormat.parse(inputDischargeDay.getText().toString()).getTime();
-                    soldier.Birthday = dateFormat.parse(inputBirthday.getText().toString()).getTime();
-                    soldier.Specialty = inputSpecialty.getText().toString();
-                    soldier.Squad = inputSquad.getSelectedItem().toString();
-                    soldier.Discharge_Flag = false;
 
-                    DBHelper dbHelper = new DBHelper(getContext(), mViewModel);
+                    soldier.name  = inputName.getText().toString();
+                    soldier.rank = inputRank.getSelectedItem().toString();
+                    soldier.milliNumber = inputMilNum.getText().toString();
+                    if(soldier.milliNumber == null || soldier.milliNumber.isEmpty()) {
+                        Toast.makeText(getContext(), "군번은 반드시 입력해주셔야 합니다.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    soldier.specialty = inputSpecialty.getText().toString();
+                    soldier.Squad = inputSquad.getSelectedItem().toString();
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    String s = inputTransferDay.getText().toString();
+                    if(s != null && !s.isEmpty()) {
+                        soldier.transferDay = dateFormat.parse(s).getTime();
+                    }
+                    s = inputEnlistmentDay.getText().toString();
+                    if(s != null && !s.isEmpty()) {
+                        soldier.enlistmentDay = dateFormat.parse(s).getTime();
+                    }
+                    s = inputDischargeDay.getText().toString();
+                    if(s != null && !s.isEmpty()) {
+                        soldier.dischargeDay = dateFormat.parse(s).getTime();
+                    }
+                    s  = inputBirthday.getText().toString();
+                    if(s != null && !s.isEmpty()) {
+                        soldier.birthday = dateFormat.parse(s).getTime();
+                    }
+
+                    DBHelper dbHelper = new DBHelper(getContext());
                     if(!dbHelper.isExistSquad(soldier.Squad)) {
                         dbHelper.createSquad(soldier.Squad);
                     }
@@ -151,11 +177,32 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                     else {
                         dbHelper.createSoldier(soldier);
                     }
-                    Toast.makeText(getContext(), soldier.Name +" 용사가 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), soldier.name +"완료", Toast.LENGTH_SHORT).show();
                 }
                 catch(ParseException e) {
-                    Toast.makeText(getContext(), "용사가 추가되지 못했습니다.", Toast.LENGTH_LONG);
+                    Log.d("makeus", e.getStackTrace().toString());
                 }
+
+                getFragmentManager().popBackStack();
+            }
+        });
+
+        Button discharge = getView().findViewById(R.id.discharge);
+        discharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String milliNumber = inputMilNum.getText().toString();
+                if (milliNumber == null || milliNumber.isEmpty()) {
+                    Toast.makeText(getContext(), "군번이 있어야 전역할 수 있습니다!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                DBHelper dbHelper = new DBHelper(getContext());
+                if (dbHelper.isExistSoldier(milliNumber)) {
+                    dbHelper.deleteSoldier(milliNumber);
+                }
+                Toast.makeText(getContext(), "완료", Toast.LENGTH_SHORT).show();
+                getFragmentManager().popBackStack();
             }
         });
     }
@@ -179,20 +226,16 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     private void receiveDate(int option, int year, int monthOfYear, int dayOfMonth) {
         switch(option) {
             case OPTION_ENLISTMENT_DAY:
-                EditText enlistment_day = getView().findViewById(R.id.input_enlistment_Day);
-                enlistment_day.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                inputEnlistmentDay.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                 break;
             case OPTION_TRANSFER_DAY:
-                EditText transfer_day = getView().findViewById(R.id.input_transfer_Day);
-                transfer_day.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                inputTransferDay.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                 break;
             case OPTION_EXPECTED_DISCHARGE_DAY:
-                EditText expeceted_discharge_day = getView().findViewById(R.id.input_discharge_Day);
-                expeceted_discharge_day.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                inputDischargeDay.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                 break;
             case OPTION_BIRTH:
-                EditText birth = getView().findViewById(R.id.input_birth);
-                birth.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                inputBirthday.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                 break;
         }
     }
@@ -200,25 +243,27 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(InputProfileViewModel.class);
 
         if( getArguments() != null ) {
             Soldier soldier = (Soldier) getArguments().get("soldier");
             setForProfileModification(soldier);
+            inputMilNum.setEnabled(false);
+            inputMilNum.setTextColor(Color.BLACK);
         }
     }
 
     private void setForProfileModification(Soldier soldier) {
-        inputName.setText(soldier.Name);
+        inputName.setText(soldier.name);
         inputMilNum.setText(soldier.getMilliNumber());
-        inputEnlistmentDay.setText( dateFormat.format(new Date(soldier.getEnlistment_Day())) );
-        inputTransferDay.setText( dateFormat.format(new Date(soldier.getTransfer_Day())) );
-        inputDischargeDay.setText( dateFormat.format(new Date(soldier.getDischarge_Day())) );
-        inputBirthday.setText( dateFormat.format(new Date(soldier.getBirthday())));
-        inputSpecialty.setText(soldier.getSpecialty());
+        inputEnlistmentDay.setText( dateFormat.format(new Date(soldier.enlistmentDay)) );
+        inputTransferDay.setText( dateFormat.format(new Date(soldier.transferDay)) );
+        inputDischargeDay.setText( dateFormat.format(new Date(soldier.dischargeDay)) );
+        inputBirthday.setText( dateFormat.format(new Date(soldier.birthday)));
+        inputSpecialty.setText(soldier.specialty);
 
-        inputSquad.setSelection(getIndex(inputSquad, soldier.getSquad()));
-        inputRank.setSelection(getIndex(inputRank, soldier.getRank()));
+        inputSquad.setSelection(getIndex(inputSquad, soldier.Squad));
+        inputRank.setSelection(getIndex(inputRank, soldier.rank));
 
     }
 
@@ -230,6 +275,15 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
         }
 
         return 0;
+    }
+
+    private class MyFocusChangeListener implements View.OnFocusChangeListener {
+        public void onFocusChange(View v, boolean hasFocus){
+            if(!hasFocus) {
+                InputMethodManager imm =  (InputMethodManager)v.getRootView().getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        }
     }
 
 }

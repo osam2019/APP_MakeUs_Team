@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewModel.Fragment.inputprofileFragment">
+    tools:context=".ViewModel.Fragment.InputProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -46,7 +46,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:hint="내용입력" />
+                    android:hint="내용입력"
+                    android:maxLines="1"
+                    android:inputType="text"/>
 
             </LinearLayout>
 
@@ -71,7 +73,8 @@
                     android:id="@+id/input_rank"
                     android:layout_width="136dp"
                     android:layout_height="50dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:entries="@array/rank"/>
 
             </LinearLayout>
 
@@ -236,7 +239,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:hint="내용입력" />
+                    android:hint="내용입력"
+                    android:maxLines="1"
+                    android:inputType="text"/>
 
             </LinearLayout>
 
@@ -281,7 +286,7 @@
                     android:text="입력완료" />
 
                 <Button
-                    android:id="@+id/discharge_Flag"
+                    android:id="@+id/discharge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"

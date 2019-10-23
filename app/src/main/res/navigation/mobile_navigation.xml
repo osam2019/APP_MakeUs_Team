@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_inputprofile"
-        android:name="com.example.makeus.ViewModel.Fragment.inputprofileFragment"
+        android:name="com.example.makeus.ViewModel.Fragment.InputProfileFragment"
         android:label="@string/test"
         tools:layout="@layout/inputprofile_fragment" />
     <fragment
@@ -24,8 +24,6 @@
     <fragment
         android:id="@+id/nav_physical"
         android:name="com.example.makeus.ViewModel.Fragment.PhysicalTestFragment"
-        android:label="test"
-        tools:layout="@layout/physical_test_fragment"
-        />
+        tools:layout="@layout/physical_test_fragment" />
 
 </navigation>

@@ -20,14 +20,12 @@ import java.util.List;
 public class SoldierAdapter extends BaseAdapter {
 
     private final Context mContext;
-    //private Squad mSquad;
-    private List<Soldier> soldiers;
-    private String squadName;
+    //private squad mSquad;
+    public List<Soldier> soldiers;
 
-    public SoldierAdapter(Context context, List<Soldier> soldiers, String squadName) {
+    public SoldierAdapter(Context context, List<Soldier> soldiers) {
         this.mContext = context;
         this.soldiers = soldiers;
-        this.squadName = squadName;
     }
 
     @Override
@@ -60,7 +58,7 @@ public class SoldierAdapter extends BaseAdapter {
         soldierRank.setText(soldier.getRank());
 
         TextView soldierName = convertView.findViewById(R.id.view_soldier_name);
-        soldierName.setText(soldier.Name);
+        soldierName.setText(soldier.name);
 
         TextView soldierMilNum = convertView.findViewById(R.id.view_soldier_milnum);
         soldierMilNum.setText(soldier.getMilliNumber());
