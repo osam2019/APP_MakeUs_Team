@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import com.example.makeus.ViewModel.Fragment.PhysicalInputFragment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class PhysicalTestAdapter extends BaseAdapter {
 
@@ -60,6 +62,25 @@ public class PhysicalTestAdapter extends BaseAdapter {
         }
 
         final Soldier soldier = soldiers.get(position);
+
+        ImageView imageView = convertView.findViewById(R.id.physical_soldier);
+        switch (new Random().nextInt(5 - 1) + 1){
+            case 1:
+                imageView.setImageResource(R.drawable.avatars1);
+                break;
+            case 2:
+                imageView.setImageResource(R.drawable.avatars2);
+                break;
+            case 3:
+                imageView.setImageResource(R.drawable.avatars4);
+                break;
+            case 4:
+                imageView.setImageResource(R.drawable.avatars5);
+                break;
+            case 5:
+                imageView.setImageResource(R.drawable.avatars6);
+                break;
+        }
 
         TextView physicalRank = convertView.findViewById(R.id.physical_rank);
         physicalRank.setText(soldier.getRank());

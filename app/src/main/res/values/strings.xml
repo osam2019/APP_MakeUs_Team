@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Makeus</string>
-    <string name="test">test</string>
-
     <string name="add_squad">Add Squad</string>
 
     <!-- TODO: Remove or change this placeholder text -->

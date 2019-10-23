@@ -295,7 +295,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/fail_button"
                     android:text="전역"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#666666"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <Button
@@ -306,7 +307,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/success_button"
                     android:text="반영"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#666666"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
             </LinearLayout>

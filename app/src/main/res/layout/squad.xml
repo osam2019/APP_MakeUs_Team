@@ -20,6 +20,7 @@
             android:minHeight="120dip"
             android:text="Squad"
             android:textAlignment="center"
+            android:textColor="#666666"
             android:textSize="14sp"
             android:textStyle="bold" />
 
