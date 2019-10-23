@@ -42,7 +42,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier a = new Soldier();
         a.Name = "산타" ;
         a.Rank = "일병";
-        a.Milli_Number = "13-45687542";
+        a.milliNumber = "13-45687542";
         a.Squad = "1분대";
         a.Enlistment_Day = new Date(1990, 3, 14).getTime();
         a.Transfer_Day =  new Date(1990, 4, 14).getTime();
@@ -54,7 +54,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier b = new Soldier();
         b.Name = "마리아" ;
         b.Rank = "상병";
-        b.Milli_Number = "14-45688526";
+        b.milliNumber = "14-45688526";
         b.Squad = "2분대";
         b.Enlistment_Day = new Date(1991, 4, 15).getTime();
         b.Transfer_Day =  new Date(1991, 5, 15).getTime();
@@ -66,7 +66,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier c = new Soldier();
         c.Name = "요셉" ;
         c.Rank = "병장";
-        c.Milli_Number = "15-78967542";
+        c.milliNumber = "15-78967542";
         c.Squad = "3분대";
         c.Enlistment_Day = new Date(1992, 5, 16).getTime();
         c.Transfer_Day =  new Date(1992, 6, 16).getTime();
@@ -78,7 +78,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier d = new Soldier();
         d.Name = "로빈" ;
         d.Rank = "이병";
-        d.Milli_Number = "16-45688431";
+        d.milliNumber = "16-45688431";
         d.Squad = "1분대";
         d.Enlistment_Day = new Date(1994, 6, 20).getTime();
         d.Transfer_Day =  new Date(1994, 7, 22).getTime();
@@ -90,7 +90,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier e = new Soldier();
         e.Name = "루피" ;
         e.Rank = "일병";
-        e.Milli_Number = "17-45681234";
+        e.milliNumber = "17-45681234";
         e.Squad = "2분대";
         e.Enlistment_Day = new Date(1998, 7, 14).getTime();
         e.Transfer_Day =  new Date(1998, 8, 18).getTime();
@@ -102,7 +102,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier f = new Soldier();
         f.Name = "조로" ;
         f.Rank = "상병";
-        f.Milli_Number = "14-45685421";
+        f.milliNumber = "14-45685421";
         f.Squad = "3분대";
         f.Enlistment_Day = new Date(2000, 3, 14).getTime();
         f.Transfer_Day =  new Date(2000, 5, 14).getTime();
@@ -114,7 +114,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier g = new Soldier();
         g.Name = "나미" ;
         g.Rank = "병장";
-        g.Milli_Number = "14-45452242";
+        g.milliNumber = "14-45452242";
         g.Squad = "1분대";
         g.Enlistment_Day = new Date(2000, 3, 14).getTime();
         g.Transfer_Day =  new Date(2000, 4, 14).getTime();
@@ -126,7 +126,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier h = new Soldier();
         h.Name = "우솝" ;
         h.Rank = "일병";
-        h.Milli_Number = "18-45644442";
+        h.milliNumber = "18-45644442";
         h.Squad = "2분대";
         h.Enlistment_Day = new Date(1990, 3, 14).getTime();
         h.Transfer_Day =  new Date(1990, 4, 14).getTime();
@@ -138,7 +138,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier i = new Soldier();
         i.Name = "루키아" ;
         i.Rank = "상병";
-        i.Milli_Number = "13-45687542";
+        i.milliNumber = "13-45687542";
         i.Squad = "3분대";
         i.Enlistment_Day = new Date(1990, 03, 14).getTime();
         i.Transfer_Day =  new Date(1990, 04, 14).getTime();
@@ -150,7 +150,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier j = new Soldier();
         j.Name = "나르코스" ;
         j.Rank = "병장";
-        j.Milli_Number = "13-45687542";
+        j.milliNumber = "13-45687542";
         j.Squad = "1분대";
         j.Enlistment_Day = new Date(1990, 03, 14).getTime();
         j.Transfer_Day =  new Date(1990, 04, 14).getTime();
@@ -162,7 +162,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier k = new Soldier();
         k.Name = "쵸파" ;
         k.Rank = "이등병";
-        k.Milli_Number = "13-45687542";
+        k.milliNumber = "13-45687542";
         k.Squad = "2분대";
         k.Enlistment_Day = new Date(1990, 03, 14).getTime();
         k.Transfer_Day =  new Date(1990, 04, 14).getTime();
@@ -174,7 +174,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier l = new Soldier();
         l.Name = "그랜라간" ;
         l.Rank = "일병";
-        l.Milli_Number = "13-45687542";
+        l.milliNumber = "13-45687542";
         l.Squad = "3분대";
         l.Enlistment_Day = new Date(1990, 03, 14).getTime();
         l.Transfer_Day =  new Date(1990, 04, 14).getTime();
@@ -186,7 +186,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier m = new Soldier();
         m.Name = "나이스" ;
         m.Rank = "상병";
-        m.Milli_Number = "13-45687542";
+        m.milliNumber = "13-45687542";
         m.Squad = "1분대";
         m.Enlistment_Day = new Date(1990, 03, 14).getTime();
         m.Transfer_Day =  new Date(1990, 04, 14).getTime();
@@ -198,7 +198,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier n = new Soldier();
         n.Name = "맨홀" ;
         n.Rank = "병장";
-        n.Milli_Number = "13-45687542";
+        n.milliNumber = "13-45687542";
         n.Squad = "2분대";
         n.Enlistment_Day = new Date(1990, 03, 14).getTime();
         n.Transfer_Day =  new Date(1990, 04, 14).getTime();
@@ -210,7 +210,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier o = new Soldier();
         o.Name = "블리치" ;
         o.Rank = "이등병";
-        o.Milli_Number = "13-45687542";
+        o.milliNumber = "13-45687542";
         o.Squad = "2분대";
         o.Enlistment_Day = new Date(1990, 03, 14).getTime();
         o.Transfer_Day =  new Date(1990, 04, 14).getTime();
@@ -222,7 +222,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier p = new Soldier();
         p.Name = "우루과이" ;
         p.Rank = "일병";
-        p.Milli_Number = "13-45687542";
+        p.milliNumber = "13-45687542";
         p.Squad = "1분대";
         p.Enlistment_Day = new Date(1990, 03, 14).getTime();
         p.Transfer_Day =  new Date(1990, 04, 14).getTime();
@@ -234,7 +234,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier q = new Soldier();
         q.Name = "이집트" ;
         q.Rank = "일병";
-        q.Milli_Number = "13-45687542";
+        q.milliNumber = "13-45687542";
         q.Squad = "1분대";
         q.Enlistment_Day = new Date(1990, 03, 14).getTime();
         q.Transfer_Day =  new Date(1990, 04, 14).getTime();
@@ -246,7 +246,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier r = new Soldier();
         r.Name = "브라질" ;
         r.Rank = "일병";
-        r.Milli_Number = "13-45687542";
+        r.milliNumber = "13-45687542";
         r.Squad = "1분대";
         r.Enlistment_Day = new Date(1990, 03, 14).getTime();
         r.Transfer_Day =  new Date(1990, 04, 14).getTime();
@@ -258,7 +258,7 @@ public abstract class AbstractViewModel extends ViewModel {
         Soldier s = new Soldier();
         s.Name = "한국";
         s.Rank = "일병";
-        s.Milli_Number = "13-45687542";
+        s.milliNumber = "13-45687542";
         s.Squad = "1분대";
         s.Enlistment_Day = new Date(1990, 03, 14).getTime();
         s.Transfer_Day =  new Date(1990, 04, 14).getTime();

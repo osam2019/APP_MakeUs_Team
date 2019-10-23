@@ -7,7 +7,7 @@ public class Soldier implements Parcelable {
     public String Name; // 성명
     public String Squad; // 분대
     public String Rank; // 계급
-    public String Milli_Number; // 군번
+    public String milliNumber; // 군번
     public String Specialty; // 주특기
     public long Birthday; // 생년월일
     public long Enlistment_Day; // 입대일
@@ -19,7 +19,7 @@ public class Soldier implements Parcelable {
         this.Name = "Test Name";
         this.Squad = "Squad Test";
         this.Rank = "Test Rank";
-        this.Milli_Number = "00-12345678";
+        this.milliNumber = "00-12345678";
         this.Birthday = 1999080800;
         this.Enlistment_Day = 2019010100;
         this.Transfer_Day = 2019022000;
@@ -30,17 +30,17 @@ public class Soldier implements Parcelable {
     public  Soldier(String name) {
         Name = name;
     }
-    public Soldier(String Name, String Squad, String Rank, String Milli_Number) {
+    public Soldier(String Name, String Squad, String Rank, String milliNumber) {
         this.Name = Name;
         this.Squad = Squad;
         this.Rank = Rank;
-        this.Milli_Number = Milli_Number;
+        this.milliNumber = milliNumber;
     }
 
     public void Input_Infomation(String name, String squad,  String rank, String milli_Number, String specialty, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag){
         this.Name = name;
         this.Squad = squad;
-        this.Milli_Number = milli_Number;
+        this.milliNumber = milli_Number;
         this.Birthday = birthday;
         this.Enlistment_Day = enlistment_Day;
         this.Transfer_Day = transfer_Day;
@@ -58,8 +58,8 @@ public class Soldier implements Parcelable {
         return this.Rank;
     }
 
-    public String getMilli_Number(){
-        return this.Milli_Number;
+    public String getMilliNumber(){
+        return this.milliNumber;
     }
 
     public long getBirthday() {
@@ -122,7 +122,7 @@ public class Soldier implements Parcelable {
         dest.writeString(Name);
         dest.writeString(Squad);
         dest.writeString(Rank);
-        dest.writeString(Milli_Number);
+        dest.writeString(milliNumber);
         dest.writeString(Specialty);
         dest.writeLong(Birthday);
         dest.writeLong(Enlistment_Day);

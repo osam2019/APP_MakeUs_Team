@@ -3,27 +3,20 @@ package com.example.makeus.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
-import android.text.NoCopySpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.makeus.Model.DBHelper;
@@ -31,13 +24,11 @@ import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.R;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import static androidx.databinding.DataBindingUtil.setContentView;
 
@@ -54,25 +45,10 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     public static inputprofileFragment newInstance() {
         return new inputprofileFragment();
     }
-    //분대 데이터를 가져올 arraylist
-    /*ArrayList squadarray = new ArrayList();
-    List<Squad> squads = mViewModel.getLiveDataSquads().getValue();
-
-    public ArrayList getSquadarray(List<Squad> msquads) {
-        for(int i=0;i<squads.size();i++){
-            squadarray.add(squads.get(i));
-        }
-        return squadarray;
-    }
-
-    public void setSquadarray(ArrayList squadarray) {
-        this.squadarray = squadarray;
-    }*/
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.inputprofile_fragment, container, false);
     }
 
@@ -164,7 +140,7 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                         Soldier soldier = new Soldier();
                         soldier.Name = name;
                         soldier.Squad = squad;
-                        soldier.Milli_Number =milli_number;
+                        soldier.milliNumber =milli_number;
                         soldier.Rank = rank;
                         soldier.Specialty = specialty;
                         soldier.Birthday = birth.getTime();
@@ -243,9 +219,9 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
             inputRank.setText(soldier.getRank());
         }
 
-        if(soldier.getMilli_Number() != null) {
+        if(soldier.getMilliNumber() != null) {
             EditText inputMilNum = getView().findViewById(R.id.input_milli_number);
-            inputMilNum.setText(soldier.getMilli_Number());
+            inputMilNum.setText(soldier.getMilliNumber());
         }
 
         if(soldier.getEnlistment_Day() != 0) {

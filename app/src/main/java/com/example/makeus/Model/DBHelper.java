@@ -137,7 +137,7 @@ public class DBHelper extends SQLiteOpenHelper {
         soldier.Name = cursor.getString(cursor.getColumnIndex("name"));
         soldier.Squad = cursor.getString(cursor.getColumnIndex("squad"));
         soldier.Rank = cursor.getString(cursor.getColumnIndex("rank"));
-        soldier.Milli_Number = cursor.getString(cursor.getColumnIndex("milli_number"));
+        soldier.milliNumber = cursor.getString(cursor.getColumnIndex("milli_number"));
         soldier.Specialty = cursor.getString(cursor.getColumnIndex("specialty"));
         soldier.Birthday = cursor.getLong(cursor.getColumnIndex("birthday"));
         soldier.Enlistment_Day = cursor.getLong(cursor.getColumnIndex("enlistment_day"));
@@ -194,7 +194,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String [] arg =
                 {
                     soldier.Name, soldier.Squad, soldier.Rank,
-                    soldier.Milli_Number, soldier.Specialty,
+                    soldier.milliNumber, soldier.Specialty,
                     String.valueOf(soldier.Birthday),
                     String.valueOf(soldier.Enlistment_Day),
                     String.valueOf(soldier.Transfer_Day),
