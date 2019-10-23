@@ -9,7 +9,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +22,8 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_launcher_background"
+                tools:srcCompat="@drawable/avatars1" />
 
             <LinearLayout
                 android:layout_width="300dp"
@@ -39,16 +40,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="이름"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/input_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:hint="내용입력"
-                    android:maxLines="1"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:maxLines="1" />
 
             </LinearLayout>
 
@@ -67,14 +69,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="계급"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/input_rank"
-                    android:layout_width="136dp"
+                    android:layout_width="180dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:entries="@array/rank"/>
+                    android:entries="@array/rank" />
 
             </LinearLayout>
 
@@ -93,13 +96,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="군번"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/input_milli_number"
-                    android:layout_width="76dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:ems="10"
                     android:inputType="number" />
 
@@ -120,11 +124,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="입대일"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/input_enlistment_Day"
-                    android:layout_width="136dp"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
@@ -148,11 +153,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="전입일"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/input_transfer_Day"
-                    android:layout_width="136dp"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
@@ -175,12 +181,13 @@
                     android:layout_width="36dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="전역예정일"
-                    android:textSize="20dp" />
+                    android:text="전역일"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/input_discharge_Day"
-                    android:layout_width="136dp"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
@@ -203,12 +210,13 @@
                     android:layout_width="36dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="생년월일"
-                    android:textSize="20dp" />
+                    android:text="생일"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/input_birth"
-                    android:layout_width="136dp"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
@@ -232,16 +240,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="주특기"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/input_specialty"
-                    android:layout_width="wrap_content"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:hint="내용입력"
-                    android:maxLines="1"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:maxLines="1" />
 
             </LinearLayout>
 
@@ -260,14 +269,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="분대"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
 
                 <Spinner
                     android:id="@+id/input_squad"
-                    android:layout_width="70dp"
+                    android:layout_width="180dp"
                     android:layout_height="50dp"
-                    android:layout_weight="2" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -278,27 +288,28 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/modify"
-                    android:layout_width="101dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/discharge"
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="입력완료" />
+                    android:background="@drawable/fail_button"
+                    android:text="전역"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/discharge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/modify"
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="전역처리" />
+                    android:background="@drawable/success_button"
+                    android:text="반영"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
             </LinearLayout>
-
-
         </LinearLayout>
-
-
     </ScrollView>
-
-
 </LinearLayout>

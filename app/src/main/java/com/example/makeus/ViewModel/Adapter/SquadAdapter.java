@@ -1,11 +1,15 @@
 package com.example.makeus.ViewModel.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
@@ -52,15 +56,18 @@ public class SquadAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if(position == 0) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.add_squad, null);
-            final SquadButton squadButton = view.findViewById(R.id.squad_button);
-            squadButton.setOnClickListener(new View.OnClickListener() {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.squad, null);
+            SquadButton addButton = view.findViewById(R.id.squad_button);
+            addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     SquadCreateFragment scf = new SquadCreateFragment(mViewModel);
                     scf.show(fragmentManager, "createSquad");
                 }
             });
+            addButton.setTextColor(Color.WHITE);
+            addButton.setText("+");
+            addButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 72);
             return view;
         } else {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
@@ -74,7 +81,7 @@ public class SquadAdapter extends BaseAdapter {
 
         final SquadButton squadButton = convertView.findViewById(R.id.squad_button);
         squadButton.squad = mSquads.get( position - 1 );
-        squadButton.setText(String.valueOf(mSquads.get( position - 1 ).Name));
+        squadButton.setText(String.valueOf(mSquads.get( position - 1 ).Name) + "\n\n" + squadButton.squad.SoldierList.size());
         squadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

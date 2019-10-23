@@ -15,10 +15,13 @@
             android:id="@+id/squad_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#8BC34A"
+            android:background="@drawable/squad_button"
             android:minWidth="120dip"
             android:minHeight="120dip"
-            android:text="Squad" />
+            android:text="Squad"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
     </FrameLayout>
 

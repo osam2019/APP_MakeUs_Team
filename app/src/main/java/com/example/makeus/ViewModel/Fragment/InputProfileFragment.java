@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import static androidx.databinding.DataBindingUtil.setContentView;
 
@@ -48,6 +50,7 @@ public class InputProfileFragment extends Fragment { //fragment class 선언
     final int OPTION_EXPECTED_DISCHARGE_DAY = 2;    //
     final int OPTION_BIRTH = 3;
 
+    ImageView imageView;
     EditText inputName;
     Spinner inputRank;
     EditText inputMilNum;
@@ -69,6 +72,24 @@ public class InputProfileFragment extends Fragment { //fragment class 선언
                              @Nullable Bundle savedInstanceState) {
         View fragment = inflater.inflate(R.layout.inputprofile_fragment, container, false);
 
+        imageView = fragment.findViewById(R.id.imageView);
+        switch (new Random().nextInt(5 - 1) + 1){
+            case 1:
+                imageView.setImageResource(R.drawable.avatars1);
+                break;
+            case 2:
+                imageView.setImageResource(R.drawable.avatars2);
+                break;
+            case 3:
+                imageView.setImageResource(R.drawable.avatars4);
+                break;
+            case 4:
+                imageView.setImageResource(R.drawable.avatars5);
+                break;
+            case 5:
+                imageView.setImageResource(R.drawable.avatars6);
+                break;
+        }
         inputName = fragment.findViewById(R.id.input_name);
         inputName.setOnFocusChangeListener(new MyFocusChangeListener());
         inputTransferDay = fragment.findViewById(R.id.input_transfer_Day);
