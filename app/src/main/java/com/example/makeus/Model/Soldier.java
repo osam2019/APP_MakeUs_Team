@@ -27,6 +27,7 @@ public class Soldier implements Parcelable {
         this.transferDay = 0;
         this.dischargeDay = 0;
         this.specialty = null;
+        this.physicalScore = new PhysicalScore();
     }
 
 
@@ -87,19 +88,20 @@ public class Soldier implements Parcelable {
         // 객체 복원
         @Override
         public Soldier createFromParcel(Parcel source) {
-            String Name = source.readString();
-            String Squad = source.readString();
-            String Rank = source.readString();
-            String Milli_Number = source.readString();
-            String Specialty = source.readString();
-            long Birthday = source.readLong();
-            long Enlistment_Day = source.readLong();
-            long Transfer_Day = source.readLong();
-            long Discharge_Day = source.readLong();
-            Soldier t1 = new Soldier();
-            t1.Input_Infomation(Name, Squad, Rank, Milli_Number, Specialty, Birthday, Enlistment_Day, Transfer_Day, Discharge_Day);
+            Soldier ret = new Soldier();
+            ret.name = source.readString();
+            ret.Squad = source.readString();
+            ret.rank = source.readString();
+            ret.milliNumber = source.readString();
+            ret.specialty = source.readString();
 
-            return t1;
+            ret.birthday = source.readLong();
+            ret.enlistmentDay = source.readLong();
+            ret.transferDay = source.readLong();
+            ret.dischargeDay = source.readLong();
+
+            ret.physicalScore = source.readParcelable(PhysicalScore.class.getClassLoader());
+            return ret;
         }
 
         @Override
@@ -119,6 +121,8 @@ public class Soldier implements Parcelable {
         dest.writeLong(enlistmentDay);
         dest.writeLong(transferDay);
         dest.writeLong(dischargeDay);
+
+        dest.writeParcelable(physicalScore, flags);
     }
 
     @Override

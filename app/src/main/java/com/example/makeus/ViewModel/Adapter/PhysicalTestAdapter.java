@@ -1,4 +1,4 @@
-package com.example.makeus.Module;
+package com.example.makeus.ViewModel.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.makeus.Model.Soldier;
-import com.example.makeus.Module.PhysicalTestAdapter;
+import com.example.makeus.ViewModel.Adapter.PhysicalTestAdapter;
 import com.example.makeus.R;
 import com.example.makeus.ViewModel.PhysicalTestViewModel;
 
