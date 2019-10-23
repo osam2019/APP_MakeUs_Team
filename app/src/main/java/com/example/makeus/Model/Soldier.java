@@ -14,7 +14,6 @@ public class Soldier implements Parcelable {
     public long enlistmentDay; // 입대일
     public long transferDay; // 전입일
     public long dischargeDay; // 전역예정일
-    public boolean dischargeFlag; // 전역여부
 
     public PhysicalScore physicalScore;
 
@@ -27,7 +26,6 @@ public class Soldier implements Parcelable {
         this.enlistmentDay = 0;
         this.transferDay = 0;
         this.dischargeDay = 0;
-        this.dischargeFlag = true;
         this.specialty = null;
     }
 
@@ -40,7 +38,7 @@ public class Soldier implements Parcelable {
     }
 
     /* 용사정보 입력 메소드*/
-    public void Input_Infomation(String name, String squad,  String rank, String milli_Number, String specialty, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag){
+    public void Input_Infomation(String name, String squad,  String rank, String milli_Number, String specialty, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day){
         this.name = name;
         this.Squad = squad;
         this.milliNumber = milli_Number;
@@ -48,13 +46,8 @@ public class Soldier implements Parcelable {
         this.enlistmentDay = enlistment_Day;
         this.transferDay = transfer_Day;
         this.dischargeDay = discharge_Day;
-        this.dischargeFlag = discharge_Flag;
         this.rank = rank;
         this.specialty = specialty;
-    }
-
-    public Soldier Output_Infomation(){
-        return this;
     }
 
     public String getRank(){
@@ -63,30 +56,6 @@ public class Soldier implements Parcelable {
 
     public String getMilliNumber(){
         return this.milliNumber;
-    }
-
-    public long getBirthday() {
-        return this.birthday;
-    }
-
-    public long getEnlistmentDay() {
-        return this.enlistmentDay;
-    }
-
-    public long getTransferDay() {
-        return this.transferDay;
-    }
-
-    public long getDischargeDay() {
-        return this.dischargeDay;
-    }
-
-    public boolean isDischargeFlag() {
-        return this.dischargeFlag;
-    }
-
-    public String getSpecialty() {
-        return this.specialty;
     }
 
     public String getSquad() {
@@ -127,9 +96,8 @@ public class Soldier implements Parcelable {
             long Enlistment_Day = source.readLong();
             long Transfer_Day = source.readLong();
             long Discharge_Day = source.readLong();
-            boolean Discharge_Flag = source.readByte() != 0;
             Soldier t1 = new Soldier();
-            t1.Input_Infomation(Name, Squad, Rank, Milli_Number, Specialty, Birthday, Enlistment_Day, Transfer_Day, Discharge_Day, Discharge_Flag);
+            t1.Input_Infomation(Name, Squad, Rank, Milli_Number, Specialty, Birthday, Enlistment_Day, Transfer_Day, Discharge_Day);
 
             return t1;
         }
@@ -151,7 +119,6 @@ public class Soldier implements Parcelable {
         dest.writeLong(enlistmentDay);
         dest.writeLong(transferDay);
         dest.writeLong(dischargeDay);
-        dest.writeByte((byte) (dischargeFlag ? 1 : 0));
     }
 
     @Override

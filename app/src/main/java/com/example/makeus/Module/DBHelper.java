@@ -43,7 +43,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 "enlistment_day int, " +
                 "transfer_day int, " +
                 "discharge_day int, " +
-                "discharge_flag int, " +
                 "primary key(milli_number) " +
                 ") ";
         db.execSQL(create_soldiers);
@@ -153,7 +152,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Soldier soldier = new Soldier();
 
-        soldier.dischargeFlag = cursor.getInt(cursor.getColumnIndex("discharge_flag")) == 0 ? false : true;
         soldier.name = cursor.getString(cursor.getColumnIndex("name"));
         soldier.Squad = cursor.getString(cursor.getColumnIndex("squad"));
         soldier.rank = cursor.getString(cursor.getColumnIndex("rank"));
@@ -208,9 +206,8 @@ public class DBHelper extends SQLiteOpenHelper {
         //Soldier 추가
         SQLiteDatabase db = getWritableDatabase();
         String sql = "INSERT INTO "+ TABLE_SOLDIERS +" (name, squad, rank, milli_number, specialty, birthday, " +
-                "enlistment_day, transfer_day, discharge_day, discharge_flag) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                "enlistment_day, transfer_day, discharge_day) VALUES (?,?,?,?,?,?,?,?,?)";
 
-        String df = (soldier.dischargeFlag ? String.valueOf(0) : String.valueOf(0));
         String [] arg =
                 {
                     soldier.name, soldier.Squad, soldier.rank,
@@ -219,7 +216,6 @@ public class DBHelper extends SQLiteOpenHelper {
                     String.valueOf(soldier.enlistmentDay),
                     String.valueOf(soldier.transferDay),
                     String.valueOf(soldier.dischargeDay),
-                    df
                 };
         db.execSQL(sql, arg);
         db.close();
@@ -295,7 +291,6 @@ public class DBHelper extends SQLiteOpenHelper {
         a.enlistmentDay = new Date(1990, 3, 14).getTime();
         a.transferDay =  new Date(1990, 4, 14).getTime();
         a.dischargeDay =  new Date(1992, 1, 1).getTime();
-        a.dischargeFlag = false;
         a.birthday = new Date(1970, 11, 11).getTime();
         a.specialty ="화학병";
 
@@ -307,7 +302,6 @@ public class DBHelper extends SQLiteOpenHelper {
         b.enlistmentDay = new Date(1991, 4, 15).getTime();
         b.transferDay =  new Date(1991, 5, 15).getTime();
         b.dischargeDay =  new Date(1993, 2, 2).getTime();
-        b.dischargeFlag = false;
         b.birthday = new Date(1971, 12, 12).getTime();
         b.specialty ="상황병";
 
@@ -319,7 +313,6 @@ public class DBHelper extends SQLiteOpenHelper {
         c.enlistmentDay = new Date(1992, 5, 16).getTime();
         c.transferDay =  new Date(1992, 6, 16).getTime();
         c.dischargeDay =  new Date(1994, 3, 3).getTime();
-        c.dischargeFlag = true;
         c.birthday = new Date(1973, 1, 14).getTime();
         c.specialty ="전술기 관리병";
 
@@ -331,7 +324,6 @@ public class DBHelper extends SQLiteOpenHelper {
         d.enlistmentDay = new Date(1994, 6, 20).getTime();
         d.transferDay =  new Date(1994, 7, 22).getTime();
         d.dischargeDay =  new Date(1996, 2, 7).getTime();
-        d.dischargeFlag = false;
         d.birthday = new Date(1974, 10, 9).getTime();
         d.specialty ="해적";
 
@@ -343,7 +335,6 @@ public class DBHelper extends SQLiteOpenHelper {
         e.enlistmentDay = new Date(1998, 7, 14).getTime();
         e.transferDay =  new Date(1998, 8, 18).getTime();
         e.dischargeDay =  new Date(2000, 1, 5).getTime();
-        e.dischargeFlag = false;
         e.birthday = new Date(1980, 1, 1).getTime();
         e.specialty ="탐정";
 
@@ -355,7 +346,6 @@ public class DBHelper extends SQLiteOpenHelper {
         f.enlistmentDay = new Date(2000, 3, 14).getTime();
         f.transferDay =  new Date(2000, 5, 14).getTime();
         f.dischargeDay =  new Date(2002, 8, 7).getTime();
-        f.dischargeFlag= false;
         f.birthday = new Date(1980, 3, 25).getTime();
         f.specialty ="해적사냥꾼";
 
@@ -367,7 +357,6 @@ public class DBHelper extends SQLiteOpenHelper {
         g.enlistmentDay = new Date(2000, 3, 14).getTime();
         g.transferDay =  new Date(2000, 4, 14).getTime();
         g.dischargeDay =  new Date(2002, 1, 1).getTime();
-        g.dischargeFlag= true;
         g.birthday = new Date(1970, 11, 11).getTime();
         g.specialty ="고고학자";
 
@@ -379,7 +368,6 @@ public class DBHelper extends SQLiteOpenHelper {
         h.enlistmentDay = new Date(1990, 3, 14).getTime();
         h.transferDay =  new Date(1990, 4, 14).getTime();
         h.dischargeDay =  new Date(1992, 1, 1).getTime();
-        h.dischargeFlag = false;
         h.birthday = new Date(1970, 11, 11).getTime();
         h.specialty ="바보";
 
@@ -391,7 +379,6 @@ public class DBHelper extends SQLiteOpenHelper {
         i.enlistmentDay = new Date(1990, 03, 14).getTime();
         i.transferDay =  new Date(1990, 04, 14).getTime();
         i.dischargeDay =  new Date(1992, 01, 01).getTime();
-        i.dischargeFlag = false;
         i.birthday = new Date(1970, 11, 11).getTime();
         i.specialty ="칼잡이";
 
@@ -403,7 +390,6 @@ public class DBHelper extends SQLiteOpenHelper {
         j.enlistmentDay = new Date(1990, 03, 14).getTime();
         j.transferDay =  new Date(1990, 04, 14).getTime();
         j.dischargeDay =  new Date(1992, 01, 01).getTime();
-        j.dischargeFlag = true;
         j.birthday = new Date(1970, 11, 11).getTime();
         j.specialty ="환자";
 
@@ -415,7 +401,6 @@ public class DBHelper extends SQLiteOpenHelper {
         k.enlistmentDay = new Date(1990, 03, 14).getTime();
         k.transferDay =  new Date(1990, 04, 14).getTime();
         k.dischargeDay =  new Date(1992, 01, 01).getTime();
-        k.dischargeFlag = false;
         k.birthday = new Date(1970, 11, 11).getTime();
         k.specialty ="의사";
 
@@ -427,7 +412,6 @@ public class DBHelper extends SQLiteOpenHelper {
         l.enlistmentDay = new Date(1990, 03, 14).getTime();
         l.transferDay =  new Date(1990, 04, 14).getTime();
         l.dischargeDay =  new Date(1992, 01, 01).getTime();
-        l.dischargeFlag = false;
         l.birthday = new Date(1970, 11, 11).getTime();
         l.specialty ="기계병";
 
@@ -439,7 +423,6 @@ public class DBHelper extends SQLiteOpenHelper {
         m.enlistmentDay = new Date(1990, 03, 14).getTime();
         m.transferDay =  new Date(1990, 04, 14).getTime();
         m.dischargeDay =  new Date(1992, 01, 01).getTime();
-        m.dischargeFlag = false;
         m.birthday = new Date(1970, 11, 11).getTime();
         m.specialty ="학부모";
 
@@ -451,7 +434,6 @@ public class DBHelper extends SQLiteOpenHelper {
         n.enlistmentDay = new Date(1990, 03, 14).getTime();
         n.transferDay =  new Date(1990, 04, 14).getTime();
         n.dischargeDay =  new Date(1992, 01, 01).getTime();
-        n.dischargeFlag = true;
         n.birthday = new Date(1970, 11, 11).getTime();
         n.specialty ="뚜껑";
 
@@ -463,7 +445,6 @@ public class DBHelper extends SQLiteOpenHelper {
         o.enlistmentDay = new Date(1990, 03, 14).getTime();
         o.transferDay =  new Date(1990, 04, 14).getTime();
         o.dischargeDay =  new Date(1992, 01, 01).getTime();
-        o.dischargeFlag = false;
         o.birthday = new Date(1970, 11, 11).getTime();
         o.specialty ="화학병";
 
@@ -475,7 +456,6 @@ public class DBHelper extends SQLiteOpenHelper {
         p.enlistmentDay = new Date(1990, 03, 14).getTime();
         p.transferDay =  new Date(1990, 04, 14).getTime();
         p.dischargeDay =  new Date(1992, 01, 01).getTime();
-        p.dischargeFlag = false;
         p.birthday = new Date(1970, 11, 11).getTime();
         p.specialty ="지구본";
 
@@ -487,7 +467,6 @@ public class DBHelper extends SQLiteOpenHelper {
         q.enlistmentDay = new Date(1990, 03, 14).getTime();
         q.transferDay =  new Date(1990, 04, 14).getTime();
         q.dischargeDay =  new Date(1992, 01, 01).getTime();
-        q.dischargeFlag = false;
         q.birthday = new Date(1970, 11, 11).getTime();
         q.specialty ="축구병";
 
@@ -499,7 +478,6 @@ public class DBHelper extends SQLiteOpenHelper {
         r.enlistmentDay = new Date(1990, 03, 14).getTime();
         r.transferDay =  new Date(1990, 04, 14).getTime();
         r.dischargeDay =  new Date(1992, 01, 01).getTime();
-        r.dischargeFlag = false;
         r.birthday = new Date(1970, 11, 11).getTime();
         r.specialty ="미라병";
 
@@ -511,7 +489,6 @@ public class DBHelper extends SQLiteOpenHelper {
         s.enlistmentDay = new Date(1990, 03, 14).getTime();
         s.transferDay =  new Date(1990, 04, 14).getTime();
         s.dischargeDay =  new Date(1992, 01, 01).getTime();
-        s.dischargeFlag = false;
         s.birthday = new Date(1970, 11, 11).getTime();
         s.specialty ="화생방병";
 
@@ -566,9 +543,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private void createSoldier(SQLiteDatabase db, Soldier soldier) {
         //Soldier 추가
         String sql = "INSERT INTO "+ TABLE_SOLDIERS +" (name, squad, rank, milli_number, specialty, birthday, " +
-                "enlistment_day, transfer_day, discharge_day, discharge_flag) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                "enlistment_day, transfer_day, discharge_day) VALUES (?,?,?,?,?,?,?,?,?)";
 
-        String df = (soldier.dischargeFlag ? String.valueOf(0) : String.valueOf(0));
         String [] arg =
                 {
                         soldier.name, soldier.Squad, soldier.rank,
@@ -577,7 +553,6 @@ public class DBHelper extends SQLiteOpenHelper {
                         String.valueOf(soldier.enlistmentDay),
                         String.valueOf(soldier.transferDay),
                         String.valueOf(soldier.dischargeDay),
-                        df
                 };
         db.execSQL(sql, arg);
     }
