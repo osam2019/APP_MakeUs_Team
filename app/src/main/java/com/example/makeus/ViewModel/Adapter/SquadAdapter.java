@@ -1,4 +1,4 @@
-package com.example.makeus.Module;
+package com.example.makeus.ViewModel.Adapter;
 
 import android.content.Context;
 
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.Navigation;
 
 import com.example.makeus.Model.Squad;
+import com.example.makeus.Module.SquadButton;
 import com.example.makeus.R;
 
 

@@ -1,28 +1,26 @@
-package com.example.makeus.ViewModel;
+package com.example.makeus.ViewModel.Fragment;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.example.makeus.Model.DBHelper;
+import com.example.makeus.Module.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
-import com.example.makeus.Module.SoldierAdapter;
+import com.example.makeus.ViewModel.Adapter.SoldierAdapter;
 import com.example.makeus.R;
+import com.example.makeus.ViewModel.SoldierViewModel;
 
 import java.util.List;
 

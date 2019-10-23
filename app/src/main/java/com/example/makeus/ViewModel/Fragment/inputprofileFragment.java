@@ -1,4 +1,4 @@
-package com.example.makeus.ViewModel;
+package com.example.makeus.ViewModel.Fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -19,10 +19,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.makeus.Model.DBHelper;
+import com.example.makeus.Module.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.R;
+import com.example.makeus.ViewModel.InputprofileViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

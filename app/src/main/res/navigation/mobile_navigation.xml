@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/nav_squad"
-        android:name="com.example.makeus.ViewModel.SquadFragment"
+        android:name="com.example.makeus.ViewModel.Fragment.SquadFragment"
         android:label="@string/test"
         tools:layout="@layout/fragment_squad" >
     </fragment>
     <fragment
         android:id="@+id/nav_inputprofile"
-        android:name="com.example.makeus.ViewModel.inputprofileFragment"
+        android:name="com.example.makeus.ViewModel.Fragment.inputprofileFragment"
         android:label="@string/test"
         tools:layout="@layout/inputprofile_fragment" />
     <fragment
         android:id="@+id/nav_soilder"
-        android:name="com.example.makeus.ViewModel.SoldierFragment"
+        android:name="com.example.makeus.ViewModel.Fragment.SoldierFragment"
         android:label="@string/test"
         tools:layout="@layout/soldier_fragment" />
 

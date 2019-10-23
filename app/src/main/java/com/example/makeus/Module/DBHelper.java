@@ -1,10 +1,12 @@
-package com.example.makeus.Model;
+package com.example.makeus.Module;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.makeus.Model.Soldier;
+import com.example.makeus.Model.Squad;
 import com.example.makeus.ViewModel.AbstractViewModel;
 
 import java.text.SimpleDateFormat;

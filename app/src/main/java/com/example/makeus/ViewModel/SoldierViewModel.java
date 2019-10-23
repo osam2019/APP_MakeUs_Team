@@ -2,7 +2,7 @@ package com.example.makeus.ViewModel;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.makeus.Model.DBHelper;
+import com.example.makeus.Module.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 

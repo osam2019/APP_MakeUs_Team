@@ -1,4 +1,4 @@
-package com.example.makeus.ViewModel;
+package com.example.makeus.ViewModel.Fragment;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -14,10 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-import com.example.makeus.Model.DBHelper;
 import com.example.makeus.Model.Squad;
-import com.example.makeus.Module.SquadAdapter;
+import com.example.makeus.ViewModel.Adapter.SquadAdapter;
 import com.example.makeus.R;
+import com.example.makeus.ViewModel.SquadViewModel;
 
 import java.util.List;
 
