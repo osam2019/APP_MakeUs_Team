@@ -55,6 +55,7 @@ public class SoldierFragment extends Fragment {
         mViewModel.getLiveDataSoldiers().observe(this, new Observer<List<Soldier>>(){
             @Override
             public void onChanged(@Nullable List<Soldier> soldier) {
+                mSoldierAdapter.soldiers = soldier;
                 mSoldierAdapter.notifyDataSetChanged();
             }
         });

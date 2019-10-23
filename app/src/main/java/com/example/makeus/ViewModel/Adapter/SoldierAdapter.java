@@ -21,7 +21,7 @@ public class SoldierAdapter extends BaseAdapter {
 
     private final Context mContext;
     //private squad mSquad;
-    private List<Soldier> soldiers;
+    public List<Soldier> soldiers;
 
     public SoldierAdapter(Context context, List<Soldier> soldiers) {
         this.mContext = context;

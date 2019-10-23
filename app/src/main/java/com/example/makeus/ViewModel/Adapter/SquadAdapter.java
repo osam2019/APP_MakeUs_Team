@@ -24,7 +24,7 @@ import java.util.List;
 public class SquadAdapter extends BaseAdapter {
 
     private final Context mContext;
-    private List<Squad> mSquads;
+    public List<Squad> mSquads;
 
     public SquadAdapter(Context context, List<Squad> squads) {
         this.mContext = context;

@@ -55,6 +55,7 @@ public class SquadFragment extends Fragment {
         mViewModel.getLiveDataSquads().observe(this, new Observer<List<Squad>>() {
             @Override
             public void onChanged(@Nullable List<Squad> squads) {
+                mSquadAdapter.mSquads = squads;
                 mSquadAdapter.notifyDataSetChanged();
             }
         });
