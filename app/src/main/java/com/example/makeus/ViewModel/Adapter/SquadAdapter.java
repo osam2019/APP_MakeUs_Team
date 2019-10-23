@@ -1,35 +1,38 @@
 package com.example.makeus.ViewModel.Adapter;
 
 import android.content.Context;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 
 import com.example.makeus.Model.Squad;
 import com.example.makeus.Module.SquadButton;
 import com.example.makeus.R;
-
+import com.example.makeus.ViewModel.Fragment.SquadCreateFragment;
+import com.example.makeus.ViewModel.SquadViewModel;
 
 import java.util.List;
 
 public class SquadAdapter extends BaseAdapter {
 
+    private static final int DIALOG_REQUEST_CODE = 2150;
     private final Context mContext;
+    private SquadViewModel mViewModel;
+    private FragmentManager fm;
     public List<Squad> mSquads;
 
-    public SquadAdapter(Context context, List<Squad> squads) {
+    public SquadAdapter(Context context, List<Squad> squads, SquadViewModel viewmodel) {
         this.mContext = context;
         this.mSquads = squads;
+        this.mViewModel = viewmodel;
     }
+
+    public void setFm(FragmentManager fm) { this.fm = fm; }
 
     @Override
     public int getCount() {
@@ -55,7 +58,8 @@ public class SquadAdapter extends BaseAdapter {
             squadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText((AppCompatActivity) mContext, "새로운 분대 추가 버튼", Toast.LENGTH_LONG).show();
+                    SquadCreateFragment scf = new SquadCreateFragment(mViewModel);
+                    scf.show(fm, "squad_create");
                 }
             });
             return view;
