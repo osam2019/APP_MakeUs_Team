@@ -71,8 +71,7 @@
                     android:id="@+id/input_rank"
                     android:layout_width="136dp"
                     android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:entries="@array/rank" />
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
