@@ -2,7 +2,10 @@ package com.example.makeus.ViewModel.Fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -67,8 +71,10 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
         View fragment = inflater.inflate(R.layout.inputprofile_fragment, container, false);
 
         inputName = fragment.findViewById(R.id.input_name);
+        inputName.setOnFocusChangeListener(new MyFocusChangeListener());
         inputTransferDay = fragment.findViewById(R.id.input_transfer_Day);
         inputMilNum = fragment.findViewById(R.id.input_milli_number);
+        inputMilNum.setOnFocusChangeListener(new MyFocusChangeListener());
         inputSquad = fragment.findViewById(R.id.input_squad);
 
         inputDischargeDay  = fragment.findViewById(R.id.input_discharge_Day);
@@ -100,8 +106,10 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
             }
         });
         inputSpecialty = fragment.findViewById(R.id.input_specialty);
+        inputSpecialty.setOnFocusChangeListener(new MyFocusChangeListener());
         inputSquad = fragment.findViewById(R.id.input_squad);
         inputRank = fragment.findViewById(R.id.input_rank);
+
         return fragment;
     }
 
@@ -175,6 +183,8 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                 catch(ParseException e) {
                     Log.d("makeus", e.getStackTrace().toString());
                 }
+
+                getFragmentManager().popBackStack();
             }
         });
     }
@@ -220,6 +230,8 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
         if( getArguments() != null ) {
             Soldier soldier = (Soldier) getArguments().get("soldier");
             setForProfileModification(soldier);
+            inputMilNum.setEnabled(false);
+            inputMilNum.setTextColor(Color.BLACK);
         }
     }
 
@@ -245,6 +257,15 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
         }
 
         return 0;
+    }
+
+    private class MyFocusChangeListener implements View.OnFocusChangeListener {
+        public void onFocusChange(View v, boolean hasFocus){
+            if(!hasFocus) {
+                InputMethodManager imm =  (InputMethodManager)v.getRootView().getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        }
     }
 
 }

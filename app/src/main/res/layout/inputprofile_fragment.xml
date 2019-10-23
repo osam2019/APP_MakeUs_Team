@@ -46,7 +46,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:hint="내용입력" />
+                    android:hint="내용입력"
+                    android:maxLines="1"
+                    android:inputType="text"/>
 
             </LinearLayout>
 
@@ -237,7 +239,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:hint="내용입력" />
+                    android:hint="내용입력"
+                    android:maxLines="1"
+                    android:inputType="text"/>
 
             </LinearLayout>
 
