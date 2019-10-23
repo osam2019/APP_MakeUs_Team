@@ -68,7 +68,7 @@ public class SoldierFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(SoldierViewModel.class);
 
         Squad squad = (Squad)getArguments().get("squad");
-        mViewModel.setSquad(new DBHelper(getContext()), squad);
+        mViewModel.setSquad(new DBHelper(getContext(), this.mViewModel), squad);
         Toast.makeText(getContext(), squad.Name, Toast.LENGTH_SHORT).show();
     }
 }

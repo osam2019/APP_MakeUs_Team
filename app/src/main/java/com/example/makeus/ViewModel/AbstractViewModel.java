@@ -1,14 +1,11 @@
 package com.example.makeus.ViewModel;
 
-import android.content.Context;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.makeus.Model.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
-import com.example.makeus.Module.SquadManager;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +32,7 @@ public abstract class AbstractViewModel extends ViewModel {
         return soldiers;
     }
 
-    protected void updateDataFromDB(DBHelper dbHelper) {
+    public void updateDataFromDB(DBHelper dbHelper) {
         this.squads.setValue(dbHelper.getAllSquad());
         this.soldiers.setValue(dbHelper.getAllSoldiers());
     }

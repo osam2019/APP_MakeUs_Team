@@ -5,9 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
-import com.example.makeus.Module.SquadManager;
+import com.example.makeus.ViewModel.AbstractViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,9 +19,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "makeus.db";
     public static final String TABLE_SOLDIERS = "soldiers";
     public static final String TABLE_SQUADS = "squads";
+    private AbstractViewModel viewModel;
 
-    public DBHelper(Context context) {
+    public DBHelper(Context context, AbstractViewModel viewModel) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.viewModel = viewModel;
     }
 
     @Override
@@ -92,10 +92,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void createSquad(String name) {
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "INSERT INTO " + name + "(name) VALUES ?";
+        String sql = "INSERT INTO " + name + " (name) VALUES ?";
         String [] arg = {name};
         db.execSQL(sql, arg);
         db.close();
+        viewModel.updateDataFromDB(this);
     }
 
     public void deleteSquad(String name) {
@@ -103,6 +104,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql = "DELETE FROM "+TABLE_SQUADS+" WHERE name = " + name;
         db.execSQL(sql,null);
         db.close();
+        viewModel.updateDataFromDB(this);
     }
 
     public void updateSquad(String oldName, String newName) {
@@ -111,6 +113,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String [] arg = { newName };
         db.execSQL(sql, arg);
         db.close();
+        viewModel.updateDataFromDB(this);
     }
 
     public boolean isExistSquad(String name) {
@@ -200,6 +203,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 };
         db.execSQL(sql, arg);
         db.close();
+        viewModel.updateDataFromDB(this);
     }
 
     public void deleteSoldier(String milliNumber) {
@@ -207,6 +211,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql = "DELETE FROM "+TABLE_SOLDIERS+" WHERE milli_number = " + milliNumber;
         db.execSQL(sql,null);
         db.close();
+        viewModel.updateDataFromDB(this);
     }
 
     public void updateSoldier(String milliNumber, String newName, String rank, long enlistment_Day, long transfer_Day, long discharge_Day, long birth, String specialty, String squad) {
@@ -220,6 +225,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL(sql, arg);
         db.close();
+        viewModel.updateDataFromDB(this);
     }
 
     public void updateSoldier(String milliNumber, boolean disFlag) {
@@ -238,6 +244,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL(sql, arg);
         db.close();
+        viewModel.updateDataFromDB(this);
     }
 
     public boolean isExistSoldier(String milliNumber) {

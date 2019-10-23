@@ -153,19 +153,26 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                     EditText squadView = view.getRootView().findViewById(R.id.input_squad);
                     String squad = squadView.getText().toString();
 
-                    DBHelper dbHelper = new DBHelper(getContext());
+                    DBHelper dbHelper = new DBHelper(getContext(), mViewModel);
                     if(!dbHelper.isExistSquad(squad)) {
                         dbHelper.createSquad(squad);
                     }
                     if(dbHelper.isExistSoldier(milli_number)) {
                         dbHelper.updateSoldier(milli_number, name, rank, enlistment_day.getTime(), transfer_day.getTime(), expeceted_discharge_day.getTime(), birth.getTime(), specialty, squad);
-                        mViewModel.updateDataFromDB(dbHelper);
                     }
                     else {
                         Soldier soldier = new Soldier();
-                        soldier.Input_Infomation(name, squad, milli_number, rank, specialty, birth.getTime(), expeceted_discharge_day.getTime(), transfer_day.getTime(), expeceted_discharge_day.getTime(), false);
+                        soldier.Name = name;
+                        soldier.Squad = squad;
+                        soldier.Milli_Number =milli_number;
+                        soldier.Rank = rank;
+                        soldier.Specialty = specialty;
+                        soldier.Birthday = birth.getTime();
+                        soldier.Discharge_Day = expeceted_discharge_day.getTime();
+                        soldier.Transfer_Day = transfer_day.getTime();
+                        soldier.Enlistment_Day = enlistment_day.getTime();
+                        soldier.Discharge_Flag = false;
                         dbHelper.createSoldier(soldier);
-                        mViewModel.updateDataFromDB(dbHelper);
                     }
                 }
                 catch(ParseException e) {
@@ -173,7 +180,6 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                 }
             }
         });
-
     }
 
     private void callDatePicker(final int option) {
