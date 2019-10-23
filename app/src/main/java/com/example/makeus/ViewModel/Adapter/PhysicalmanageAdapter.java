@@ -17,12 +17,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class PhysicalmanageAdapter extends BaseAdapter {
+public class PhysicalTestAdapter extends BaseAdapter {
 
     private final Context mContext;
     private List<Soldier> soldiers;
 
-    public PhysicalmanageAdapter(Context context, List<Soldier> soldiers) {
+    public PhysicalTestAdapter(Context context, List<Soldier> soldiers) {
         this.mContext = context;
         this.soldiers = soldiers;
     }
@@ -47,6 +47,7 @@ public class PhysicalmanageAdapter extends BaseAdapter {
 
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+            convertView = layoutInflater.inflate(R.layout.physicalManageFragment, null);
         }
 
         Soldier soldier = soldiers.get(position);
@@ -68,6 +69,14 @@ public class PhysicalmanageAdapter extends BaseAdapter {
         TextView physicalRunning = convertView.findViewById(R.id.in_physic_running);
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm:ss");
         physicalRunning.setText( dateFormat.format(new Date(physicalScore.getRunning())) );
+
+        LinearLayout viewPhysicalScoreLayout = convertView.findViewById(R.id.physical_test_layout);
+        viewPhysicalScoreLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Open Dialog for Pnysical score", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }
