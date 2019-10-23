@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
+/* 부대를 만드는 클래스, 효율적인 데이터 전송을 위한 parcelable 상속*/
 public class Squad implements Parcelable {
 
     public String Name;
@@ -22,7 +23,7 @@ public class Squad implements Parcelable {
     }
 
 //    public void Organize_Squad(Soldier soldier) {
-//        if ( Name.equals(soldier.Squad)) {
+//        if ( name.equals(soldier.squad)) {
 //            SoldierList.add(soldier);
 //        }
 //    }

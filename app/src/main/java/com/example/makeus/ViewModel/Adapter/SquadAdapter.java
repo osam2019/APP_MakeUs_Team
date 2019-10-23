@@ -81,7 +81,7 @@ public class SquadAdapter extends BaseAdapter {
                 bundle.putParcelable("squad", button.squad);
                 Navigation.findNavController(v).navigate(R.id.nav_soilder, bundle);
 
-                //Toast.makeText((AppCompatActivity) mContext, button.squad.Name + " 이벤트발생", Toast.LENGTH_LONG).show();
+                //Toast.makeText((AppCompatActivity) mContext, button.squad.name + " 이벤트발생", Toast.LENGTH_LONG).show();
             }
         });
 

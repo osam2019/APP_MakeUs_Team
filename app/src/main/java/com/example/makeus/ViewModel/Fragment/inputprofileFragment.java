@@ -129,16 +129,16 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                 try {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     Soldier soldier = new Soldier();
-                    soldier.Name  = inputName.getText().toString();
-                    soldier.Rank = inputRank.getSelectedItem().toString();
-                    soldier.Transfer_Day = dateFormat.parse(inputTransferDay.getText().toString()).getTime();
+                    soldier.name  = inputName.getText().toString();
+                    soldier.rank = inputRank.getSelectedItem().toString();
+                    soldier.transferDay = dateFormat.parse(inputTransferDay.getText().toString()).getTime();
                     soldier.milliNumber = inputMilNum.getText().toString();
-                    soldier.Enlistment_Day = dateFormat.parse(inputEnlistmentDay.getText().toString()).getTime();
-                    soldier.Discharge_Day = dateFormat.parse(inputDischargeDay.getText().toString()).getTime();
-                    soldier.Birthday = dateFormat.parse(inputBirthday.getText().toString()).getTime();
-                    soldier.Specialty = inputSpecialty.getText().toString();
+                    soldier.enlistmentDay = dateFormat.parse(inputEnlistmentDay.getText().toString()).getTime();
+                    soldier.dischargeDay = dateFormat.parse(inputDischargeDay.getText().toString()).getTime();
+                    soldier.birthday = dateFormat.parse(inputBirthday.getText().toString()).getTime();
+                    soldier.specialty = inputSpecialty.getText().toString();
                     soldier.Squad = inputSquad.getSelectedItem().toString();
-                    soldier.Discharge_Flag = false;
+                    soldier.dischargeFlag = false;
 
                     DBHelper dbHelper = new DBHelper(getContext(), mViewModel);
                     if(!dbHelper.isExistSquad(soldier.Squad)) {
@@ -151,7 +151,7 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
                     else {
                         dbHelper.createSoldier(soldier);
                     }
-                    Toast.makeText(getContext(), soldier.Name +" 용사가 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), soldier.name +" 용사가 추가되었습니다.", Toast.LENGTH_SHORT).show();
                 }
                 catch(ParseException e) {
                     Toast.makeText(getContext(), "용사가 추가되지 못했습니다.", Toast.LENGTH_LONG);
@@ -209,11 +209,11 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     }
 
     private void setForProfileModification(Soldier soldier) {
-        inputName.setText(soldier.Name);
+        inputName.setText(soldier.name);
         inputMilNum.setText(soldier.getMilliNumber());
-        inputEnlistmentDay.setText( dateFormat.format(new Date(soldier.getEnlistment_Day())) );
-        inputTransferDay.setText( dateFormat.format(new Date(soldier.getTransfer_Day())) );
-        inputDischargeDay.setText( dateFormat.format(new Date(soldier.getDischarge_Day())) );
+        inputEnlistmentDay.setText( dateFormat.format(new Date(soldier.getEnlistmentDay())) );
+        inputTransferDay.setText( dateFormat.format(new Date(soldier.getTransferDay())) );
+        inputDischargeDay.setText( dateFormat.format(new Date(soldier.getDischargeDay())) );
         inputBirthday.setText( dateFormat.format(new Date(soldier.getBirthday())));
         inputSpecialty.setText(soldier.getSpecialty());
 

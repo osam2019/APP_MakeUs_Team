@@ -20,7 +20,7 @@ import java.util.List;
 public class SoldierAdapter extends BaseAdapter {
 
     private final Context mContext;
-    //private Squad mSquad;
+    //private squad mSquad;
     private List<Soldier> soldiers;
     private String squadName;
 
@@ -60,7 +60,7 @@ public class SoldierAdapter extends BaseAdapter {
         soldierRank.setText(soldier.getRank());
 
         TextView soldierName = convertView.findViewById(R.id.view_soldier_name);
-        soldierName.setText(soldier.Name);
+        soldierName.setText(soldier.name);
 
         TextView soldierMilNum = convertView.findViewById(R.id.view_soldier_milnum);
         soldierMilNum.setText(soldier.getMilliNumber());

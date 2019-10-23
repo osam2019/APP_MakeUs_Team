@@ -33,7 +33,7 @@ public class Notifier {
 
     public void Notify(Soldier soldier, String test, Date dueDate) {
         float dayCount = (float)(dueDate.getTime() - Calendar.getInstance().getTimeInMillis()) / (24 * 60 * 60 * 1000);
-        sendNotification(soldier.Rank + " " + soldier.Name, test + dueDate.toString() + " D-" +dayCount);
+        sendNotification(soldier.rank + " " + soldier.name, test + dueDate.toString() + " D-" +dayCount);
     }
 
     private void sendNotification(String title, String text) {

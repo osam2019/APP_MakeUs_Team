@@ -3,60 +3,54 @@ package com.example.makeus.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/* 용사정보를 만드는 클래스, 효율적인 데이터 전송을 위한 parcelable 상속*/
 public class Soldier implements Parcelable {
-    public String Name; // 성명
+    public String name; // 성명
     public String Squad; // 분대
-    public String Rank; // 계급
+    public String rank; // 계급
     public String milliNumber; // 군번
-    public String Specialty; // 주특기
-    public long Birthday; // 생년월일
-    public long Enlistment_Day; // 입대일
-    public long Transfer_Day; // 전입일
-    public long Discharge_Day; // 전역예정일
-    public boolean Discharge_Flag; // 전역여부
+    public String specialty; // 주특기
+    public long birthday; // 생년월일
+    public long enlistmentDay; // 입대일
+    public long transferDay; // 전입일
+    public long dischargeDay; // 전역예정일
+    public boolean dischargeFlag; // 전역여부
 
     public PhysicalScore physicalScore;
 
     public Soldier() {
-        this.Name = "Test Name";
-        this.Squad = "Squad Test";
-        this.Rank = "Test Rank";
-        this.milliNumber = "00-12345678";
-        this.Birthday = 1999080800;
-        this.Enlistment_Day = 2019010100;
-        this.Transfer_Day = 2019022000;
-        this.Discharge_Day = 2020070100;
-        this.Discharge_Flag = false;
-        Specialty = "화학병";
-    }
-    public Soldier(String name) {
-        Name = name;
-    }
-    public Soldier(String Name, String Squad, String Rank, String milliNumber) {
-        this.Name = Name;
-        this.Squad = Squad;
-        this.Rank = Rank;
-        this.milliNumber = milliNumber;
+        this.name = null;
+        this.Squad = null;
+        this.rank = null;
+        this.milliNumber = null;
+        this.birthday = 0;
+        this.enlistmentDay = 0;
+        this.transferDay = 0;
+        this.dischargeDay = 0;
+        this.dischargeFlag = true;
+        this.specialty = null;
     }
 
+
     public Soldier(String Name, String Rank, String milliNumber, PhysicalScore physicalScore) {
-        this.Name = Name;
-        this.Rank = Rank;
+        this.name = Name;
+        this.rank = Rank;
         this.milliNumber = milliNumber;
         this.physicalScore = physicalScore;
     }
 
+    /* 용사정보 입력 메소드*/
     public void Input_Infomation(String name, String squad,  String rank, String milli_Number, String specialty, long birthday, long enlistment_Day, long transfer_Day, long discharge_Day, boolean discharge_Flag){
-        this.Name = name;
+        this.name = name;
         this.Squad = squad;
         this.milliNumber = milli_Number;
-        this.Birthday = birthday;
-        this.Enlistment_Day = enlistment_Day;
-        this.Transfer_Day = transfer_Day;
-        this.Discharge_Day = discharge_Day;
-        this.Discharge_Flag = discharge_Flag;
-        this.Rank = rank;
-        this.Specialty = specialty;
+        this.birthday = birthday;
+        this.enlistmentDay = enlistment_Day;
+        this.transferDay = transfer_Day;
+        this.dischargeDay = discharge_Day;
+        this.dischargeFlag = discharge_Flag;
+        this.rank = rank;
+        this.specialty = specialty;
     }
 
     public Soldier Output_Infomation(){
@@ -64,7 +58,7 @@ public class Soldier implements Parcelable {
     }
 
     public String getRank(){
-        return this.Rank;
+        return this.rank;
     }
 
     public String getMilliNumber(){
@@ -72,27 +66,27 @@ public class Soldier implements Parcelable {
     }
 
     public long getBirthday() {
-        return this.Birthday;
+        return this.birthday;
     }
 
-    public long getEnlistment_Day() {
-        return this.Enlistment_Day;
+    public long getEnlistmentDay() {
+        return this.enlistmentDay;
     }
 
-    public long getTransfer_Day() {
-        return this.Transfer_Day;
+    public long getTransferDay() {
+        return this.transferDay;
     }
 
-    public long getDischarge_Day() {
-        return this.Discharge_Day;
+    public long getDischargeDay() {
+        return this.dischargeDay;
     }
 
-    public boolean isDischarge_Flag() {
-        return this.Discharge_Flag;
+    public boolean isDischargeFlag() {
+        return this.dischargeFlag;
     }
 
     public String getSpecialty() {
-        return this.Specialty;
+        return this.specialty;
     }
 
     public String getSquad() {
@@ -119,6 +113,7 @@ public class Soldier implements Parcelable {
         this.physicalScore.setRunning(running);
     }
 
+    /*parcelable 사용을 위한 creator 객체 생성, 생성자 Soldier*/
     public static final Creator<Soldier> CREATOR = new Creator<Soldier>() {
         // 객체 복원
         @Override
@@ -147,16 +142,16 @@ public class Soldier implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(Name);
+        dest.writeString(name);
         dest.writeString(Squad);
-        dest.writeString(Rank);
+        dest.writeString(rank);
         dest.writeString(milliNumber);
-        dest.writeString(Specialty);
-        dest.writeLong(Birthday);
-        dest.writeLong(Enlistment_Day);
-        dest.writeLong(Transfer_Day);
-        dest.writeLong(Discharge_Day);
-        dest.writeByte((byte) (Discharge_Flag ? 1 : 0));
+        dest.writeString(specialty);
+        dest.writeLong(birthday);
+        dest.writeLong(enlistmentDay);
+        dest.writeLong(transferDay);
+        dest.writeLong(dischargeDay);
+        dest.writeByte((byte) (dischargeFlag ? 1 : 0));
     }
 
     @Override

@@ -56,7 +56,7 @@ public class PhysicalTestAdapter extends BaseAdapter {
         physicalRank.setText(soldier.getRank());
 
         TextView physicalName = convertView.findViewById(R.id.physical_name);
-        physicalName.setText(soldier.Name);
+        physicalName.setText(soldier.name);
 
         PhysicalScore physicalScore = soldier.getPhysicalScore();
 

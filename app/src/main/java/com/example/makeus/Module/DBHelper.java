@@ -153,16 +153,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Soldier soldier = new Soldier();
 
-        soldier.Discharge_Flag = cursor.getInt(cursor.getColumnIndex("discharge_flag")) == 0 ? false : true;
-        soldier.Name = cursor.getString(cursor.getColumnIndex("name"));
+        soldier.dischargeFlag = cursor.getInt(cursor.getColumnIndex("discharge_flag")) == 0 ? false : true;
+        soldier.name = cursor.getString(cursor.getColumnIndex("name"));
         soldier.Squad = cursor.getString(cursor.getColumnIndex("squad"));
-        soldier.Rank = cursor.getString(cursor.getColumnIndex("rank"));
+        soldier.rank = cursor.getString(cursor.getColumnIndex("rank"));
         soldier.milliNumber = cursor.getString(cursor.getColumnIndex("milli_number"));
-        soldier.Specialty = cursor.getString(cursor.getColumnIndex("specialty"));
-        soldier.Birthday = cursor.getLong(cursor.getColumnIndex("birthday"));
-        soldier.Enlistment_Day = cursor.getLong(cursor.getColumnIndex("enlistment_day"));
-        soldier.Transfer_Day = cursor.getLong(cursor.getColumnIndex("transfer_day"));
-        soldier.Discharge_Day = cursor.getLong(cursor.getColumnIndex("discharge_day"));
+        soldier.specialty = cursor.getString(cursor.getColumnIndex("specialty"));
+        soldier.birthday = cursor.getLong(cursor.getColumnIndex("birthday"));
+        soldier.enlistmentDay = cursor.getLong(cursor.getColumnIndex("enlistment_day"));
+        soldier.transferDay = cursor.getLong(cursor.getColumnIndex("transfer_day"));
+        soldier.dischargeDay = cursor.getLong(cursor.getColumnIndex("discharge_day"));
 
         return soldier;
     }
@@ -210,15 +210,15 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql = "INSERT INTO "+ TABLE_SOLDIERS +" (name, squad, rank, milli_number, specialty, birthday, " +
                 "enlistment_day, transfer_day, discharge_day, discharge_flag) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-        String df = (soldier.Discharge_Flag ? String.valueOf(0) : String.valueOf(0));
+        String df = (soldier.dischargeFlag ? String.valueOf(0) : String.valueOf(0));
         String [] arg =
                 {
-                    soldier.Name, soldier.Squad, soldier.Rank,
-                    soldier.milliNumber, soldier.Specialty,
-                    String.valueOf(soldier.Birthday),
-                    String.valueOf(soldier.Enlistment_Day),
-                    String.valueOf(soldier.Transfer_Day),
-                    String.valueOf(soldier.Discharge_Day),
+                    soldier.name, soldier.Squad, soldier.rank,
+                    soldier.milliNumber, soldier.specialty,
+                    String.valueOf(soldier.birthday),
+                    String.valueOf(soldier.enlistmentDay),
+                    String.valueOf(soldier.transferDay),
+                    String.valueOf(soldier.dischargeDay),
                     df
                 };
         db.execSQL(sql, arg);
@@ -249,7 +249,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void updateSoldier(Soldier soldier) {
-        updateSoldier(soldier.milliNumber, soldier.Name, soldier.Rank, soldier.Enlistment_Day, soldier.Transfer_Day, soldier.Discharge_Day, soldier.Birthday, soldier.Specialty, soldier.Squad);
+        updateSoldier(soldier.milliNumber, soldier.name, soldier.rank, soldier.enlistmentDay, soldier.transferDay, soldier.dischargeDay, soldier.birthday, soldier.specialty, soldier.Squad);
     }
 
     public void updateSoldier(String milliNumber, boolean disFlag) {
@@ -288,232 +288,232 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private void SampleData(SQLiteDatabase db) {
         Soldier a = new Soldier();
-        a.Name = "산타" ;
-        a.Rank = "일병";
+        a.name = "산타" ;
+        a.rank = "일병";
         a.milliNumber = "13-45687542";
         a.Squad = "1분대";
-        a.Enlistment_Day = new Date(1990, 3, 14).getTime();
-        a.Transfer_Day =  new Date(1990, 4, 14).getTime();
-        a.Discharge_Day =  new Date(1992, 1, 1).getTime();
-        a.Discharge_Flag = false;
-        a.Birthday = new Date(1970, 11, 11).getTime();
-        a.Specialty ="화학병";
+        a.enlistmentDay = new Date(1990, 3, 14).getTime();
+        a.transferDay =  new Date(1990, 4, 14).getTime();
+        a.dischargeDay =  new Date(1992, 1, 1).getTime();
+        a.dischargeFlag = false;
+        a.birthday = new Date(1970, 11, 11).getTime();
+        a.specialty ="화학병";
 
         Soldier b = new Soldier();
-        b.Name = "마리아" ;
-        b.Rank = "상병";
+        b.name = "마리아" ;
+        b.rank = "상병";
         b.milliNumber = "14-45618526";
         b.Squad = "2분대";
-        b.Enlistment_Day = new Date(1991, 4, 15).getTime();
-        b.Transfer_Day =  new Date(1991, 5, 15).getTime();
-        b.Discharge_Day =  new Date(1993, 2, 2).getTime();
-        b.Discharge_Flag = false;
-        b.Birthday = new Date(1971, 12, 12).getTime();
-        b.Specialty ="상황병";
+        b.enlistmentDay = new Date(1991, 4, 15).getTime();
+        b.transferDay =  new Date(1991, 5, 15).getTime();
+        b.dischargeDay =  new Date(1993, 2, 2).getTime();
+        b.dischargeFlag = false;
+        b.birthday = new Date(1971, 12, 12).getTime();
+        b.specialty ="상황병";
 
         Soldier c = new Soldier();
-        c.Name = "요셉" ;
-        c.Rank = "병장";
+        c.name = "요셉" ;
+        c.rank = "병장";
         c.milliNumber = "15-78987542";
         c.Squad = "3분대";
-        c.Enlistment_Day = new Date(1992, 5, 16).getTime();
-        c.Transfer_Day =  new Date(1992, 6, 16).getTime();
-        c.Discharge_Day =  new Date(1994, 3, 3).getTime();
-        c.Discharge_Flag = true;
-        c.Birthday = new Date(1973, 1, 14).getTime();
-        c.Specialty ="전술기 관리병";
+        c.enlistmentDay = new Date(1992, 5, 16).getTime();
+        c.transferDay =  new Date(1992, 6, 16).getTime();
+        c.dischargeDay =  new Date(1994, 3, 3).getTime();
+        c.dischargeFlag = true;
+        c.birthday = new Date(1973, 1, 14).getTime();
+        c.specialty ="전술기 관리병";
 
         Soldier d = new Soldier();
-        d.Name = "로빈" ;
-        d.Rank = "이병";
+        d.name = "로빈" ;
+        d.rank = "이병";
         d.milliNumber = "16-45688434";
         d.Squad = "1분대";
-        d.Enlistment_Day = new Date(1994, 6, 20).getTime();
-        d.Transfer_Day =  new Date(1994, 7, 22).getTime();
-        d.Discharge_Day =  new Date(1996, 2, 7).getTime();
-        d.Discharge_Flag = false;
-        d.Birthday = new Date(1974, 10, 9).getTime();
-        d.Specialty ="해적";
+        d.enlistmentDay = new Date(1994, 6, 20).getTime();
+        d.transferDay =  new Date(1994, 7, 22).getTime();
+        d.dischargeDay =  new Date(1996, 2, 7).getTime();
+        d.dischargeFlag = false;
+        d.birthday = new Date(1974, 10, 9).getTime();
+        d.specialty ="해적";
 
         Soldier e = new Soldier();
-        e.Name = "루피" ;
-        e.Rank = "일병";
+        e.name = "루피" ;
+        e.rank = "일병";
         e.milliNumber = "17-45681134";
         e.Squad = "2분대";
-        e.Enlistment_Day = new Date(1998, 7, 14).getTime();
-        e.Transfer_Day =  new Date(1998, 8, 18).getTime();
-        e.Discharge_Day =  new Date(2000, 1, 5).getTime();
-        e.Discharge_Flag = false;
-        e.Birthday = new Date(1980, 1, 1).getTime();
-        e.Specialty ="탐정";
+        e.enlistmentDay = new Date(1998, 7, 14).getTime();
+        e.transferDay =  new Date(1998, 8, 18).getTime();
+        e.dischargeDay =  new Date(2000, 1, 5).getTime();
+        e.dischargeFlag = false;
+        e.birthday = new Date(1980, 1, 1).getTime();
+        e.specialty ="탐정";
 
         Soldier f = new Soldier();
-        f.Name = "조로" ;
-        f.Rank = "상병";
+        f.name = "조로" ;
+        f.rank = "상병";
         f.milliNumber = "14-49685421";
         f.Squad = "3분대";
-        f.Enlistment_Day = new Date(2000, 3, 14).getTime();
-        f.Transfer_Day =  new Date(2000, 5, 14).getTime();
-        f.Discharge_Day =  new Date(2002, 8, 7).getTime();
-        f.Discharge_Flag = false;
-        f.Birthday = new Date(1980, 3, 25).getTime();
-        f.Specialty ="해적사냥꾼";
+        f.enlistmentDay = new Date(2000, 3, 14).getTime();
+        f.transferDay =  new Date(2000, 5, 14).getTime();
+        f.dischargeDay =  new Date(2002, 8, 7).getTime();
+        f.dischargeFlag= false;
+        f.birthday = new Date(1980, 3, 25).getTime();
+        f.specialty ="해적사냥꾼";
 
         Soldier g = new Soldier();
-        g.Name = "나미" ;
-        g.Rank = "병장";
+        g.name = "나미" ;
+        g.rank = "병장";
         g.milliNumber = "14-45452242";
         g.Squad = "1분대";
-        g.Enlistment_Day = new Date(2000, 3, 14).getTime();
-        g.Transfer_Day =  new Date(2000, 4, 14).getTime();
-        g.Discharge_Day =  new Date(2002, 1, 1).getTime();
-        g.Discharge_Flag = true;
-        g.Birthday = new Date(1970, 11, 11).getTime();
-        g.Specialty ="고고학자";
+        g.enlistmentDay = new Date(2000, 3, 14).getTime();
+        g.transferDay =  new Date(2000, 4, 14).getTime();
+        g.dischargeDay =  new Date(2002, 1, 1).getTime();
+        g.dischargeFlag= true;
+        g.birthday = new Date(1970, 11, 11).getTime();
+        g.specialty ="고고학자";
 
         Soldier h = new Soldier();
-        h.Name = "우솝" ;
-        h.Rank = "일병";
+        h.name = "우솝" ;
+        h.rank = "일병";
         h.milliNumber = "18-45644442";
         h.Squad = "2분대";
-        h.Enlistment_Day = new Date(1990, 3, 14).getTime();
-        h.Transfer_Day =  new Date(1990, 4, 14).getTime();
-        h.Discharge_Day =  new Date(1992, 1, 1).getTime();
-        h.Discharge_Flag = false;
-        h.Birthday = new Date(1970, 11, 11).getTime();
-        h.Specialty ="바보";
+        h.enlistmentDay = new Date(1990, 3, 14).getTime();
+        h.transferDay =  new Date(1990, 4, 14).getTime();
+        h.dischargeDay =  new Date(1992, 1, 1).getTime();
+        h.dischargeFlag = false;
+        h.birthday = new Date(1970, 11, 11).getTime();
+        h.specialty ="바보";
 
         Soldier i = new Soldier();
-        i.Name = "루키아" ;
-        i.Rank = "상병";
+        i.name = "루키아" ;
+        i.rank = "상병";
         i.milliNumber = "13-45686542";
         i.Squad = "3분대";
-        i.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        i.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        i.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        i.Discharge_Flag = false;
-        i.Birthday = new Date(1970, 11, 11).getTime();
-        i.Specialty ="칼잡이";
+        i.enlistmentDay = new Date(1990, 03, 14).getTime();
+        i.transferDay =  new Date(1990, 04, 14).getTime();
+        i.dischargeDay =  new Date(1992, 01, 01).getTime();
+        i.dischargeFlag = false;
+        i.birthday = new Date(1970, 11, 11).getTime();
+        i.specialty ="칼잡이";
 
         Soldier j = new Soldier();
-        j.Name = "나르코스" ;
-        j.Rank = "병장";
+        j.name = "나르코스" ;
+        j.rank = "병장";
         j.milliNumber = "15-45687542";
         j.Squad = "1분대";
-        j.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        j.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        j.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        j.Discharge_Flag = true;
-        j.Birthday = new Date(1970, 11, 11).getTime();
-        j.Specialty ="환자";
+        j.enlistmentDay = new Date(1990, 03, 14).getTime();
+        j.transferDay =  new Date(1990, 04, 14).getTime();
+        j.dischargeDay =  new Date(1992, 01, 01).getTime();
+        j.dischargeFlag = true;
+        j.birthday = new Date(1970, 11, 11).getTime();
+        j.specialty ="환자";
 
         Soldier k = new Soldier();
-        k.Name = "쵸파" ;
-        k.Rank = "이등병";
+        k.name = "쵸파" ;
+        k.rank = "이등병";
         k.milliNumber = "13-45617542";
         k.Squad = "2분대";
-        k.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        k.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        k.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        k.Discharge_Flag = false;
-        k.Birthday = new Date(1970, 11, 11).getTime();
-        k.Specialty ="의사";
+        k.enlistmentDay = new Date(1990, 03, 14).getTime();
+        k.transferDay =  new Date(1990, 04, 14).getTime();
+        k.dischargeDay =  new Date(1992, 01, 01).getTime();
+        k.dischargeFlag = false;
+        k.birthday = new Date(1970, 11, 11).getTime();
+        k.specialty ="의사";
 
         Soldier l = new Soldier();
-        l.Name = "그랜라간" ;
-        l.Rank = "일병";
+        l.name = "그랜라간" ;
+        l.rank = "일병";
         l.milliNumber = "13-45687742";
         l.Squad = "3분대";
-        l.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        l.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        l.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        l.Discharge_Flag = false;
-        l.Birthday = new Date(1970, 11, 11).getTime();
-        l.Specialty ="기계병";
+        l.enlistmentDay = new Date(1990, 03, 14).getTime();
+        l.transferDay =  new Date(1990, 04, 14).getTime();
+        l.dischargeDay =  new Date(1992, 01, 01).getTime();
+        l.dischargeFlag = false;
+        l.birthday = new Date(1970, 11, 11).getTime();
+        l.specialty ="기계병";
 
         Soldier m = new Soldier();
-        m.Name = "나이스" ;
-        m.Rank = "상병";
+        m.name = "나이스" ;
+        m.rank = "상병";
         m.milliNumber = "13-4568c542";
         m.Squad = "1분대";
-        m.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        m.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        m.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        m.Discharge_Flag = false;
-        m.Birthday = new Date(1970, 11, 11).getTime();
-        m.Specialty ="학부모";
+        m.enlistmentDay = new Date(1990, 03, 14).getTime();
+        m.transferDay =  new Date(1990, 04, 14).getTime();
+        m.dischargeDay =  new Date(1992, 01, 01).getTime();
+        m.dischargeFlag = false;
+        m.birthday = new Date(1970, 11, 11).getTime();
+        m.specialty ="학부모";
 
         Soldier n = new Soldier();
-        n.Name = "맨홀" ;
-        n.Rank = "병장";
+        n.name = "맨홀" ;
+        n.rank = "병장";
         n.milliNumber = "13-45687541";
         n.Squad = "2분대";
-        n.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        n.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        n.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        n.Discharge_Flag = true;
-        n.Birthday = new Date(1970, 11, 11).getTime();
-        n.Specialty ="뚜껑";
+        n.enlistmentDay = new Date(1990, 03, 14).getTime();
+        n.transferDay =  new Date(1990, 04, 14).getTime();
+        n.dischargeDay =  new Date(1992, 01, 01).getTime();
+        n.dischargeFlag = true;
+        n.birthday = new Date(1970, 11, 11).getTime();
+        n.specialty ="뚜껑";
 
         Soldier o = new Soldier();
-        o.Name = "블리치" ;
-        o.Rank = "이등병";
+        o.name = "블리치" ;
+        o.rank = "이등병";
         o.milliNumber = "12-45689542";
         o.Squad = "2분대";
-        o.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        o.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        o.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        o.Discharge_Flag = false;
-        o.Birthday = new Date(1970, 11, 11).getTime();
-        o.Specialty ="화학병";
+        o.enlistmentDay = new Date(1990, 03, 14).getTime();
+        o.transferDay =  new Date(1990, 04, 14).getTime();
+        o.dischargeDay =  new Date(1992, 01, 01).getTime();
+        o.dischargeFlag = false;
+        o.birthday = new Date(1970, 11, 11).getTime();
+        o.specialty ="화학병";
 
         Soldier p = new Soldier();
-        p.Name = "우루과이" ;
-        p.Rank = "일병";
+        p.name = "우루과이" ;
+        p.rank = "일병";
         p.milliNumber = "19-45627542";
         p.Squad = "1분대";
-        p.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        p.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        p.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        p.Discharge_Flag = false;
-        p.Birthday = new Date(1970, 11, 11).getTime();
-        p.Specialty ="지구본";
+        p.enlistmentDay = new Date(1990, 03, 14).getTime();
+        p.transferDay =  new Date(1990, 04, 14).getTime();
+        p.dischargeDay =  new Date(1992, 01, 01).getTime();
+        p.dischargeFlag = false;
+        p.birthday = new Date(1970, 11, 11).getTime();
+        p.specialty ="지구본";
 
         Soldier q = new Soldier();
-        q.Name = "이집트" ;
-        q.Rank = "일병";
+        q.name = "이집트" ;
+        q.rank = "일병";
         q.milliNumber = "10-45681542";
         q.Squad = "1분대";
-        q.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        q.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        q.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        q.Discharge_Flag = false;
-        q.Birthday = new Date(1970, 11, 11).getTime();
-        q.Specialty ="축구병";
+        q.enlistmentDay = new Date(1990, 03, 14).getTime();
+        q.transferDay =  new Date(1990, 04, 14).getTime();
+        q.dischargeDay =  new Date(1992, 01, 01).getTime();
+        q.dischargeFlag = false;
+        q.birthday = new Date(1970, 11, 11).getTime();
+        q.specialty ="축구병";
 
         Soldier r = new Soldier();
-        r.Name = "브라질" ;
-        r.Rank = "일병";
+        r.name = "브라질" ;
+        r.rank = "일병";
         r.milliNumber = "02-45686542";
         r.Squad = "1분대";
-        r.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        r.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        r.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        r.Discharge_Flag = false;
-        r.Birthday = new Date(1970, 11, 11).getTime();
-        r.Specialty ="미라병";
+        r.enlistmentDay = new Date(1990, 03, 14).getTime();
+        r.transferDay =  new Date(1990, 04, 14).getTime();
+        r.dischargeDay =  new Date(1992, 01, 01).getTime();
+        r.dischargeFlag = false;
+        r.birthday = new Date(1970, 11, 11).getTime();
+        r.specialty ="미라병";
 
         Soldier s = new Soldier();
-        s.Name = "한국";
-        s.Rank = "일병";
+        s.name = "한국";
+        s.rank = "일병";
         s.milliNumber = "20-45680542";
         s.Squad = "1분대";
-        s.Enlistment_Day = new Date(1990, 03, 14).getTime();
-        s.Transfer_Day =  new Date(1990, 04, 14).getTime();
-        s.Discharge_Day =  new Date(1992, 01, 01).getTime();
-        s.Discharge_Flag = false;
-        s.Birthday = new Date(1970, 11, 11).getTime();
-        s.Specialty ="화생방병";
+        s.enlistmentDay = new Date(1990, 03, 14).getTime();
+        s.transferDay =  new Date(1990, 04, 14).getTime();
+        s.dischargeDay =  new Date(1992, 01, 01).getTime();
+        s.dischargeFlag = false;
+        s.birthday = new Date(1970, 11, 11).getTime();
+        s.specialty ="화생방병";
 
         ArrayList<Soldier> x = new ArrayList<>();
         x.add(a);
@@ -568,15 +568,15 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql = "INSERT INTO "+ TABLE_SOLDIERS +" (name, squad, rank, milli_number, specialty, birthday, " +
                 "enlistment_day, transfer_day, discharge_day, discharge_flag) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-        String df = (soldier.Discharge_Flag ? String.valueOf(0) : String.valueOf(0));
+        String df = (soldier.dischargeFlag ? String.valueOf(0) : String.valueOf(0));
         String [] arg =
                 {
-                        soldier.Name, soldier.Squad, soldier.Rank,
-                        soldier.milliNumber, soldier.Specialty,
-                        String.valueOf(soldier.Birthday),
-                        String.valueOf(soldier.Enlistment_Day),
-                        String.valueOf(soldier.Transfer_Day),
-                        String.valueOf(soldier.Discharge_Day),
+                        soldier.name, soldier.Squad, soldier.rank,
+                        soldier.milliNumber, soldier.specialty,
+                        String.valueOf(soldier.birthday),
+                        String.valueOf(soldier.enlistmentDay),
+                        String.valueOf(soldier.transferDay),
+                        String.valueOf(soldier.dischargeDay),
                         df
                 };
         db.execSQL(sql, arg);

@@ -23,6 +23,7 @@ public abstract class AbstractViewModel extends ViewModel {
         soldiers.setValue(new ArrayList<Soldier>());
     }
 
+
     public MutableLiveData<List<Squad>> getLiveDataSquads() {
         return squads;
     }
