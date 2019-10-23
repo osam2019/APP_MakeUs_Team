@@ -11,7 +11,7 @@
                     android:icon="@drawable/ic_menu_gallery"
                     android:title="용사관리" />
                 <item
-                    android:id="@+id/nav_health"
+                    android:id="@+id/nav_physical"
                     android:icon="@drawable/ic_menu_gallery"
                     android:title="체력관리" />
             </menu>
