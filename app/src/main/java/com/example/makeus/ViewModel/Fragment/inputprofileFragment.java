@@ -116,6 +116,8 @@ public class inputprofileFragment extends Fragment { //fragment class 선언
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(InputprofileViewModel.class);
+        mViewModel.updateDataFromDB(new DBHelper(getContext(), mViewModel));
+
         List<String> squadNames = getSquadNames(mViewModel.getLiveDataSquads().getValue());
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item, squadNames);
         inputSquad.setAdapter(arrayAdapter);

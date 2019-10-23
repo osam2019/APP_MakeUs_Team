@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.example.makeus.Model.Squad;
+import com.example.makeus.Module.DBHelper;
 import com.example.makeus.ViewModel.Adapter.SquadAdapter;
 import com.example.makeus.R;
 import com.example.makeus.ViewModel.SquadViewModel;
@@ -41,6 +42,7 @@ public class SquadFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SquadViewModel.class);
+        mViewModel.updateDataFromDB(new DBHelper(getContext(), mViewModel));
 
         if(mSquadAdapter == null) {
             mSquadAdapter = new SquadAdapter(this.getContext(), mViewModel.getLiveDataSquads().getValue());
