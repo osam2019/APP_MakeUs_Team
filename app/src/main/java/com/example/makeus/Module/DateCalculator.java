@@ -88,15 +88,15 @@ public class DateCalculator {
             // 입대한달이 2017-01-03 > x  인경우 복무단축용이 안되경우인가?
 
             // 입대일에 totalNSDay 추가한뒤 반환
-            return addTotalNSDayToInitialDate(initialDate, totalNSDay);
+            return addTotalNSDayToInitialDate(enlistmentDate, totalNSDay);
 
-        } else if( (enlistmentDate.compareTo(initialDate) >= 0) && enlistmentDate.compareTo(lastDate) > 0 ){
+        } else if( (enlistmentDate.compareTo(initialDate) >= 0) && enlistmentDate.compareTo(lastDate) < 0 ){
             // 입대한달이 2017-01-03 <= x < 2020-06-16 인가? (1일 ~ 90일 적용)
             int noOfDeductedDay = getNoOfDeductedDay(enlistmentDate, initialDate);
             totalNSDay -= noOfDeductedDay;
 
             // 입대일에 totalNSDay 추가한뒤 반환
-            return addTotalNSDayToInitialDate(initialDate, totalNSDay);
+            return addTotalNSDayToInitialDate(enlistmentDate, totalNSDay);
 
         } else {
             // 입대한달이 2020-06-16 부터인가? (3개월 적용)
@@ -104,7 +104,7 @@ public class DateCalculator {
             totalNSDay -= noOfDeductedDay;
 
             // 입대일에 totalNSDay 추가한뒤 반환
-            return addTotalNSDayToInitialDate(initialDate, totalNSDay);
+            return addTotalNSDayToInitialDate(enlistmentDate, totalNSDay);
         }
 
     }
@@ -135,14 +135,14 @@ public class DateCalculator {
     // 복무단축일 반환하는 메소드
     private int getNoOfDeductedDay(Date enlistmentDate, Date initialDate) {
         long diff = enlistmentDate.getTime() - initialDate.getTime();
-        int diffDays = (int) (diff / 24 * 60 * 60 * 1000);
+        int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
         return ((diffDays/14) + 1);
     }
 
-    private long addTotalNSDayToInitialDate(Date initialDate, int totalNSDay) {
+    private long addTotalNSDayToInitialDate(Date enlistmentDate, int totalNSDay) {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(initialDate);
-        cal.add(Calendar.DATE, totalNSDay);
+        cal.setTime(enlistmentDate);
+        cal.add(Calendar.DATE, totalNSDay - 1);
         return cal.getTime().getTime();
     }
 

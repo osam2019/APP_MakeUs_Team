@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.example.makeus.Module.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
+import com.example.makeus.Module.DateCalculator;
 import com.example.makeus.R;
 import com.example.makeus.ViewModel.InputProfileViewModel;
 
@@ -45,10 +46,12 @@ public class InputProfileFragment extends Fragment { //fragment class 선언
 
     final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    final int OPTION_ENLISTMENT_DAY = 0;  //입대일 선언
-    final int OPTION_TRANSFER_DAY = 1;  //전입일 선언
-    final int OPTION_EXPECTED_DISCHARGE_DAY = 2;    //
-    final int OPTION_BIRTH = 3;
+    final int OPTION_ENLISTMENT_DAY = 0;            // 입대일 옵션
+    final int OPTION_TRANSFER_DAY = 1;              // 전입일 옵션
+    final int OPTION_EXPECTED_DISCHARGE_DAY = 2;    // 전역예상일 옵션
+    final int OPTION_BIRTH = 3;                     // 생일 옵션
+
+    final String AUTO_SET_DISCHARGE_DATE = "AUTO_SET_EXPECTED_DISCHARGE_DATE"; // 전역예상일 자동완성 옵션
 
     ImageView imageView;
     EditText inputName;
@@ -245,20 +248,40 @@ public class InputProfileFragment extends Fragment { //fragment class 선언
     }
 
     private void receiveDate(int option, int year, int monthOfYear, int dayOfMonth) {
+
+        final String inputDayStr = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+
         switch(option) {
             case OPTION_ENLISTMENT_DAY:
-                inputEnlistmentDay.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                inputEnlistmentDay.setText(inputDayStr);
+                autoSetDischargeDayByEnlistmentDay(inputDayStr);
                 break;
             case OPTION_TRANSFER_DAY:
-                inputTransferDay.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                inputTransferDay.setText(inputDayStr);
                 break;
             case OPTION_EXPECTED_DISCHARGE_DAY:
-                inputDischargeDay.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                inputDischargeDay.setText(inputDayStr);
                 break;
             case OPTION_BIRTH:
-                inputBirthday.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                inputBirthday.setText(inputDayStr);
                 break;
         }
+    }
+
+    private void autoSetDischargeDayByEnlistmentDay(String enlistmentDayStr) {
+        try {
+            Date enlistmentDate = dateFormat.parse(enlistmentDayStr);
+
+            long dischargeDay = new DateCalculator().getDischargeDay(enlistmentDate.getTime());
+
+            String dischargeDayStr = dateFormat.format(new Date(dischargeDay));
+            inputDischargeDay.setText(dischargeDayStr);
+
+        } catch (ParseException e) {
+            Log.d(AUTO_SET_DISCHARGE_DATE, "Exception occured in autoSetDischargeDayByEnlistmentDay()");
+            e.printStackTrace();
+        }
+
     }
 
     @Override
