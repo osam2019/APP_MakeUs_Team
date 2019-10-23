@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.example.makeus.Model.DBHelper;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.Module.SquadAdapter;
 import com.example.makeus.R;

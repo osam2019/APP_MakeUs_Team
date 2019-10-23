@@ -1,5 +1,6 @@
 package com.example.makeus.Module;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -129,9 +130,9 @@ public class SoldierManager {
     public boolean isExistSoldier(String milliNumber) {
         // 존재하면 true, 없으면 false
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        Cursor data = db.rawQuery("SELECT name FROM soldiers WHERE milli_number = \'" + milliNumber +"\'", null );
-
+        String sql = "SELECT name FROM soldiers WHERE milli_number = ?";
+        String[] args = {milliNumber};
+        Cursor data = db.rawQuery(sql, args);
         if(data.getCount() > 0) {
             db.close();
             return true;

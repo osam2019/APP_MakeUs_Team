@@ -3,6 +3,7 @@ package com.example.makeus.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.makeus.Model.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.R;
 
@@ -118,13 +120,19 @@ public class inputprofileFragment extends Fragment {
                     EditText squadView = view.getRootView().findViewById(R.id.input_squad);
                     String squad = squadView.getText().toString();
 
-                    if(mViewModel.isExistSoldier(milli_number)) {
-                        mViewModel.updateSoldier(milli_number, name, rank, enlistment_day.getTime(), transfer_day.getTime(), expeceted_discharge_day.getTime(), birth.getTime(), specialty, squad);
+                    DBHelper dbHelper = new DBHelper(getContext());
+                    if(!dbHelper.isExistSquad(squad)) {
+                        dbHelper.createSquad(squad);
+                    }
+                    if(dbHelper.isExistSoldier(milli_number)) {
+                        dbHelper.updateSoldier(milli_number, name, rank, enlistment_day.getTime(), transfer_day.getTime(), expeceted_discharge_day.getTime(), birth.getTime(), specialty, squad);
+                        mViewModel.updateDataFromDB(dbHelper);
                     }
                     else {
                         Soldier soldier = new Soldier();
                         soldier.Input_Infomation(name, squad, milli_number, rank, specialty, birth.getTime(), expeceted_discharge_day.getTime(), transfer_day.getTime(), expeceted_discharge_day.getTime(), false);
-                        mViewModel.createSoldier(soldier);
+                        dbHelper.createSoldier(soldier);
+                        mViewModel.updateDataFromDB(dbHelper);
                     }
                 }
                 catch(ParseException e) {

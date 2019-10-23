@@ -18,19 +18,15 @@ public abstract class AbstractViewModel extends ViewModel {
 
     private MutableLiveData<List<Squad>> squads;
     private MutableLiveData<List<Soldier>> soldiers;
-    private SquadManager squadManager;
-    private DBHelper dbHelper;
 
     public AbstractViewModel() {
-        this.dbHelper = new DBHelper();
-        squadManager = new SquadManager(dbHelper);
-
         this.squads = new MutableLiveData<>();
         squads.setValue(new ArrayList<Squad>());
         this.soldiers = new MutableLiveData<>();
         soldiers.setValue(new ArrayList<Soldier>());
         this.SampleData();
     }
+
 
     public MutableLiveData<List<Squad>> getLiveDataSquads() {
         return squads;
@@ -39,78 +35,9 @@ public abstract class AbstractViewModel extends ViewModel {
         return soldiers;
     }
 
-    protected void updateDataFromDB() {
-        squads.setValue(squadManager.getAllSquad());
-        soldiers.setValue(squadManager.soldierManager.getAllSoldiers());
-    }
-
-    //병사
-    public List<Soldier> getAllSoldiers() {
-        return squadManager.soldierManager.getAllSoldiers();
-    }
-
-    public List<Soldier> getSpecificSquadSoldiers(String squadName){
-        return squadManager.soldierManager.getSpecificSquadSoldiers(squadName);
-    }
-
-    public Soldier readSoldier(String milliNumber) {
-        //Soldier 업데이트
-        return squadManager.soldierManager.readSoldier(milliNumber);
-    }
-
-    public void createSoldier(Soldier squad) {
-        //Soldier 추가
-        squadManager.soldierManager.createSoldier(squad);
-        updateDataFromDB();
-    }
-
-    public void deleteSoldier(String milliNumber) {
-        //Soldier 삭제
-        squadManager.soldierManager.deleteSoldier(milliNumber);
-        updateDataFromDB();
-    }
-
-    public void updateSoldier(String milliNumber, String newName, String rank, long enlistment_Day, long transfer_Day, long discharge_Day, long birth, String specialty, String squad) {
-        //Soldier 값변경
-        squadManager.soldierManager.updateSoldier(milliNumber, newName, rank, enlistment_Day, transfer_Day, discharge_Day, birth, specialty, squad);
-        updateDataFromDB();
-    }
-
-    public boolean isExistSoldier(String isExistSoldier) {
-        return squadManager.soldierManager.isExistSoldier(isExistSoldier);
-    }
-
-    //분대
-    public List<Squad> getAllSquad() {
-        //모든 스쿼드 반환
-        return squadManager.getAllSquad();
-    }
-
-    public Squad readSquad(String name) {
-        //Sqaud 업데이트
-        return squadManager.readSquad(name);
-    }
-
-    public void createSquad(String name) {
-        //Squad 추가
-        squadManager.createSquad(name);
-        updateDataFromDB();
-    }
-
-    public void deleteSquad(String name) {
-        //Squad 삭제
-        squadManager.deleteSquad(name);
-        updateDataFromDB();
-    }
-
-    public void updateSquad(String oldName, String newName) {
-        //Squad 값변경
-        squadManager.updateSquad(oldName, newName);
-        updateDataFromDB();
-    }
-
-    public boolean isExistSquad(String name) {
-        return squadManager.isExistSquad(name);
+    protected void updateDataFromDB(DBHelper dbHelper) {
+        this.squads.setValue(dbHelper.getAllSquad());
+        this.soldiers.setValue(dbHelper.getAllSoldiers());
     }
 
     private void SampleData() {
@@ -354,7 +281,7 @@ public abstract class AbstractViewModel extends ViewModel {
         x.add(r);
         x.add(s);
 
-        Squad alpha = new Squad("배구", x);
+        Squad alpha = new Squad("a", x);
 
         ArrayList<Soldier> y = new ArrayList<>();
         y.add(b);
@@ -364,7 +291,7 @@ public abstract class AbstractViewModel extends ViewModel {
         y.add(n);
         y.add(o);
 
-        Squad beta = new Squad("농구", y);
+        Squad beta = new Squad("b", y);
 
         ArrayList<Soldier> z = new ArrayList<>();
         z.add(c);
@@ -372,7 +299,7 @@ public abstract class AbstractViewModel extends ViewModel {
         z.add(i);
         z.add(l);
 
-        Squad gamma = new Squad("축구", y);
+        Squad gamma = new Squad("c", y);
 
         this.squads.getValue().add(alpha);
         this.squads.getValue().add(beta);
@@ -397,7 +324,6 @@ public abstract class AbstractViewModel extends ViewModel {
         this.soldiers.getValue().add(q);
         this.soldiers.getValue().add(r);
         this.soldiers.getValue().add(s);
-
 
     }
 }

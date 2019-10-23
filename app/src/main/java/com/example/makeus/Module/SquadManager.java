@@ -1,6 +1,7 @@
 package com.example.makeus.Module;
 
 import android.app.Application;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -17,8 +18,7 @@ public class SquadManager {
     public SoldierManager soldierManager;
 
     public SquadManager(DBHelper dbHelper) {
-        this.dbHelper = dbHelper;
-        this.soldierManager = new SoldierManager(this.dbHelper);
+        this.soldierManager = new SoldierManager(dbHelper);
     }
 
     public List<Squad> getAllSquad() {

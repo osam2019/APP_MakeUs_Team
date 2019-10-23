@@ -2,6 +2,7 @@ package com.example.makeus.ViewModel;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.makeus.Model.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 
@@ -29,9 +30,9 @@ public class SoldierViewModel extends AbstractViewModel {
     }
 
     @Override
-    protected void updateDataFromDB() {
-        //super.updateDataFromDB();
-        //mSoldiers.setValue(getSpecificSquadSoldiers(mSquad.Name));
+    protected void updateDataFromDB(DBHelper dbHelper) {
+        super.updateDataFromDB(dbHelper);
+        mSoldiers.setValue(dbHelper.getSpecificSquadSoldiers(mSquad.Name));
     }
 
     @Override
@@ -39,8 +40,8 @@ public class SoldierViewModel extends AbstractViewModel {
         return mSoldiers;
     }
 
-    public void setSquad(Squad squad) {
+    public void setSquad(DBHelper dbHelper, Squad squad) {
         mSquad = squad;
-        updateDataFromDB();
+        updateDataFromDB(dbHelper);
     }
 }

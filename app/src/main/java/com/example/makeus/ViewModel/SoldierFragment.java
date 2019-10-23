@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.makeus.Model.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.Module.SoldierAdapter;
@@ -67,7 +68,7 @@ public class SoldierFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(SoldierViewModel.class);
 
         Squad squad = (Squad)getArguments().get("squad");
-        mViewModel.setSquad(squad);
+        mViewModel.setSquad(new DBHelper(getContext()), squad);
         Toast.makeText(getContext(), squad.Name, Toast.LENGTH_SHORT).show();
     }
 }
