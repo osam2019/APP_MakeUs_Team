@@ -90,7 +90,7 @@
                 android:layout_weight="1"
                 android:background="#FFFFFF"
                 android:hint="내용입력"
-                android:inputType="time"
+                android:inputType="text"
                 android:padding="10dp" />
 
         </LinearLayout>

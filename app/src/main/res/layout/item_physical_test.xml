@@ -42,7 +42,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="이름"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/title_Rank"
@@ -51,17 +51,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="계급"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/title_pushUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="팔굽혀펴기"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/title_sitUp"
@@ -71,7 +61,17 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="윗몸 일으키기"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/title_pushUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="팔굽혀펴기"
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/title_running"
@@ -81,7 +81,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="3km 뜀뛰기"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
 
         </LinearLayout>
 
@@ -100,7 +100,7 @@
                 android:background="#9CD4DC"
                 android:gravity="center"
                 android:text="TextView"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/physical_rank"
@@ -110,17 +110,7 @@
                 android:background="#9CD4DC"
                 android:gravity="center"
                 android:text="TextView"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/physical_pushUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="#9CD4DC"
-                android:gravity="center"
-                android:text="TextView"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/physical_sitUp"
@@ -130,7 +120,17 @@
                 android:background="#9CD4DC"
                 android:gravity="center"
                 android:text="TextView"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/physical_pushUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#9CD4DC"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/physical_running"
@@ -140,7 +140,7 @@
                 android:background="#9CD4DC"
                 android:gravity="center"
                 android:text="TextView"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
 
         </LinearLayout>
 

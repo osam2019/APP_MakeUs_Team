@@ -2,6 +2,7 @@ package com.example.makeus;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,8 +34,6 @@ import com.example.makeus.Module.DateCalculator;
 import com.example.makeus.Module.Notifier;
 import com.google.android.material.navigation.NavigationView;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -61,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
         checkPermission();
         releaseNotificationMessage();
+    }
+
+    public void btnLogout(View v){
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override
