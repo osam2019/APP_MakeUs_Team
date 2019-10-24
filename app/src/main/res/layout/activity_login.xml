@@ -5,6 +5,7 @@
     android:id="@+id/loginLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".LoginActivity"
     android:orientation="vertical">
 
     <Button
@@ -67,6 +68,7 @@
         android:inputType="textPersonName"
         android:text="군번"
         android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/unitMark"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteY="415dp"
