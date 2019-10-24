@@ -81,12 +81,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // 클릭시 엑셀 내보내기 기능 발생
-        if(DataExporter.Export(new DBHelper(getApplicationContext()))){
-            Toast.makeText(getApplicationContext(), "엑셀 파일로 출력되었습니다.", Toast.LENGTH_LONG);
+        if(item.getItemId() == R.id.extraction_to_xls) {
+            if(DataExporter.Export(new DBHelper(this))){
+                Toast.makeText(this, "엑셀 파일이 외부저장소의 makeus 폴더로 출력되었습니다.", Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(this, "출력에 문제가 발생했습니다. 외부저장소에 문제가 있나요?", Toast.LENGTH_LONG).show();
+            }
         }
-        else{
-            Toast.makeText(getApplicationContext(), "출력에 문제가 발생했습니다.", Toast.LENGTH_LONG);
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
