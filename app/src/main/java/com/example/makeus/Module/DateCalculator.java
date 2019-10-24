@@ -146,8 +146,18 @@ public class DateCalculator {
         return cal.getTime().getTime();
     }
 
-    // 인성검사
-    public boolean isPersonalityAssessmentDay(long transfer_day, String rank){
+    // ------------------------------------ 인성검사 ------------------------------------
+    public long getPersonalityTestDueDate(long transfer_day, String rank) {
+        if(isValidPersonalityTestDate(transfer_day, rank)) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date(transfer_day));
+            cal.add(Calendar.MONTH, 1);
+            return cal.getTime().getTime();
+        }
+        return 0;
+    }
+
+    public boolean isValidPersonalityTestDate(long transfer_day, String rank){
         // 전입신병의 조건으로만
         if(rank.equals("이병") || rank.equals("일병")) {
             return toPrivateOrPrivateFirstClassCase(transfer_day);
@@ -155,7 +165,8 @@ public class DateCalculator {
         return false;
     }
 
-    // 신체검사
+
+    // ------------------------------------ 신체검사 ------------------------------------
     public boolean isHealthScreeningDay(Soldier soldier) {
         // 전입 신병일 경우 (전입 신병 신체 검사)
         if(soldier.rank.equals("이병") || soldier.rank.equals("일병")) {
@@ -172,6 +183,11 @@ public class DateCalculator {
         Calendar curCal = Calendar.getInstance();
         Calendar transferCal = Calendar.getInstance();
         transferCal.setTime(new Date(transfer_date));
+
+        int curMonth = curCal.get(Calendar.MONTH) + 1;
+        int transMonth = transferCal.get(Calendar.MONTH) + 1;
+        int curDay = curCal.get(Calendar.DAY_OF_MONTH);
+        int transDay = transferCal.get(Calendar.DAY_OF_MONTH);
 
         int monthDiff = ((curCal.get(Calendar.MONTH) - transferCal.get(Calendar.MONTH)) % 12);
         int dayDiff = curCal.get(Calendar.DAY_OF_MONTH) - transferCal.get(Calendar.DAY_OF_MONTH);

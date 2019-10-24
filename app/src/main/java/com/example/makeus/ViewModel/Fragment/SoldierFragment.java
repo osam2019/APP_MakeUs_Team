@@ -59,6 +59,8 @@ public class SoldierFragment extends Fragment {
                 mSoldierAdapter.notifyDataSetChanged();
             }
         });
+
+
     }
 
     @Override

@@ -28,6 +28,7 @@ import com.example.makeus.Module.DBHelper;
 import com.example.makeus.Model.Soldier;
 import com.example.makeus.Model.Squad;
 import com.example.makeus.Module.DateCalculator;
+import com.example.makeus.Module.Notifier;
 import com.example.makeus.R;
 import com.example.makeus.ViewModel.InputProfileViewModel;
 
@@ -51,7 +52,7 @@ public class InputProfileFragment extends Fragment { //fragment class 선언
     final int OPTION_EXPECTED_DISCHARGE_DAY = 2;    // 전역예상일 옵션
     final int OPTION_BIRTH = 3;                     // 생일 옵션
 
-    final String AUTO_SET_DISCHARGE_DATE = "AUTO_SET_EXPECTED_DISCHARGE_DATE"; // 전역예상일 자동완성 옵션
+    final String AUTO_DISCHARGE_DATE = "AUTO_DISCHARGE_DATE"; // 전역예상일 자동완성 옵션
 
     ImageView imageView;
     EditText inputName;
@@ -172,7 +173,7 @@ public class InputProfileFragment extends Fragment { //fragment class 선언
                     soldier.specialty = inputSpecialty.getText().toString();
                     soldier.Squad = inputSquad.getSelectedItem().toString();
 
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     String s = inputTransferDay.getText().toString();
                     if(s != null && !s.isEmpty()) {
                         soldier.transferDay = dateFormat.parse(s).getTime();
@@ -201,6 +202,14 @@ public class InputProfileFragment extends Fragment { //fragment class 선언
                     else {
                         dbHelper.createSoldier(soldier);
                     }
+
+                    // -----------------------------------------------------------------------------
+                    DateCalculator dateUtil = new DateCalculator();
+                    long dueDateVal = dateUtil.getPersonalityTestDueDate(soldier.transferDay, soldier.rank);
+                    if(dueDateVal != 0) {
+                        new Notifier(getContext()).Notify(soldier, "인성검사", new Date(dueDateVal));
+                    }
+                    // -----------------------------------------------------------------------------
                     Toast.makeText(getContext(), soldier.name +"완료", Toast.LENGTH_SHORT).show();
                 }
                 catch(ParseException e) {
@@ -278,7 +287,7 @@ public class InputProfileFragment extends Fragment { //fragment class 선언
             inputDischargeDay.setText(dischargeDayStr);
 
         } catch (ParseException e) {
-            Log.d(AUTO_SET_DISCHARGE_DATE, "Exception occured in autoSetDischargeDayByEnlistmentDay()");
+            Log.d(AUTO_DISCHARGE_DATE, "Exception occured in autoSetDischargeDayByEnlistmentDay()");
             e.printStackTrace();
         }
 
