@@ -9,9 +9,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,7 +29,7 @@ import java.text.SimpleDateFormat;
 
 public class PhysicalInputFragment extends DialogFragment {
     AbstractViewModel mViewModel;
-    Context context;
+    final Context context;
     Soldier soldier;
 
     public PhysicalInputFragment(Context context, AbstractViewModel viewModel, Soldier soldier) {
@@ -38,7 +42,7 @@ public class PhysicalInputFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View fragment = inflater.inflate(R.layout.physical_input_fragment,null, false);
+        final View fragment = inflater.inflate(R.layout.physical_input_fragment,null, false);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(fragment);
@@ -47,16 +51,26 @@ public class PhysicalInputFragment extends DialogFragment {
         final EditText pushupET = fragment.findViewById(R.id.pushup);
         final EditText runningET = fragment.findViewById(R.id.running);
 
-        builder.setPositiveButton("제출", new DialogInterface.OnClickListener() {
+        Button cencelButton = fragment.findViewById(R.id.cencel);
+        Button confirmButton = fragment.findViewById(R.id.confirm);
+
+        cencelButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
+            public void onClick(View view) {
+                PhysicalInputFragment.this.dismiss();
+            }
+        });
+
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 DBHelper dbHelper = new DBHelper(context);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("mm:ss");
                 long running;
                 try {
                     running = dateFormat.parse(runningET.getText().toString()).getTime();
                 } catch (ParseException e) {
-                    Toast.makeText(context, "시간이 잘못 입력되었어요.", Toast.LENGTH_LONG);
+                    Toast.makeText(getActivity(), "시간이 잘못 입력되었어요.", Toast.LENGTH_LONG);
                     return;
                 }
                 soldier.physicalScore.setSitUp(Integer.valueOf(situpET.getText().toString()));
@@ -64,9 +78,10 @@ public class PhysicalInputFragment extends DialogFragment {
                 soldier.physicalScore.setRunning(running);
                 dbHelper.updateSoldier(soldier);
                 mViewModel.updateDataFromDB(dbHelper);
+
+                PhysicalInputFragment.this.dismiss();
             }
         });
-        builder.setNegativeButton("취소", null);
 
         return builder.create();
     }

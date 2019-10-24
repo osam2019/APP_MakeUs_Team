@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,27 +26,27 @@ import java.util.List;
 public class PhysicalTestFragment extends Fragment {
 
     private PhysicalTestViewModel mViewModel;
-    private PhysicalTestAdapter mPhysicalTestAdapter;
+    public PhysicalTestAdapter mPhysicalTestAdapter;
 
     public static PhysicalTestFragment newInstance() {
         return new PhysicalTestFragment();
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.physical_test_fragment, container, false);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(PhysicalTestViewModel.class);
-        mViewModel.updateDataFromDB(new DBHelper(getContext()));
-        // TODO: Use the ViewModel
-        if(mPhysicalTestAdapter == null) {
-            mPhysicalTestAdapter = new PhysicalTestAdapter(this.getContext(), mViewModel.getLiveDataSoldiers().getValue(), mViewModel, getFragmentManager());
-        }
+    public void onResume() {
+        super.onResume();
 
         ListView listView = getView().findViewById(R.id.physicalTestListView);
         listView.setAdapter(mPhysicalTestAdapter);
@@ -57,6 +58,17 @@ public class PhysicalTestFragment extends Fragment {
                 mPhysicalTestAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(PhysicalTestViewModel.class);
+        mViewModel.updateDataFromDB(new DBHelper(getContext()));
+        // TODO: Use the ViewModel
+        if(mPhysicalTestAdapter == null) {
+            mPhysicalTestAdapter = new PhysicalTestAdapter(this.getContext(), mViewModel.getLiveDataSoldiers().getValue(), mViewModel, getFragmentManager(), PhysicalTestFragment.this);
+        }
     }
 
 }

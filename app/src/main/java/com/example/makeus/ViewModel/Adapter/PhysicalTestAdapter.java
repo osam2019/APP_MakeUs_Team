@@ -1,6 +1,8 @@
 package com.example.makeus.ViewModel.Adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModel;
 
 import com.example.makeus.Model.PhysicalScore;
@@ -18,6 +21,7 @@ import com.example.makeus.Model.Soldier;
 import com.example.makeus.R;
 import com.example.makeus.ViewModel.AbstractViewModel;
 import com.example.makeus.ViewModel.Fragment.PhysicalInputFragment;
+import com.example.makeus.ViewModel.Fragment.PhysicalTestFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,16 +30,20 @@ import java.util.Random;
 
 public class PhysicalTestAdapter extends BaseAdapter {
 
+    final FragmentTransaction tran;
     private final Context mContext;
     public List<Soldier> soldiers;
     private AbstractViewModel viewModel;
     private FragmentManager fragmentManager;
+    private PhysicalTestFragment prev;
 
-    public PhysicalTestAdapter(Context context, List<Soldier> soldiers, AbstractViewModel viewModel, FragmentManager fragmentManager) {
+    public PhysicalTestAdapter(Context context, List<Soldier> soldiers, AbstractViewModel viewModel, FragmentManager fragmentManager, PhysicalTestFragment ptf) {
         this.mContext = context;
         this.soldiers = soldiers;
         this.viewModel = viewModel;
+        this.prev = ptf;
         this.fragmentManager = fragmentManager;
+        this.tran = fragmentManager.beginTransaction();
     }
 
     @Override
