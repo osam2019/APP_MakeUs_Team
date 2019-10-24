@@ -18,20 +18,20 @@ _병력관리 자동화 어플리케이션의 등장!_
 **Make Us** 어플리케이션으로 해결하자!
 
 ### 인사관리
-1. 새로운 분대 추가 및 분대의 분대원 정보 수정
-![image](https://www.dropbox.com/s/05ja807txmgjmu9/1MakeUs.gif?dl=0)
+1. 새로운 분대 추가 및 분대의 분대원 정보 수정  
+![Imgur](http://i.imgur.com/9QkaAlj.gif)
 
 
 2. 용사 추가 및 전입병(이병, 일병) 인성평가 및 전입신병 신검 관련 알림 메세지
-![Imgur](https://i.imgur.com/3htmudU.gifv)
+![Imgur](http://i.imgur.com/30lFBUh.gif)
 
 
 3. 로그인시 인성평가 및 전입신병 신검 관련 알림 메세지
-![Imgur](https://i.imgur.com/n5DHJvh.gifv)
+![Imgur](https://i.imgur.com/tKGO9q6.gif)
 
 
 4. 분대원 전역 처리
-![Imgur](https://i.imgur.com/uEldPY7.gifv)
+![Imgur](https://i.imgur.com/MraKigR.gif)
 
 
 ### 체력관리
