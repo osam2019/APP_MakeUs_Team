@@ -203,13 +203,18 @@ public class InputProfileFragment extends Fragment { //fragment class 선언
                         dbHelper.createSoldier(soldier);
                     }
 
-                    // -----------------------------------------------------------------------------
                     DateCalculator dateUtil = new DateCalculator();
-                    long dueDateVal = dateUtil.getPersonalityTestDueDate(soldier.transferDay, soldier.rank);
-                    if(dueDateVal != 0) {
-                        new Notifier(getContext()).Notify(soldier, "인성검사", new Date(dueDateVal));
+                    long personalityDueDate = dateUtil.getPersonalityTestDueDate(soldier.transferDay, soldier.rank);
+                    //String dueDateStr = dateFormat.format(dueDateVal);
+                    if(personalityDueDate != 0) {
+                        new Notifier(getContext()).Notify(soldier, "인성검사 만료일 ", new Date(personalityDueDate));
                     }
-                    // -----------------------------------------------------------------------------
+
+                    long screeningDueDate = dateUtil.getHealthScreeningDueDate(soldier);
+                    if(screeningDueDate != 0) {
+                        new Notifier(getContext()).Notify(soldier, "신체검사 만료일 ", new Date(screeningDueDate));
+                    }
+
                     Toast.makeText(getContext(), soldier.name +"완료", Toast.LENGTH_SHORT).show();
                 }
                 catch(ParseException e) {

@@ -25,13 +25,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.makeus.Model.Soldier;
 import com.example.makeus.Module.DBHelper;
 import com.example.makeus.Module.DataExporter;
+import com.example.makeus.Module.DateCalculator;
+import com.example.makeus.Module.Notifier;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     final static String TAG = "makeus";
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         checkPermission();
+        releaseNotificationMessage();
     }
 
     @Override
@@ -107,6 +112,27 @@ public class MainActivity extends AppCompatActivity {
                 requestPermissions(permission_list, 0);
             }
         }
+    }
+
+    public void releaseNotificationMessage() {
+        DBHelper dbHelper = new DBHelper(this);
+        List<Soldier> soldiers = dbHelper.getAllSoldiers();
+
+        DateCalculator dateUtil = new DateCalculator();
+
+        for(int i=0; i<soldiers.size(); i++) {
+            long personalityDueDate = dateUtil.getPersonalityTestDueDate(soldiers.get(i).transferDay, soldiers.get(i).rank);
+            //String dueDateStr = dateFormat.format(dueDateVal);
+            if(personalityDueDate != 0) {
+                new Notifier(this).Notify(soldiers.get(i), "인성검사 만료일 ", new Date(personalityDueDate));
+            }
+
+            long screeningDueDate = dateUtil.getHealthScreeningDueDate(soldiers.get(i));
+            if(screeningDueDate != 0) {
+                new Notifier(this).Notify(soldiers.get(i), "신체검사 만료일 ", new Date(screeningDueDate));
+            }
+        }
+
     }
 
     @Override
