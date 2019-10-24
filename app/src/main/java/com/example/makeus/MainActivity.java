@@ -1,23 +1,40 @@
 package com.example.makeus;
 
+import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.pm.PackageManager;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.SyncStateContract;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.makeus.Module.DBHelper;
+import com.example.makeus.Module.DataExporter;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
+    final static String TAG = "makeus";
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -38,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        checkPermission();
     }
 
     @Override
@@ -57,6 +76,47 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // 클릭시 엑셀 내보내기 기능 발생
+        if(DataExporter.Export(new DBHelper(getApplicationContext()))){
+            Toast.makeText(getApplicationContext(), "엑셀 파일로 출력되었습니다.", Toast.LENGTH_LONG);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "출력에 문제가 발생했습니다.", Toast.LENGTH_LONG);
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    // 체크할 권한 목록
+    String [] permission_list = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
+    // 권한 체크 메서드
+    public void checkPermission(){
+        // 현재 안드로이드 버전이 6.0 미만이면 메서드를 종료한다.
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            return;
+        }
+        // 각 권한의 허용 여부를 확인한다.
+        for(String permission : permission_list){
+            // 권한 허용 여부를 확인한다.
+            int chk = checkCallingOrSelfPermission(permission);
+            // 거부 상태라고 한다면..
+            if(chk == PackageManager.PERMISSION_DENIED){
+                // 사용자에게 권한 허용여부를 확인하는 창을 띄운다.
+                requestPermissions(permission_list, 0);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for(int i = 0; i < grantResults.length; i++){
+            if(grantResults[i] == PackageManager.PERMISSION_DENIED){
+                this.finish();
+                System.exit(0);
+            }
+        }
     }
 }
