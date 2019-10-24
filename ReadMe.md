@@ -19,7 +19,7 @@ _병력관리 자동화 어플리케이션의 등장!_
 
 ### 인사관리
 1. 새로운 분대 추가 및 분대의 분대원 정보 수정
-![Imgur](https://i.imgur.com/UA4CeWg.gifv)
+![image](https://www.dropbox.com/s/ilg1013gzyz25cv/2MakeUs%20-%20new%20soldier%28private%20or%20private%20first%20class%29%20management%20with%20Notification%20Message%20about%20both%20personality%20assessment%20and%20health%20screening.gif?dl=0)
 
 
 2. 용사 추가 및 전입병(이병, 일병) 인성평가 및 전입신병 신검 관련 알림 메세지
