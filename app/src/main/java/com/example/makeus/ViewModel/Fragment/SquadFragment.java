@@ -44,10 +44,6 @@ public class SquadFragment extends Fragment {
 
         if(mSquadAdapter == null) {
             mSquadAdapter = new SquadAdapter(this.getContext(), mViewModel.getLiveDataSquads().getValue(), mViewModel, getActivity().getSupportFragmentManager());
-        }else{
-            for(int i = 0; i < mViewModel.getLiveDataSquads().getValue().size(); i ++) {
-                System.out.println(i+1 + "번째 분대 " + mViewModel.getLiveDataSquads().getValue().get(i).Name);
-            }
         }
 
         // TODO: Use the ViewModel
