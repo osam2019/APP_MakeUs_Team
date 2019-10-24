@@ -38,7 +38,6 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    final static String TAG = "makeus";
 
     private AppBarConfiguration mAppBarConfiguration;
 
