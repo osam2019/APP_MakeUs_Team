@@ -64,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnLogout(View v){
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     @Override
