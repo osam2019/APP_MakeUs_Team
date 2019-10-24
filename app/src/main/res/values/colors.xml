@@ -8,6 +8,7 @@
     <color name="purestBlue">#8CBECD</color>
     <color name="coralBlue">#C7E7EB</color>
     <color name="livingCoral">#fac0b0</color>
+    <color name="middleGray">#848484</color>
 
     <!-- Squad Button Color -->
     <color name="addSquad">#E4FFC4</color>
