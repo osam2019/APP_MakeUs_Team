@@ -32,8 +32,17 @@ public class Notifier {
     }
 
     public void Notify(Soldier soldier, String test, Date dueDate) {
-        float dayCount = (float)(dueDate.getTime() - Calendar.getInstance().getTimeInMillis()) / (24 * 60 * 60 * 1000);
-        sendNotification(soldier.rank + " " + soldier.name, test + dueDate.toString() + " D-" +dayCount);
+        int dayCount = (int) (dueDate.getTime() - Calendar.getInstance().getTimeInMillis()) / (24 * 60 * 60 * 1000);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dueDate);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        final String dueDateString = year + "년 " + month + "월 " + day + "일";
+
+        sendNotification(soldier.rank + " " + soldier.name, test + " " + dueDateString + "까지 D-" +dayCount);
     }
 
     private void sendNotification(String title, String text) {

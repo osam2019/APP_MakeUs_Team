@@ -167,7 +167,34 @@ public class DateCalculator {
 
 
     // ------------------------------------ 신체검사 ------------------------------------
-    public boolean isHealthScreeningDay(Soldier soldier) {
+    public long getHealthScreeningDueDate(Soldier soldier) {
+        if(isHealthScreeningDueDate(soldier)) {
+
+
+            if(soldier.rank.equals("이병") || soldier.rank.equals("일병")) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(new Date(soldier.transferDay));
+
+                cal.add(Calendar.MONTH, 1);
+                return cal.getTime().getTime();
+
+            } else if(soldier.rank.equals("상병")) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(new Date(soldier.enlistmentDay));
+
+                if( cal.get(Calendar.DAY_OF_MONTH) == 1) {    // 8개월 복무 후 상병진급
+                    cal.add(Calendar.MONTH, 9);
+                } else {    // 9개월 복무 후 상병진급
+                    cal.add(Calendar.MONTH, 10);
+                }
+                cal.set(Calendar.DAY_OF_MONTH,1);
+                return cal.getTime().getTime();
+            }
+        }
+        return 0;
+    }
+
+    public boolean isHealthScreeningDueDate(Soldier soldier) {
         // 전입 신병일 경우 (전입 신병 신체 검사)
         if(soldier.rank.equals("이병") || soldier.rank.equals("일병")) {
             return toPrivateOrPrivateFirstClassCase(soldier.transferDay);
@@ -195,8 +222,7 @@ public class DateCalculator {
         // 1. 전입일과 현재 개월이 아직 같은 달일경우
         // 2. 전입월이 지난달이고 현재 달에서 전입월의 일수만큼 넘지않거나 같은경우
         // 3. 전입월이 12월이고 다음달이 1월인 경우.
-        if( monthDiff == 0 || ( (monthDiff == 1) && (dayDiff <= 0))
-       || ( (monthDiff == -1) && (dayDiff <= 0) ) || ( (monthDiff == 11) && (dayDiff <= 0) )) {
+        if( monthDiff == 0 || ( (monthDiff == 1) && (dayDiff <= 0)) || ( (monthDiff == 1) && (dayDiff <= 0) ) || ( (monthDiff == -11) && (dayDiff <= 0) )) {
             return true;
         }
 
