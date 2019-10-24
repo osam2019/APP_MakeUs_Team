@@ -21,11 +21,14 @@ _병력관리 자동화 어플리케이션의 등장!_
 1. 새로운 분대 추가 및 분대의 분대원 정보 수정
 ![Imgur](https://i.imgur.com/rz9WnnS.gifv)
 
+
 2. 용사 추가 및 전입병(이병, 일병) 인성평가 및 전입신병 신검 관련 알림 메세지
 ![Imgur](https://i.imgur.com/Su8nKS5.gifv)
 
+
 3. 로그인시 인성평가 및 전입신병 신검 관련 알림 메세지
 ![Imgur](https://i.imgur.com/uYtuugX.gifv)
+
 
 4. 분대원 전역 처리
 ![Imgur](https://i.imgur.com/Op15Rx2.gifv)
@@ -34,6 +37,7 @@ _병력관리 자동화 어플리케이션의 등장!_
 ### 체력관리
 1. 용사체력정보 관리 및 기록 수정, 확인, 엑셀 파일 출력 관리
 ![Imgur](https://i.imgur.com/Hu5N8oG.gifv)
+
 
 2. 용사체력정보 엑셀 출력 파일
 ![Imgur](https://i.imgur.com/ezX10fX.jpg)
