@@ -60,7 +60,6 @@ public class SoldierFragment extends Fragment {
             }
         });
 
-
     }
 
     @Override
