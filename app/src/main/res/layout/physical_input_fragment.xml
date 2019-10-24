@@ -70,6 +70,7 @@
                 android:layout_height="50dp"
                 android:background="#FFFFFF"
                 android:hint="내용입력"
+                android:inputType="numberSigned"
                 android:padding="10dp" />
 
             <EditText
@@ -79,6 +80,7 @@
                 android:layout_weight="1"
                 android:background="#FFFFFF"
                 android:hint="내용입력"
+                android:inputType="numberSigned"
                 android:padding="10dp" />
 
             <EditText
@@ -88,6 +90,7 @@
                 android:layout_weight="1"
                 android:background="#FFFFFF"
                 android:hint="내용입력"
+                android:inputType="time"
                 android:padding="10dp" />
 
         </LinearLayout>
