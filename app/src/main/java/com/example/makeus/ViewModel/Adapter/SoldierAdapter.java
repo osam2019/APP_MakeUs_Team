@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -54,17 +55,10 @@ public class SoldierAdapter extends BaseAdapter {
 
         final Soldier soldier = soldiers.get(position);
 
-        TextView soldierRank = convertView.findViewById(R.id.view_soilder_rank);
-        soldierRank.setText(soldier.getRank());
 
-        TextView soldierName = convertView.findViewById(R.id.view_soldier_name);
-        soldierName.setText(soldier.name);
-
-        TextView soldierMilNum = convertView.findViewById(R.id.view_soldier_milnum);
-        soldierMilNum.setText(soldier.getMilliNumber());
-
-        LinearLayout viewSoldierLayout = convertView.findViewById(R.id.row_view_soldier_layout);
-        viewSoldierLayout.setOnClickListener( new View.OnClickListener() {
+        Button button = convertView.findViewById(R.id.soldier_button);
+        button.setText(soldier.rank +"\n\n" + soldier.name);
+        button.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
