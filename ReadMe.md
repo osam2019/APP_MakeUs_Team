@@ -18,28 +18,28 @@ _병력관리 자동화 어플리케이션의 등장!_
 **Make Us** 어플리케이션으로 해결하자!
 
 ### 인사관리
-1. 새로운 분대 추가 및 분대의 분대원 정보 수정  
+#### 새로운 분대 추가 및 분대의 분대원 정보 수정  
 ![Imgur](http://i.imgur.com/9QkaAlj.gif)
 
 
-2. 용사 추가 및 전입병(이병, 일병) 인성평가 및 전입신병 신검 관련 알림 메세지  
+#### 용사 추가 및 전입병(이병, 일병) 인성평가 및 전입신병 신검 관련 알림 메세지  
 ![Imgur](http://i.imgur.com/30lFBUh.gif)
 
 
-3. 로그인시 인성평가 및 전입신병 신검 관련 알림 메세지  
+#### 로그인시 인성평가 및 전입신병 신검 관련 알림 메세지  
 ![Imgur](https://i.imgur.com/tKGO9q6.gif)
 
 
-4. 분대원 전역 처리  
+#### 분대원 전역 처리  
 ![Imgur](https://i.imgur.com/MraKigR.gif)
 
 
 ### 체력관리
-1. 용사체력정보 관리 및 기록 수정, 확인, 엑셀 파일 출력 관리  
-![Imgur](https://i.imgur.com/nJA7Ps2.gifv)
+#### 용사체력정보 관리 및 기록 수정, 확인, 엑셀 파일 출력 관리  
+![Imgur](https://i.imgur.com/GqQQGSk.gif)
 
 
-2. 용사체력정보 엑셀 출력 파일  
+#### 용사체력정보 엑셀 출력 파일  
 ![Imgur](https://i.imgur.com/ezX10fX.jpg)
 
 
@@ -50,12 +50,17 @@ _병력관리 자동화 어플리케이션의 등장!_
 
 ## 설치 안내 (Installation Process)
 
-아래 APK 파일을 다운로드받아 스마트폰에서 실행하여 주세요.
+아래 APK 파일을 다운로드받아 스마트폰에서 실행하여 주세요.  
+
+
 [Make Us.apk](https://www.dropbox.com/s/na5hd0dy0ih4519/MakeUs.apk?dl=0)
+
 
 ## 사용법 (Getting Started)
 
-앱 사용방법은 아래 파일을 확인해주세요.
+앱 사용방법은 아래 파일을 확인해주세요.  
+
+
 [Make Us 소개 PPT 파일](https://www.dropbox.com/s/mgqqharvvn4h1vi/Makeus%20%EC%86%8C%EA%B0%9C.pptx?dl=0)
 
 ## 파일 정보 및 목록 (File Manifest)
