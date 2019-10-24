@@ -4,25 +4,29 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:title="관리">
-            <menu>
-                <item
-                    android:id="@+id/nav_squad"
-                    android:icon="@drawable/helmet"
-                    android:title="분대관리" />
-                <item
-                    android:id="@+id/nav_physical"
-                    android:icon="@drawable/weightlifter"
-                    android:title="체력관리" />
-            </menu>
-        </item>
-        <item android:title="기능">
-            <menu>
-                <item
-                    android:id="@+id/nav_inputprofile"
-                    android:icon="@drawable/contract"
-                    android:title="용사추가" />
-            </menu>
-        </item>
+        <item
+            android:id="@+id/nav_squad"
+            android:icon="@drawable/helmet"
+            android:title="분대관리" />
+        <item
+            android:id="@+id/nav_physical"
+            android:icon="@drawable/weightlifter"
+            android:title="체력관리" />
+        <item
+            android:id="@+id/nav1"
+            android:icon="@drawable/calendar"
+            android:title="일정관리" />
+        <item
+            android:id="@+id/nav2"
+            android:icon="@drawable/ancientscroll"
+            android:title="이력관리" />
+        <item
+            android:id="@+id/nav3"
+            android:icon="@drawable/breakfast"
+            android:title="식수관리" />
+        <item
+            android:id="@+id/nav4"
+            android:icon="@drawable/evaluation"
+            android:title="평가관리" />
     </group>
 </menu>

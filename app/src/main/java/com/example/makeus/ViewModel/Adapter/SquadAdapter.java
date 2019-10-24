@@ -1,5 +1,6 @@
 package com.example.makeus.ViewModel.Adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.example.makeus.Model.Squad;
 import com.example.makeus.Module.SquadButton;
 import com.example.makeus.R;
 import com.example.makeus.ViewModel.AbstractViewModel;
+import com.example.makeus.ViewModel.Fragment.AddFragment;
 import com.example.makeus.ViewModel.Fragment.SquadCreateFragment;
 
 import java.util.List;
@@ -61,8 +63,8 @@ public class SquadAdapter extends BaseAdapter {
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SquadCreateFragment scf = new SquadCreateFragment(mViewModel);
-                    scf.show(fragmentManager, "createSquad");
+                    AddFragment af = new AddFragment(mContext, fragmentManager, mViewModel);
+                    af.show(fragmentManager, "Add");
                 }
             });
             addButton.setTextColor(Color.WHITE);
@@ -90,8 +92,6 @@ public class SquadAdapter extends BaseAdapter {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("squad", button.squad);
                 Navigation.findNavController(v).navigate(R.id.nav_soilder, bundle);
-
-                //Toast.makeText((AppCompatActivity) mContext, button.squad.name + " 이벤트발생", Toast.LENGTH_LONG).show();
             }
         });
 

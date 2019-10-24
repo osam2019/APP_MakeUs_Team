@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#D9D9D9"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".ViewModel.Fragment.AddFragment">
+
+    <Button
+        android:id="@+id/add_soldier"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/fail_button"
+        android:text="용사" />
+
+    <Button
+        android:id="@+id/add_squad"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/success_button"
+        android:text="분대" />
+</LinearLayout>
