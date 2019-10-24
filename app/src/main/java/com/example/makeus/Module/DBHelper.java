@@ -558,12 +558,12 @@ public class DBHelper extends SQLiteOpenHelper {
     private void createSquad(SQLiteDatabase db, String name) {
         String sql = "INSERT INTO " + TABLE_SQUADS + " VALUES (?)";
         String [] arg = {name};
-        db.execSQL(sql, arg);;
+        db.execSQL(sql, arg);
     }
     private void createSoldier(SQLiteDatabase db, Soldier soldier) {
         //Soldier 추가
         String sql = "INSERT INTO "+ TABLE_SOLDIERS +" (name, squad, rank, milli_number, specialty, birthday, " +
-                "enlistment_day, transfer_day, discharge_day) VALUES (?,?,?,?,?,?,?,?,?)";
+                "enlistment_day, transfer_day, discharge_day, push_up, sit_up, running) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         String [] arg =
                 {
@@ -573,6 +573,9 @@ public class DBHelper extends SQLiteOpenHelper {
                         String.valueOf(soldier.enlistmentDay),
                         String.valueOf(soldier.transferDay),
                         String.valueOf(soldier.dischargeDay),
+                        String.valueOf(soldier.physicalScore.getPushUp()),
+                        String.valueOf(soldier.physicalScore.getSitUp()),
+                        String.valueOf(soldier.physicalScore.getRunning()),
                 };
         db.execSQL(sql, arg);
     }
