@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/physical_test_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="180dp"
+    android:background="#C7E7EB"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -15,31 +16,10 @@
         <ImageView
             android:id="@+id/physical_soldier"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="175dp"
             android:layout_gravity="center"
             tools:srcCompat="#FFC107" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/physical_rank"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="이병"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/physical_name"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="홍길동"
-                android:textSize="18sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -55,12 +35,31 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/title_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="이름"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/title_Rank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="계급"
+                android:textSize="18sp" />
+
+            <TextView
                 android:id="@+id/title_pushUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
+                android:gravity="center"
                 android:text="팔굽혀펴기"
                 android:textSize="18sp" />
 
@@ -69,8 +68,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:gravity="center"
                 android:text="윗몸 일으키기"
                 android:textSize="18sp" />
 
@@ -79,7 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
                 android:text="3km 뜀뛰기"
                 android:textSize="18sp" />
 
@@ -92,11 +92,33 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/physical_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="#9CD4DC"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/physical_rank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#9CD4DC"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="18sp" />
+
+            <TextView
                 android:id="@+id/physical_pushUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
+                android:background="#9CD4DC"
+                android:gravity="center"
                 android:text="TextView"
                 android:textSize="18sp" />
 
@@ -104,8 +126,9 @@
                 android:id="@+id/physical_sitUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:background="#9CD4DC"
+                android:gravity="center"
                 android:text="TextView"
                 android:textSize="18sp" />
 
@@ -113,7 +136,9 @@
                 android:id="@+id/physical_running"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#9CD4DC"
+                android:gravity="center"
                 android:text="TextView"
                 android:textSize="18sp" />
 

@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/physical_root">
+    android:id="@+id/physical_root"
+    android:layout_width="325dp"
+    android:layout_height="270dp"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="337dp"
+        android:layout_width="325dp"
+        android:layout_height="200dp"
+        android:background="#D9D9D9"
+        android:baselineAligned="false"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:layout_weight="1"
-        android:baselineAligned="false">
+        android:padding="15dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -25,10 +28,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
+                android:scrollbarSize="4dp"
                 android:text="윗몸일으키기"
                 android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/text2"
@@ -38,7 +43,8 @@
                 android:gravity="center_vertical"
                 android:text="팔굽혀펴기"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/text3"
@@ -46,61 +52,79 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="뜀걸음"
+                android:text="3Km 뜀걸음"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="17sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/situp"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="#FFFFFF"
+                android:hint="내용입력"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/pushup"
+                android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:hint="내용입력"
+                android:padding="10dp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/situp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:hint="갯수입력"
-                    android:inputType="numberSigned" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/running"
+                android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:hint="내용입력"
+                android:padding="10dp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/pushup"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:hint="갯수 입력"
-                    android:inputType="numberSigned" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <EditText
-                    android:id="@+id/running"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="시간 입력"
-                    android:inputType="time" />
-            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="325dp"
+        android:layout_height="70dp"
+        android:background="#D9D9D9"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cencel"
+            android:layout_width="20dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/fail_button"
+            android:text="취소"
+            android:textColor="#666666"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="20dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/success_button"
+            android:text="확인"
+            android:textColor="#666666"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 </LinearLayout>
