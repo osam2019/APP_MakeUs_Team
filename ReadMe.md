@@ -22,24 +22,24 @@ _병력관리 자동화 어플리케이션의 등장!_
 ![Imgur](http://i.imgur.com/9QkaAlj.gif)
 
 
-2. 용사 추가 및 전입병(이병, 일병) 인성평가 및 전입신병 신검 관련 알림 메세지
+2. 용사 추가 및 전입병(이병, 일병) 인성평가 및 전입신병 신검 관련 알림 메세지  
 ![Imgur](http://i.imgur.com/30lFBUh.gif)
 
 
-3. 로그인시 인성평가 및 전입신병 신검 관련 알림 메세지
+3. 로그인시 인성평가 및 전입신병 신검 관련 알림 메세지  
 ![Imgur](https://i.imgur.com/tKGO9q6.gif)
 
 
-4. 분대원 전역 처리
+4. 분대원 전역 처리  
 ![Imgur](https://i.imgur.com/MraKigR.gif)
 
 
 ### 체력관리
-1. 용사체력정보 관리 및 기록 수정, 확인, 엑셀 파일 출력 관리
+1. 용사체력정보 관리 및 기록 수정, 확인, 엑셀 파일 출력 관리  
 ![Imgur](https://i.imgur.com/nJA7Ps2.gifv)
 
 
-2. 용사체력정보 엑셀 출력 파일
+2. 용사체력정보 엑셀 출력 파일  
 ![Imgur](https://i.imgur.com/ezX10fX.jpg)
 
 
