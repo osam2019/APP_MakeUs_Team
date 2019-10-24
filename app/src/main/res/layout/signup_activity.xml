@@ -31,41 +31,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="7dp"
-            android:gravity="center">
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="6.75dp">
-
-            <TextView
-                android:id="@+id/signup_unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="소속부대"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="62dp"
-                tools:layout_editor_absoluteY="143dp" />
-
-            <EditText
-                android:id="@+id/signup_input_unit"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:background="@drawable/black_button"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="textPersonName"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="7dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:gravity="center">
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -76,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:text="사진"
                 android:textSize="20sp"
@@ -86,19 +53,29 @@
 
             <EditText
                 android:id="@+id/signup_input_picture"
-                android:layout_width="250dp"
+                android:layout_width="117.5dp"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:background="@drawable/black_button"
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textPersonName"
                 android:textSize="20sp" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/black_button"
+                app:srcCompat="@android:drawable/stat_sys_upload" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="7dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:gravity="center">
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -130,8 +107,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="7dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:gravity="center">
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -163,8 +140,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="7dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:gravity="center">
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -196,8 +173,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="7dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:gravity="center">
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -229,41 +206,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="7dp"
-            android:gravity="center">
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="6.75dp">
-
-            <TextView
-                android:id="@+id/signup_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="아이디"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="62dp"
-                tools:layout_editor_absoluteY="143dp" />
-
-            <EditText
-                android:id="@+id/signup_input_id"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:background="@drawable/black_button"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="textPersonName"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="7dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:gravity="center">
             android:layout_width="match_parent"
             android:layout_height="60dp"
