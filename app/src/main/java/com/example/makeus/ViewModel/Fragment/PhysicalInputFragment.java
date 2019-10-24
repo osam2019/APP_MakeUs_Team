@@ -26,6 +26,7 @@ import com.example.makeus.ViewModel.AbstractViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PhysicalInputFragment extends DialogFragment {
     AbstractViewModel mViewModel;
@@ -47,9 +48,21 @@ public class PhysicalInputFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(fragment);
 
-        final EditText situpET = fragment.findViewById(R.id.situp);
         final EditText pushupET = fragment.findViewById(R.id.pushup);
+        final EditText situpET = fragment.findViewById(R.id.situp);
         final EditText runningET = fragment.findViewById(R.id.running);
+
+        if(soldier.physicalScore.getPushUp() != 0) {
+            pushupET.setText(Integer.toString(soldier.physicalScore.getPushUp()));
+        }
+
+        if(soldier.physicalScore.getSitUp() != 0) {
+            situpET.setText(Integer.toString(soldier.physicalScore.getSitUp()));
+        }
+
+        if(soldier.physicalScore.getRunning() != 0) {
+            runningET.setText(convertLongToTime(soldier.physicalScore.getRunning()));
+        }
 
         Button cencelButton = fragment.findViewById(R.id.cencel);
         Button confirmButton = fragment.findViewById(R.id.confirm);
@@ -84,6 +97,13 @@ public class PhysicalInputFragment extends DialogFragment {
         });
 
         return builder.create();
+    }
+
+    private String convertLongToTime(long mills) {
+        Date date = new Date(mills);
+        SimpleDateFormat formatter = new SimpleDateFormat("mm:ss");
+        String dateFormatted = formatter.format(date);
+        return dateFormatted;
     }
 
 }
