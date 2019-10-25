@@ -60,8 +60,9 @@ _병력관리 자동화 어플리케이션의 등장!_
 
 앱 사용방법은 아래 파일을 확인해주세요.  
 
-[Make Us 소개 PDF 파일](https://www.dropbox.com/s/h97lzde4s24d3ub/Makeus%20%EC%86%8C%EA%B0%9C.pdf?dl=0)
-[Make Us 소개 PPT 파일](https://www.dropbox.com/s/mgqqharvvn4h1vi/Makeus%20%EC%86%8C%EA%B0%9C.pptx?dl=0)
+[Make Us 소개 PDF 파일](https://www.dropbox.com/s/h97lzde4s24d3ub/Makeus%20%EC%86%8C%EA%B0%9C.pdf?dl=0)  
+[Make Us 소개 PPT 파일](https://www.dropbox.com/s/mgqqharvvn4h1vi/Makeus%20%EC%86%8C%EA%B0%9C.pptx?dl=0)  
+[Maek Us 시연 MP4 파일](https://www.dropbox.com/s/4270c2f8x2qzydf/MakeUs.mp4?dl=0)
 
 ## 파일 정보 및 목록 (File Manifest)
 
