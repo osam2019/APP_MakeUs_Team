@@ -50,8 +50,12 @@ _병력관리 자동화 어플리케이션의 등장!_
 
 ## 설치 안내 (Installation Process)
 
-아래 APK 파일을 다운로드받아 스마트폰에서 실행하여 주세요.  
+아래 APK 파일을 다운로드받아 스마트폰에서 실행하여 주세요.  **로그인 시,**
 
+**로그인 시,**
+
+> 아이디 : 18-76061119   
+> 비밀번호 : password  
 
 [Make Us.apk](https://www.dropbox.com/s/na5hd0dy0ih4519/MakeUs.apk?dl=0)
 
